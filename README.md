@@ -12,4 +12,4 @@ _Not financial advice, just a fun project._
 | QQQ | [csv](qqq.csv) | [markdown](qqq.md) |
 | IWM | [csv](iwm.csv) | [markdown](iwm.md) |
 
-To spot changes, look at the pcommits in the main branch](commits/main/).
+To spot changes, look at the [commits in the main branch](commits/main/).
