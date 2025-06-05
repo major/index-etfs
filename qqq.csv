@@ -1,102 +1,102 @@
 Holding Ticker,Name,Weight
-AAPL ,Apple Inc,7.559
-ABNB ,Airbnb Inc,0.353
-ADBE ,Adobe Inc,1.099
-ADI ,Analog Devices Inc,0.662
-ADP ,Automatic Data Processing Inc,0.81
-ADSK ,Autodesk Inc,0.392
-AEP ,American Electric Power Co Inc,0.332
-AMAT ,Applied Materials Inc,0.803
-AMD ,Advanced Micro Devices Inc,1.173
-AMGN ,Amgen Inc,0.941
-AMZN ,Amazon.com Inc,5.449
-ANSS ,ANSYS Inc,0.18
-APP ,AppLovin Corp,0.786
 ARM ,ARM Holdings PLC ADR,0.104
-ASML ,ASML Holding NV,0.41
-AVGO ,Broadcom Inc,5.022
-AXON ,Axon Enterprise Inc,0.365
-AZN ,AstraZeneca PLC ADR,0.259
 BIIB ,Biogen Inc,0.118
-BKNG ,Booking Holdings Inc,1.113
-BKR ,Baker Hughes Co,0.225
-CCEP ,Coca-Cola Europacific Partners PLC,0.256
-CDNS ,Cadence Design Systems Inc,0.493
-CDW ,CDW Corp/DE,0.143
-CEG ,Constellation Energy Corp,0.572
-CHTR ,Charter Communications Inc,0.337
-CMCSA ,Comcast Corp,0.793
-COST ,Costco Wholesale Corp,2.85
-CPRT ,Copart Inc,0.297
-CRWD ,Crowdstrike Holdings Inc,0.657
-CSCO ,Cisco Systems Inc,1.564
-CSGP ,CoStar Group Inc,0.193
-CSX ,CSX Corp,0.369
-CTAS ,Cintas Corp,0.56
-CTSH ,Cognizant Technology Solutions Corp,0.241
-DASH ,DoorDash Inc,0.53
-DDOG ,Datadog Inc,0.232
-DXCM ,Dexcom Inc,0.204
-EA ,Electronic Arts Inc,0.236
-EXC ,Exelon Corp,0.262
-FANG ,Diamondback Energy Inc,0.246
-FAST ,Fastenal Co,0.286
-FTNT ,Fortinet Inc,0.477
-GEHC ,GE HealthCare Technologies Inc,0.199
 GFS ,GLOBALFOUNDRIES Inc,0.127
+ON ,ON Semiconductor Corp,0.129
+CDW ,CDW Corp/DE,0.143
+WBD ,Warner Bros Discovery Inc,0.147
+ANSS ,ANSYS Inc,0.18
+CSGP ,CoStar Group Inc,0.193
+KHC ,Kraft Heinz Co/The,0.195
+GEHC ,GE HealthCare Technologies Inc,0.199
+DXCM ,Dexcom Inc,0.204
+TTD ,Trade Desk Inc/The,0.21
+ODFL ,Old Dominion Freight Line Inc,0.21
+TEAM ,Atlassian Corp,0.211
+MCHP ,Microchip Technology Inc,0.212
+BKR ,Baker Hughes Co,0.225
+DDOG ,Datadog Inc,0.232
+EA ,Electronic Arts Inc,0.236
+LULU ,Lululemon Athletica Inc,0.238
+XEL ,Xcel Energy Inc,0.24
+CTSH ,Cognizant Technology Solutions Corp,0.241
+FANG ,Diamondback Energy Inc,0.246
+TTWO ,Take-Two Interactive Software Inc,0.247
+CCEP ,Coca-Cola Europacific Partners PLC,0.256
+AZN ,AstraZeneca PLC ADR,0.259
+IDXX ,IDEXX Laboratories Inc,0.261
+EXC ,Exelon Corp,0.262
+KDP ,Keurig Dr Pepper Inc,0.272
+VRSK ,Verisk Analytics Inc,0.275
+ZS ,Zscaler Inc,0.278
+FAST ,Fastenal Co,0.286
+ROST ,Ross Stores Inc,0.287
+PCAR ,PACCAR Inc,0.297
+CPRT ,Copart Inc,0.297
+REGN ,Regeneron Pharmaceuticals Inc,0.318
+NXPI ,NXP Semiconductors NV,0.325
+WDAY ,Workday Inc,0.326
+AEP ,American Electric Power Co Inc,0.332
+CHTR ,Charter Communications Inc,0.337
+PAYX ,Paychex Inc,0.35
+MRVL ,Marvell Technology Inc,0.35
+ABNB ,Airbnb Inc,0.353
+AXON ,Axon Enterprise Inc,0.365
+CSX ,CSX Corp,0.369
+ROP ,Roper Technologies Inc,0.372
+MNST ,Monster Beverage Corp,0.375
+ADSK ,Autodesk Inc,0.392
+PDD ,PDD Holdings Inc ADR,0.406
+ASML ,ASML Holding NV,0.41
+PYPL ,PayPal Holdings Inc,0.44
+MAR ,Marriott International Inc/MD,0.441
+SNPS ,Synopsys Inc,0.447
+FTNT ,Fortinet Inc,0.477
+ORLY ,O'Reilly Automotive Inc,0.478
+CDNS ,Cadence Design Systems Inc,0.493
+MDLZ ,Mondelez International Inc,0.526
+DASH ,DoorDash Inc,0.53
+INTC ,Intel Corp,0.535
+MSTR ,MicroStrategy Inc,0.549
+CTAS ,Cintas Corp,0.56
+CEG ,Constellation Energy Corp,0.572
+SBUX ,Starbucks Corp,0.611
+KLAC ,KLA Corp,0.634
+CRWD ,Crowdstrike Holdings Inc,0.657
+ADI ,Analog Devices Inc,0.662
+LRCX ,Lam Research Corp,0.664
+VRTX ,Vertex Pharmaceuticals Inc,0.699
+MU ,Micron Technology Inc,0.702
+SHOP ,Shopify Inc,0.769
+PANW ,Palo Alto Networks Inc,0.784
+APP ,AppLovin Corp,0.786
+CMCSA ,Comcast Corp,0.793
+MELI ,MercadoLibre Inc,0.797
+AMAT ,Applied Materials Inc,0.803
+ADP ,Automatic Data Processing Inc,0.81
 GILD ,Gilead Sciences Inc,0.829
+HON ,Honeywell International Inc,0.902
+AMGN ,Amgen Inc,0.941
+QCOM ,QUALCOMM Inc,1.0
+TXN ,Texas Instruments Inc,1.06
+ADBE ,Adobe Inc,1.099
+PEP ,PepsiCo Inc,1.103
+BKNG ,Booking Holdings Inc,1.113
+AMD ,Advanced Micro Devices Inc,1.173
+ISRG ,Intuitive Surgical Inc,1.215
+INTU ,Intuit Inc,1.309
+LIN ,Linde PLC,1.368
+CSCO ,Cisco Systems Inc,1.564
+TMUS ,T-Mobile US Inc,1.686
+PLTR ,Palantir Technologies Inc,1.785
 GOOG ,Alphabet Inc,2.31
 GOOGL ,Alphabet Inc,2.432
-HON ,Honeywell International Inc,0.902
-IDXX ,IDEXX Laboratories Inc,0.261
-INTC ,Intel Corp,0.535
-INTU ,Intuit Inc,1.309
-ISRG ,Intuitive Surgical Inc,1.215
-KDP ,Keurig Dr Pepper Inc,0.272
-KHC ,Kraft Heinz Co/The,0.195
-KLAC ,KLA Corp,0.634
-LIN ,Linde PLC,1.368
-LRCX ,Lam Research Corp,0.664
-LULU ,Lululemon Athletica Inc,0.238
-MAR ,Marriott International Inc/MD,0.441
-MCHP ,Microchip Technology Inc,0.212
-MDLZ ,Mondelez International Inc,0.526
-MELI ,MercadoLibre Inc,0.797
-META ,Meta Platforms Inc,3.738
-MNST ,Monster Beverage Corp,0.375
-MRVL ,Marvell Technology Inc,0.35
-MSFT ,Microsoft Corp,8.556
-MSTR ,MicroStrategy Inc,0.549
-MU ,Micron Technology Inc,0.702
-NFLX ,Netflix Inc,3.237
-NVDA ,NVIDIA Corp,8.592
-NXPI ,NXP Semiconductors NV,0.325
-ODFL ,Old Dominion Freight Line Inc,0.21
-ON ,ON Semiconductor Corp,0.129
-ORLY ,O'Reilly Automotive Inc,0.478
-PANW ,Palo Alto Networks Inc,0.784
-PAYX ,Paychex Inc,0.35
-PCAR ,PACCAR Inc,0.297
-PDD ,PDD Holdings Inc ADR,0.406
-PEP ,PepsiCo Inc,1.103
-PLTR ,Palantir Technologies Inc,1.785
-PYPL ,PayPal Holdings Inc,0.44
-QCOM ,QUALCOMM Inc,1.0
-REGN ,Regeneron Pharmaceuticals Inc,0.318
-ROP ,Roper Technologies Inc,0.372
-ROST ,Ross Stores Inc,0.287
-SBUX ,Starbucks Corp,0.611
-SHOP ,Shopify Inc,0.769
-SNPS ,Synopsys Inc,0.447
-TEAM ,Atlassian Corp,0.211
-TMUS ,T-Mobile US Inc,1.686
+COST ,Costco Wholesale Corp,2.85
 TSLA ,Tesla Inc,2.994
-TTD ,Trade Desk Inc/The,0.21
-TTWO ,Take-Two Interactive Software Inc,0.247
-TXN ,Texas Instruments Inc,1.06
-VRSK ,Verisk Analytics Inc,0.275
-VRTX ,Vertex Pharmaceuticals Inc,0.699
-WBD ,Warner Bros Discovery Inc,0.147
-WDAY ,Workday Inc,0.326
-XEL ,Xcel Energy Inc,0.24
-ZS ,Zscaler Inc,0.278
+NFLX ,Netflix Inc,3.237
+META ,Meta Platforms Inc,3.738
+AVGO ,Broadcom Inc,5.022
+AMZN ,Amazon.com Inc,5.449
+AAPL ,Apple Inc,7.559
+MSFT ,Microsoft Corp,8.556
+NVDA ,NVIDIA Corp,8.592
