@@ -6,8 +6,10 @@ _Not financial advice, just a fun project._
 
 ## Supported ETFs
 
-SPY: [csv](spy.csv) or [markdown](spy.md)
-QQQ: [csv](qqq.csv) or [markdown](qqq.md)
-IWM: [csv](iwm.csv) or [markdown](iwm.md)
+| ETF | CSV | Markdown |
+|-----|-----|----------|
+| SPY | [csv](spy.csv) | [markdown](spy.md) |
+| QQQ | [csv](qqq.csv) | [markdown](qqq.md) |
+| IWM | [csv](iwm.csv) | [markdown](iwm.md) |
 
 To spot changes, look at the pcommits in the main branch](commits/main/).
