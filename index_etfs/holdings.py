@@ -11,8 +11,11 @@ def get_spy_holdings():
     df = df[df["Local Currency"] == "USD"]
     df = df[df["Ticker"] != "-"]
 
-    # Select the columns we care about
-    df = df[["Ticker", "Name", "Weight"]].sort_values(by="Weight", ascending=False)
+    df = (
+        df[["Ticker", "Name", "Weight"]]
+        .sort_values(by="Weight", ascending=False)
+        .reset_index(drop=True)
+    )
 
     df.to_csv("spy.csv")
     df.to_markdown("spy.md")
@@ -23,8 +26,10 @@ def get_qqq_holdings():
     holdings_url = "https://www.invesco.com/us/financial-products/etfs/holdings/main/holdings/0?audienceType=Investor&action=download&ticker=QQQ"
     df = pd.read_csv(holdings_url, thousands=",")
 
-    df = df[["Holding Ticker", "Name", "Weight"]].sort_values(
-        by="Weight", ascending=False
+    df = (
+        df[["Holding Ticker", "Name", "Weight"]]
+        .sort_values(by="Weight", ascending=False)
+        .reset_index(drop=True)
     )
 
     df.to_csv("qqq.csv")
@@ -39,8 +44,10 @@ def get_iwm_holdings():
     df = df[df["Market Currency"] == "USD"]
     df = df[df["Ticker"] != "-"]
 
-    df = df[["Ticker", "Name", "Weight (%)"]].sort_values(
-        by="Weight (%)", ascending=False
+    df = (
+        df[["Ticker", "Name", "Weight (%)"]]
+        .sort_values(by="Weight (%)", ascending=False)
+        .reset_index(drop=True)
     )
 
     df.to_csv("iwm.csv")
