@@ -1,506 +1,506 @@
 | Ticker   | Name                         |   Weight |
 |:---------|:-----------------------------|---------:|
 | AMTM     | AMENTUM HOLDINGS INC         | 0        |
-| NWS      | NEWS CORP   CLASS B          | 0.007183 |
-| BF.B     | BROWN FORMAN CORP CLASS B    | 0.009842 |
-| MHK      | MOHAWK INDUSTRIES INC        | 0.010498 |
-| CZR      | CAESARS ENTERTAINMENT INC    | 0.0108   |
-| ENPH     | ENPHASE ENERGY INC           | 0.010843 |
-| DVA      | DAVITA INC                   | 0.01201  |
-| IVZ      | INVESCO LTD                  | 0.012749 |
-| FOX      | FOX CORP   CLASS B           | 0.012929 |
-| APA      | APA CORP                     | 0.013127 |
-| CPB      | THE CAMPBELL S COMPANY       | 0.013291 |
-| BEN      | FRANKLIN RESOURCES INC       | 0.013342 |
-| MGM      | MGM RESORTS INTERNATIONAL    | 0.013685 |
-| ALB      | ALBEMARLE CORP               | 0.0137   |
-| PARA     | PARAMOUNT GLOBAL CLASS B     | 0.014068 |
-| FRT      | FEDERAL REALTY INVS TRUST    | 0.01423  |
-| CRL      | CHARLES RIVER LABORATORIES   | 0.014321 |
-| WYNN     | WYNN RESORTS LTD             | 0.014777 |
-| AES      | AES CORP                     | 0.014854 |
-| GNRC     | GENERAC HOLDINGS INC         | 0.014906 |
-| AOS      | SMITH (A.O.) CORP            | 0.015074 |
-| TECH     | BIO TECHNE CORP              | 0.015134 |
-| LW       | LAMB WESTON HOLDINGS INC     | 0.015621 |
-| MTCH     | MATCH GROUP INC              | 0.015684 |
-| WBA      | WALGREENS BOOTS ALLIANCE INC | 0.016024 |
-| IPG      | INTERPUBLIC GROUP OF COS INC | 0.01674  |
-| NCLH     | NORWEGIAN CRUISE LINE HOLDIN | 0.016915 |
-| MKTX     | MARKETAXESS HOLDINGS INC     | 0.016965 |
-| HAS      | HASBRO INC                   | 0.016978 |
-| HSIC     | HENRY SCHEIN INC             | 0.017425 |
-| HII      | HUNTINGTON INGALLS INDUSTRIE | 0.01752  |
-| TAP      | MOLSON COORS BEVERAGE CO   B | 0.017537 |
-| MRNA     | MODERNA INC                  | 0.017564 |
-| HRL      | HORMEL FOODS CORP            | 0.01774  |
-| EMN      | EASTMAN CHEMICAL CO          | 0.018009 |
-| ERIE     | ERIE INDEMNITY COMPANY CL A  | 0.018219 |
-| DAY      | DAYFORCE INC                 | 0.018508 |
-| BG       | BUNGE GLOBAL SA              | 0.019539 |
-| EPAM     | EPAM SYSTEMS INC             | 0.019638 |
-| GL       | GLOBE LIFE INC               | 0.01994  |
-| SWK      | STANLEY BLACK + DECKER INC   | 0.020031 |
-| VTRS     | VIATRIS INC                  | 0.020073 |
-| LKQ      | LKQ CORP                     | 0.02009  |
-| KMX      | CARMAX INC                   | 0.020097 |
-| PNW      | PINNACLE WEST CAPITAL        | 0.020179 |
-| AIZ      | ASSURANT INC                 | 0.020488 |
-| SOLV     | SOLVENTUM CORP               | 0.020699 |
-| BXP      | BXP INC                      | 0.020742 |
-| NWSA     | NEWS CORP   CLASS A          | 0.020955 |
-| CAG      | CONAGRA BRANDS INC           | 0.021069 |
-| ARE      | ALEXANDRIA REAL ESTATE EQUIT | 0.021232 |
-| HST      | HOST HOTELS + RESORTS INC    | 0.021307 |
-| INCY     | INCYTE CORP                  | 0.021366 |
-| RL       | RALPH LAUREN CORP            | 0.02152  |
-| RVTY     | REVVITY INC                  | 0.02184  |
-| JBHT     | HUNT (JB) TRANSPRT SVCS INC  | 0.021977 |
-| UHS      | UNIVERSAL HEALTH SERVICES B  | 0.022018 |
-| CHRW     | C.H. ROBINSON WORLDWIDE INC  | 0.02212  |
-| TKO      | TKO GROUP HOLDINGS INC       | 0.022294 |
-| SWKS     | SKYWORKS SOLUTIONS INC       | 0.022473 |
-| AKAM     | AKAMAI TECHNOLOGIES INC      | 0.022684 |
-| MOS      | MOSAIC CO/THE                | 0.022785 |
-| NDSN     | NORDSON CORP                 | 0.023005 |
-| REG      | REGENCY CENTERS CORP         | 0.023132 |
-| FOXA     | FOX CORP   CLASS A           | 0.023247 |
-| POOL     | POOL CORP                    | 0.023284 |
-| JNPR     | JUNIPER NETWORKS INC         | 0.02343  |
-| SJM      | JM SMUCKER CO/THE            | 0.023494 |
-| DOC      | HEALTHPEAK PROPERTIES INC    | 0.023692 |
-| ALLE     | ALLEGION PLC                 | 0.023831 |
-| UDR      | UDR INC                      | 0.024451 |
-| CPT      | CAMDEN PROPERTY TRUST        | 0.024537 |
-| PAYC     | PAYCOM SOFTWARE INC          | 0.024629 |
-| ALGN     | ALIGN TECHNOLOGY INC         | 0.024998 |
-| BLDR     | BUILDERS FIRSTSOURCE INC     | 0.025872 |
-| JKHY     | JACK HENRY + ASSOCIATES INC  | 0.026233 |
-| TER      | TERADYNE INC                 | 0.026399 |
-| MAS      | MASCO CORP                   | 0.026601 |
-| TXT      | TEXTRON INC                  | 0.02696  |
-| IEX      | IDEX CORP                    | 0.026982 |
-| OMC      | OMNICOM GROUP                | 0.027167 |
-| BBY      | BEST BUY CO INC              | 0.027307 |
-| KIM      | KIMCO REALTY CORP            | 0.027386 |
-| LVS      | LAS VEGAS SANDS CORP         | 0.027421 |
-| COO      | COOPER COS INC/THE           | 0.028031 |
-| HOLX     | HOLOGIC INC                  | 0.02805  |
-| AVY      | AVERY DENNISON CORP          | 0.028318 |
-| LYB      | LYONDELLBASELL INDU CL A     | 0.028649 |
-| EG       | EVEREST GROUP LTD            | 0.029311 |
-| EVRG     | EVERGY INC                   | 0.029562 |
-| ZBRA     | ZEBRA TECHNOLOGIES CORP CL A | 0.029715 |
-| APTV     | APTIV PLC                    | 0.029778 |
-| J        | JACOBS SOLUTIONS INC         | 0.030361 |
-| BAX      | BAXTER INTERNATIONAL INC     | 0.030589 |
-| LNT      | ALLIANT ENERGY CORP          | 0.030757 |
-| EXPD     | EXPEDITORS INTL WASH INC     | 0.030856 |
-| CLX      | CLOROX COMPANY               | 0.030904 |
-| L        | LOEWS CORP                   | 0.031029 |
-| TSN      | TYSON FOODS INC CL A         | 0.031203 |
-| EL       | ESTEE LAUDER COMPANIES CL A  | 0.031238 |
-| KEY      | KEYCORP                      | 0.031254 |
-| GEN      | GEN DIGITAL INC              | 0.031365 |
-| WST      | WEST PHARMACEUTICAL SERVICES | 0.03139  |
-| DPZ      | DOMINO S PIZZA INC           | 0.031513 |
-| BALL     | BALL CORP                    | 0.031661 |
-| PFG      | PRINCIPAL FINANCIAL GROUP    | 0.031689 |
-| CF       | CF INDUSTRIES HOLDINGS INC   | 0.031847 |
-| MOH      | MOLINA HEALTHCARE INC        | 0.032286 |
-| ROL      | ROLLINS INC                  | 0.032297 |
-| TPR      | TAPESTRY INC                 | 0.032358 |
-| FDS      | FACTSET RESEARCH SYSTEMS INC | 0.032512 |
-| DECK     | DECKERS OUTDOOR CORP         | 0.032637 |
-| PNR      | PENTAIR PLC                  | 0.032673 |
-| SNA      | SNAP ON INC                  | 0.033215 |
-| FFIV     | F5 INC                       | 0.033589 |
-| HAL      | HALLIBURTON CO               | 0.034325 |
-| TRMB     | TRIMBLE INC                  | 0.034354 |
-| PKG      | PACKAGING CORP OF AMERICA    | 0.034435 |
-| GPC      | GENUINE PARTS CO             | 0.0345   |
-| MAA      | MID AMERICA APARTMENT COMM   | 0.034614 |
-| FSLR     | FIRST SOLAR INC              | 0.034784 |
-| CFG      | CITIZENS FINANCIAL GROUP     | 0.03489  |
-| LII      | LENNOX INTERNATIONAL INC     | 0.035006 |
-| ESS      | ESSEX PROPERTY TRUST INC     | 0.035504 |
-| NI       | NISOURCE INC                 | 0.03609  |
-| CTRA     | COTERRA ENERGY INC           | 0.036272 |
-| ZBH      | ZIMMER BIOMET HOLDINGS INC   | 0.03629  |
-| MKC      | MCCORMICK + CO NON VTG SHRS  | 0.03635  |
-| STLD     | STEEL DYNAMICS INC           | 0.037093 |
-| INVH     | INVITATION HOMES INC         | 0.037217 |
-| GPN      | GLOBAL PAYMENTS INC          | 0.037309 |
-| JBL      | JABIL INC                    | 0.037483 |
-| BIIB     | BIOGEN INC                   | 0.037669 |
-| WDC      | WESTERN DIGITAL CORP         | 0.037739 |
-| LDOS     | LEIDOS HOLDINGS INC          | 0.037794 |
-| LUV      | SOUTHWEST AIRLINES CO        | 0.03813  |
-| DGX      | QUEST DIAGNOSTICS INC        | 0.038205 |
-| RF       | REGIONS FINANCIAL CORP       | 0.038429 |
-| WY       | WEYERHAEUSER CO              | 0.038474 |
-| WSM      | WILLIAMS SONOMA INC          | 0.038549 |
-| IFF      | INTL FLAVORS + FRAGRANCES    | 0.03877  |
-| DLTR     | DOLLAR TREE INC              | 0.038827 |
-| DOW      | DOW INC                      | 0.039119 |
-| PTC      | PTC INC                      | 0.039975 |
-| SMCI     | SUPER MICRO COMPUTER INC     | 0.040717 |
-| WAT      | WATERS CORP                  | 0.040781 |
-| PHM      | PULTEGROUP INC               | 0.040785 |
-| TPL      | TEXAS PACIFIC LAND CORP      | 0.040836 |
-| DVN      | DEVON ENERGY CORP            | 0.040931 |
-| AMCR     | AMCOR PLC                    | 0.041036 |
-| NTRS     | NORTHERN TRUST CORP          | 0.041064 |
-| TROW     | T ROWE PRICE GROUP INC       | 0.041078 |
-| CMS      | CMS ENERGY CORP              | 0.041084 |
-| EIX      | EDISON INTERNATIONAL         | 0.041182 |
-| FE       | FIRSTENERGY CORP             | 0.041319 |
-| HUBB     | HUBBELL INC                  | 0.04135  |
-| ON       | ON SEMICONDUCTOR             | 0.041377 |
-| LH       | LABCORP HOLDINGS INC         | 0.041827 |
-| NTAP     | NETAPP INC                   | 0.042152 |
-| EXPE     | EXPEDIA GROUP INC            | 0.042233 |
-| SW       | SMURFIT WESTROCK PLC         | 0.042249 |
-| NVR      | NVR INC                      | 0.042539 |
-| WBD      | WARNER BROS DISCOVERY INC    | 0.042722 |
-| ULTA     | ULTA BEAUTY INC              | 0.04293  |
-| WRB      | WR BERKLEY CORP              | 0.043761 |
-| K        | KELLANOVA                    | 0.043811 |
-| PODD     | INSULET CORP                 | 0.043986 |
-| SYF      | SYNCHRONY FINANCIAL          | 0.044362 |
-| ADM      | ARCHER DANIELS MIDLAND CO    | 0.044548 |
-| VRSN     | VERISIGN INC                 | 0.044808 |
-| LYV      | LIVE NATION ENTERTAINMENT IN | 0.044841 |
-| HBAN     | HUNTINGTON BANCSHARES INC    | 0.045351 |
-| CPAY     | CORPAY INC                   | 0.0457   |
-| HPQ      | HP INC                       | 0.04591  |
-| KHC      | KRAFT HEINZ CO/THE           | 0.046025 |
-| CBOE     | CBOE GLOBAL MARKETS INC      | 0.046115 |
-| TDY      | TELEDYNE TECHNOLOGIES INC    | 0.046215 |
-| HPE      | HEWLETT PACKARD ENTERPRISE   | 0.046232 |
-| EQR      | EQUITY RESIDENTIAL           | 0.046243 |
-| CINF     | CINCINNATI FINANCIAL CORP    | 0.046336 |
-| CDW      | CDW CORP/DE                  | 0.046471 |
-| STE      | STERIS PLC                   | 0.047431 |
-| ES       | EVERSOURCE ENERGY            | 0.047454 |
-| CNP      | CENTERPOINT ENERGY INC       | 0.047601 |
-| HSY      | HERSHEY CO/THE               | 0.047693 |
-| ATO      | ATMOS ENERGY CORP            | 0.047933 |
-| CHD      | CHURCH + DWIGHT CO INC       | 0.047984 |
-| EXE      | EXPAND ENERGY CORP           | 0.048166 |
-| DOV      | DOVER CORP                   | 0.04822  |
-| MTD      | METTLER TOLEDO INTERNATIONAL | 0.048304 |
-| FTV      | FORTIVE CORP                 | 0.048529 |
-| TYL      | TYLER TECHNOLOGIES INC       | 0.048668 |
-| SBAC     | SBA COMMUNICATIONS CORP      | 0.048843 |
-| IQV      | IQVIA HOLDINGS INC           | 0.048868 |
-| VLTO     | VERALTO CORP                 | 0.048884 |
-| IP       | INTERNATIONAL PAPER CO       | 0.04903  |
-| CCL      | CARNIVAL CORP                | 0.049473 |
-| DG       | DOLLAR GENERAL CORP          | 0.049478 |
-| DRI      | DARDEN RESTAURANTS INC       | 0.049726 |
-| PPL      | PPL CORP                     | 0.049905 |
-| GDDY     | GODADDY INC   CLASS A        | 0.05022  |
-| FITB     | FIFTH THIRD BANCORP          | 0.050931 |
-| FANG     | DIAMONDBACK ENERGY INC       | 0.050938 |
-| LEN      | LENNAR CORP A                | 0.050939 |
-| PPG      | PPG INDUSTRIES INC           | 0.051191 |
-| AEE      | AMEREN CORPORATION           | 0.051361 |
-| BRO      | BROWN + BROWN INC            | 0.051799 |
-| RJF      | RAYMOND JAMES FINANCIAL INC  | 0.052035 |
-| UAL      | UNITED AIRLINES HOLDINGS INC | 0.052406 |
-| STZ      | CONSTELLATION BRANDS INC A   | 0.05255  |
-| STX      | SEAGATE TECHNOLOGY HOLDINGS  | 0.053412 |
-| CNC      | CENTENE CORP                 | 0.053903 |
-| AWK      | AMERICAN WATER WORKS CO INC  | 0.054114 |
-| HUM      | HUMANA INC                   | 0.054243 |
-| DTE      | DTE ENERGY COMPANY           | 0.054501 |
-| TSCO     | TRACTOR SUPPLY COMPANY       | 0.054505 |
-| KEYS     | KEYSIGHT TECHNOLOGIES IN     | 0.054768 |
-| VTR      | VENTAS INC                   | 0.054844 |
-| STT      | STATE STREET CORP            | 0.055162 |
-| NUE      | NUCOR CORP                   | 0.055298 |
-| DD       | DUPONT DE NEMOURS INC        | 0.055769 |
-| OXY      | OCCIDENTAL PETROLEUM CORP    | 0.055979 |
-| BR       | BROADRIDGE FINANCIAL SOLUTIO | 0.05682  |
-| AVB      | AVALONBAY COMMUNITIES INC    | 0.057182 |
-| ANSS     | ANSYS INC                    | 0.058686 |
-| IRM      | IRON MOUNTAIN INC            | 0.05894  |
-| MTB      | M + T BANK CORP              | 0.0592   |
-| ODFL     | OLD DOMINION FREIGHT LINE    | 0.059514 |
-| GIS      | GENERAL MILLS INC            | 0.059597 |
-| WTW      | WILLIS TOWERS WATSON PLC     | 0.060856 |
-| XYL      | XYLEM INC                    | 0.061023 |
-| DAL      | DELTA AIR LINES INC          | 0.062097 |
-| GRMN     | GARMIN LTD                   | 0.062604 |
-| NRG      | NRG ENERGY INC               | 0.06268  |
-| EXR      | EXTRA SPACE STORAGE INC      | 0.062816 |
-| IT       | GARTNER INC                  | 0.063946 |
-| A        | AGILENT TECHNOLOGIES INC     | 0.064422 |
-| MPWR     | MONOLITHIC POWER SYSTEMS INC | 0.064555 |
-| GEHC     | GE HEALTHCARE TECHNOLOGY     | 0.064826 |
-| CSGP     | COSTAR GROUP INC             | 0.065316 |
-| EQT      | EQT CORP                     | 0.065334 |
-| IR       | INGERSOLL RAND INC           | 0.065432 |
-| EFX      | EQUIFAX INC                  | 0.06548  |
-| WEC      | WEC ENERGY GROUP INC         | 0.065734 |
-| VICI     | VICI PROPERTIES INC          | 0.065749 |
-| DXCM     | DEXCOM INC                   | 0.066412 |
-| MLM      | MARTIN MARIETTA MATERIALS    | 0.066668 |
-| MCHP     | MICROCHIP TECHNOLOGY INC     | 0.068552 |
-| NDAQ     | NASDAQ INC                   | 0.068938 |
-| DHI      | DR HORTON INC                | 0.06899  |
-| PCG      | P G + E CORP                 | 0.069063 |
-| WAB      | WABTEC CORP                  | 0.06914  |
-| DELL     | DELL TECHNOLOGIES  C         | 0.069142 |
-| EA       | ELECTRONIC ARTS INC          | 0.069516 |
-| ETR      | ENTERGY CORP                 | 0.069536 |
-| VMC      | VULCAN MATERIALS CO          | 0.069564 |
-| ACGL     | ARCH CAPITAL GROUP LTD       | 0.070279 |
-| ED       | CONSOLIDATED EDISON INC      | 0.070309 |
-| TRGP     | TARGA RESOURCES CORP         | 0.070979 |
-| SYY      | SYSCO CORP                   | 0.071531 |
-| ROK      | ROCKWELL AUTOMATION INC      | 0.071761 |
-| RMD      | RESMED INC                   | 0.072693 |
-| PRU      | PRUDENTIAL FINANCIAL INC     | 0.07278  |
-| BKR      | BAKER HUGHES CO              | 0.072901 |
-| HES      | HESS CORP                    | 0.072935 |
-| HIG      | HARTFORD INSURANCE GROUP INC | 0.072985 |
-| LULU     | LULULEMON ATHLETICA INC      | 0.073454 |
-| CAH      | CARDINAL HEALTH INC          | 0.073583 |
-| EBAY     | EBAY INC                     | 0.073851 |
-| CHTR     | CHARTER COMMUNICATIONS INC A | 0.074647 |
-| CBRE     | CBRE GROUP INC   A           | 0.074773 |
-| OTIS     | OTIS WORLDWIDE CORP          | 0.07488  |
-| TTWO     | TAKE TWO INTERACTIVE SOFTWRE | 0.077498 |
-| GLW      | CORNING INC                  | 0.077723 |
-| CTSH     | COGNIZANT TECH SOLUTIONS A   | 0.077758 |
-| F        | FORD MOTOR CO                | 0.077923 |
-| XEL      | XCEL ENERGY INC              | 0.078091 |
-| PEG      | PUBLIC SERVICE ENTERPRISE GP | 0.078875 |
-| YUM      | YUM  BRANDS INC              | 0.079077 |
-| VLO      | VALERO ENERGY CORP           | 0.079661 |
-| AME      | AMETEK INC                   | 0.081161 |
-| KVUE     | KENVUE INC                   | 0.08232  |
-| FIS      | FIDELITY NATIONAL INFO SERV  | 0.084557 |
-| IDXX     | IDEXX LABORATORIES INC       | 0.084805 |
-| TGT      | TARGET CORP                  | 0.084935 |
-| EXC      | EXELON CORP                  | 0.0851   |
-| FICO     | FAIR ISAAC CORP              | 0.085592 |
-| CCI      | CROWN CASTLE INC             | 0.086436 |
-| MSCI     | MSCI INC                     | 0.086802 |
-| MNST     | MONSTER BEVERAGE CORP        | 0.087133 |
-| CPRT     | COPART INC                   | 0.087175 |
-| KR       | KROGER CO                    | 0.087446 |
-| KDP      | KEURIG DR PEPPER INC         | 0.087636 |
-| CMI      | CUMMINS INC                  | 0.087904 |
-| KMB      | KIMBERLY CLARK CORP          | 0.088118 |
-| VRSK     | VERISK ANALYTICS INC         | 0.089778 |
-| MET      | METLIFE INC                  | 0.090144 |
-| LHX      | L3HARRIS TECHNOLOGIES INC    | 0.090343 |
-| URI      | UNITED RENTALS INC           | 0.090514 |
-| EW       | EDWARDS LIFESCIENCES CORP    | 0.090963 |
-| SLB      | SCHLUMBERGER LTD             | 0.091847 |
-| PSX      | PHILLIPS 66                  | 0.091916 |
-| GM       | GENERAL MOTORS CO            | 0.092884 |
-| ROST     | ROSS STORES INC              | 0.093014 |
-| D        | DOMINION ENERGY INC          | 0.093288 |
-| PSA      | PUBLIC STORAGE               | 0.093894 |
-| FAST     | FASTENAL CO                  | 0.093935 |
-| FDX      | FEDEX CORP                   | 0.095188 |
-| SRE      | SEMPRA                       | 0.09531  |
-| GWW      | WW GRAINGER INC              | 0.09541  |
-| TEL      | TE CONNECTIVITY PLC          | 0.095989 |
-| PCAR     | PACCAR INC                   | 0.09605  |
-| CTVA     | CORTEVA INC                  | 0.096743 |
-| O        | REALTY INCOME CORP           | 0.096752 |
-| AMP      | AMERIPRISE FINANCIAL INC     | 0.096912 |
-| BDX      | BECTON DICKINSON AND CO      | 0.097332 |
-| SPG      | SIMON PROPERTY GROUP INC     | 0.097633 |
-| COR      | CENCORA INC                  | 0.098661 |
-| MPC      | MARATHON PETROLEUM CORP      | 0.099083 |
-| OKE      | ONEOK INC                    | 0.099536 |
-| AFL      | AFLAC INC                    | 0.100268 |
-| AIG      | AMERICAN INTERNATIONAL GROUP | 0.10045  |
-| REGN     | REGENERON PHARMACEUTICALS    | 0.100453 |
-| PAYX     | PAYCHEX INC                  | 0.101198 |
-| COIN     | COINBASE GLOBAL INC  CLASS A | 0.101412 |
-| RSG      | REPUBLIC SERVICES INC        | 0.101857 |
-| TFC      | TRUIST FINANCIAL CORP        | 0.103363 |
-| NXPI     | NXP SEMICONDUCTORS NV        | 0.104288 |
-| PWR      | QUANTA SERVICES INC          | 0.10508  |
-| WDAY     | WORKDAY INC CLASS A          | 0.106077 |
-| AEP      | AMERICAN ELECTRIC POWER      | 0.107485 |
-| KMI      | KINDER MORGAN INC            | 0.108247 |
-| ALL      | ALLSTATE CORP                | 0.108517 |
-| DLR      | DIGITAL REALTY TRUST INC     | 0.110328 |
-| NSC      | NORFOLK SOUTHERN CORP        | 0.110785 |
-| AXON     | AXON ENTERPRISE INC          | 0.113248 |
-| CARR     | CARRIER GLOBAL CORP          | 0.114282 |
-| APO      | APOLLO GLOBAL MANAGEMENT INC | 0.115105 |
-| VST      | VISTRA CORP                  | 0.115291 |
-| ABNB     | AIRBNB INC CLASS A           | 0.117456 |
-| MAR      | MARRIOTT INTERNATIONAL  CL A | 0.11784  |
-| HLT      | HILTON WORLDWIDE HOLDINGS IN | 0.118493 |
-| FCX      | FREEPORT MCMORAN INC         | 0.11873  |
-| ROP      | ROPER TECHNOLOGIES INC       | 0.120697 |
-| CSX      | CSX CORP                     | 0.120973 |
-| APD      | AIR PRODUCTS + CHEMICALS INC | 0.121741 |
-| TRV      | TRAVELERS COS INC/THE        | 0.121793 |
-| NEM      | NEWMONT CORP                 | 0.122638 |
-| EOG      | EOG RESOURCES INC            | 0.123442 |
-| AZO      | AUTOZONE INC                 | 0.12391  |
-| BK       | BANK OF NEW YORK MELLON CORP | 0.125997 |
-| ADSK     | AUTODESK INC                 | 0.126736 |
-| FTNT     | FORTINET INC                 | 0.130148 |
-| ITW      | ILLINOIS TOOL WORKS          | 0.130282 |
-| NOC      | NORTHROP GRUMMAN CORP        | 0.13164  |
-| ECL      | ECOLAB INC                   | 0.132968 |
-| RCL      | ROYAL CARIBBEAN CRUISES LTD  | 0.133134 |
-| JCI      | JOHNSON CONTROLS INTERNATION | 0.133874 |
-| USB      | US BANCORP                   | 0.134974 |
-| HCA      | HCA HEALTHCARE INC           | 0.135202 |
-| EMR      | EMERSON ELECTRIC CO          | 0.136916 |
-| PNC      | PNC FINANCIAL SERVICES GROUP | 0.137089 |
-| MSI      | MOTOROLA SOLUTIONS INC       | 0.137481 |
-| GD       | GENERAL DYNAMICS CORP        | 0.138017 |
-| UPS      | UNITED PARCEL SERVICE CL B   | 0.140066 |
-| HWM      | HOWMET AEROSPACE INC         | 0.140493 |
-| CMG      | CHIPOTLE MEXICAN GRILL INC   | 0.141302 |
-| PYPL     | PAYPAL HOLDINGS INC          | 0.142093 |
-| CL       | COLGATE PALMOLIVE CO         | 0.145002 |
-| DASH     | DOORDASH INC   A             | 0.14514  |
-| WMB      | WILLIAMS COS INC             | 0.146343 |
-| NKE      | NIKE INC  CL B               | 0.146725 |
-| SNPS     | SYNOPSYS INC                 | 0.147728 |
-| MCO      | MOODY S CORP                 | 0.149586 |
-| ZTS      | ZOETIS INC                   | 0.149647 |
-| CTAS     | CINTAS CORP                  | 0.154124 |
-| ORLY     | O REILLY AUTOMOTIVE INC      | 0.156266 |
-| CVS      | CVS HEALTH CORP              | 0.157312 |
-| MMM      | 3M CO                        | 0.15738  |
-| AON      | AON PLC CLASS A              | 0.15842  |
-| TDG      | TRANSDIGM GROUP INC          | 0.160173 |
-| CDNS     | CADENCE DESIGN SYS INC       | 0.160693 |
-| KKR      | KKR + CO INC                 | 0.161371 |
-| SHW      | SHERWIN WILLIAMS CO/THE      | 0.163966 |
-| AJG      | ARTHUR J GALLAGHER + CO      | 0.164697 |
-| CI       | THE CIGNA GROUP              | 0.168381 |
-| PH       | PARKER HANNIFIN CORP         | 0.168779 |
-| MDLZ     | MONDELEZ INTERNATIONAL INC A | 0.169759 |
-| INTC     | INTEL CORP                   | 0.171174 |
-| WM       | WASTE MANAGEMENT INC         | 0.171746 |
-| EQIX     | EQUINIX INC                  | 0.175091 |
-| MCK      | MCKESSON CORP                | 0.176346 |
-| ELV      | ELEVANCE HEALTH INC          | 0.176418 |
-| DUK      | DUKE ENERGY CORP             | 0.177608 |
-| CEG      | CONSTELLATION ENERGY         | 0.179716 |
-| WELL     | WELLTOWER INC                | 0.184369 |
-| FI       | FISERV INC                   | 0.186432 |
-| TT       | TRANE TECHNOLOGIES PLC       | 0.190681 |
-| SO       | SOUTHERN CO/THE              | 0.191842 |
-| BMY      | BRISTOL MYERS SQUIBB CO      | 0.192239 |
-| ANET     | ARISTA NETWORKS INC          | 0.194808 |
-| SBUX     | STARBUCKS CORP               | 0.195424 |
-| CME      | CME GROUP INC                | 0.196275 |
-| PLD      | PROLOGIS INC                 | 0.197846 |
-| LMT      | LOCKHEED MARTIN CORP         | 0.198058 |
-| MO       | ALTRIA GROUP INC             | 0.199404 |
-| BX       | BLACKSTONE INC               | 0.199431 |
-| AMT      | AMERICAN TOWER CORP          | 0.199819 |
-| ICE      | INTERCONTINENTAL EXCHANGE IN | 0.203302 |
-| KLAC     | KLA CORP                     | 0.208142 |
-| ADI      | ANALOG DEVICES INC           | 0.213961 |
-| CB       | CHUBB LTD                    | 0.214875 |
-| COP      | CONOCOPHILLIPS               | 0.2154   |
-| LRCX     | LAM RESEARCH CORP            | 0.215583 |
-| MDT      | MEDTRONIC PLC                | 0.220658 |
-| APH      | AMPHENOL CORP CL A           | 0.221612 |
-| MMC      | MARSH + MCLENNAN COS         | 0.222681 |
-| VRTX     | VERTEX PHARMACEUTICALS INC   | 0.225423 |
-| CRWD     | CROWDSTRIKE HOLDINGS INC   A | 0.225531 |
-| TMUS     | T MOBILE US INC              | 0.232289 |
-| MU       | MICRON TECHNOLOGY INC        | 0.234228 |
-| COF      | CAPITAL ONE FINANCIAL CORP   | 0.241947 |
-| DHR      | DANAHER CORP                 | 0.243261 |
-| LOW      | LOWE S COS INC               | 0.254213 |
-| ETN      | EATON CORP PLC               | 0.255235 |
-| CMCSA    | COMCAST CORP CLASS A         | 0.255318 |
-| DE       | DEERE + CO                   | 0.255914 |
-| PANW     | PALO ALTO NETWORKS INC       | 0.258165 |
-| PFE      | PFIZER INC                   | 0.259183 |
-| SYK      | STRYKER CORP                 | 0.26043  |
-| ADP      | AUTOMATIC DATA PROCESSING    | 0.262573 |
-| UNP      | UNION PACIFIC CORP           | 0.263782 |
-| AMAT     | APPLIED MATERIALS INC        | 0.263985 |
-| GEV      | GE VERNOVA INC               | 0.264496 |
-| GILD     | GILEAD SCIENCES INC          | 0.27261  |
-| TJX      | TJX COMPANIES INC            | 0.283278 |
-| BLK      | BLACKROCK INC                | 0.283805 |
-| C        | CITIGROUP INC                | 0.284717 |
-| NEE      | NEXTERA ENERGY INC           | 0.290895 |
-| HON      | HONEYWELL INTERNATIONAL INC  | 0.291594 |
-| SCHW     | SCHWAB (CHARLES) CORP        | 0.294123 |
-| BSX      | BOSTON SCIENTIFIC CORP       | 0.299841 |
-| TMO      | THERMO FISHER SCIENTIFIC INC | 0.301455 |
-| AMGN     | AMGEN INC                    | 0.305124 |
-| BA       | BOEING CO/THE                | 0.310178 |
-| MS       | MORGAN STANLEY               | 0.319782 |
-| SPGI     | S+P GLOBAL INC               | 0.321444 |
-| QCOM     | QUALCOMM INC                 | 0.322902 |
-| AXP      | AMERICAN EXPRESS CO          | 0.324994 |
-| PGR      | PROGRESSIVE CORP             | 0.325109 |
-| CAT      | CATERPILLAR INC              | 0.329974 |
-| TXN      | TEXAS INSTRUMENTS INC        | 0.343098 |
-| UBER     | UBER TECHNOLOGIES INC        | 0.349982 |
-| PEP      | PEPSICO INC                  | 0.352303 |
-| ADBE     | ADOBE INC                    | 0.357608 |
-| VZ       | VERIZON COMMUNICATIONS INC   | 0.361047 |
-| BKNG     | BOOKING HOLDINGS INC         | 0.364166 |
-| RTX      | RTX CORP                     | 0.366556 |
-| AMD      | ADVANCED MICRO DEVICES       | 0.370946 |
-| GS       | GOLDMAN SACHS GROUP INC      | 0.37409  |
-| MRK      | MERCK + CO. INC.             | 0.388516 |
-| ACN      | ACCENTURE PLC CL A           | 0.390655 |
-| ISRG     | INTUITIVE SURGICAL INC       | 0.394153 |
-| T        | AT+T INC                     | 0.394292 |
-| DIS      | WALT DISNEY CO/THE           | 0.402538 |
-| NOW      | SERVICENOW INC               | 0.414811 |
-| INTU     | INTUIT INC                   | 0.424621 |
-| MCD      | MCDONALD S CORP              | 0.43816  |
-| LIN      | LINDE PLC                    | 0.443084 |
-| CVX      | CHEVRON CORP                 | 0.452772 |
-| ABT      | ABBOTT LABORATORIES          | 0.459718 |
-| PLTR     | PALANTIR TECHNOLOGIES INC A  | 0.48642  |
-| WFC      | WELLS FARGO + CO             | 0.487487 |
-| IBM      | INTL BUSINESS MACHINES CORP  | 0.488303 |
-| CRM      | SALESFORCE INC               | 0.505947 |
-| CSCO     | CISCO SYSTEMS INC            | 0.509314 |
-| GE       | GENERAL ELECTRIC             | 0.535066 |
-| UNH      | UNITEDHEALTH GROUP INC       | 0.538777 |
-| KO       | COCA COLA CO/THE             | 0.543336 |
-| ORCL     | ORACLE CORP                  | 0.549417 |
-| PM       | PHILIP MORRIS INTERNATIONAL  | 0.559895 |
-| BAC      | BANK OF AMERICA CORP         | 0.578158 |
-| ABBV     | ABBVIE INC                   | 0.654989 |
-| HD       | HOME DEPOT INC               | 0.726026 |
-| JNJ      | JOHNSON + JOHNSON            | 0.732207 |
-| PG       | PROCTER + GAMBLE CO/THE      | 0.755544 |
-| WMT      | WALMART INC                  | 0.841091 |
-| XOM      | EXXON MOBIL CORP             | 0.877362 |
-| COST     | COSTCO WHOLESALE CORP        | 0.888106 |
-| MA       | MASTERCARD INC   A           | 0.943713 |
-| NFLX     | NETFLIX INC                  | 1.05879  |
-| LLY      | ELI LILLY + CO               | 1.19417  |
-| V        | VISA INC CLASS A SHARES      | 1.25115  |
-| JPM      | JPMORGAN CHASE + CO          | 1.44984  |
-| TSLA     | TESLA INC                    | 1.57708  |
-| GOOG     | ALPHABET INC CL C            | 1.58905  |
-| BRK.B    | BERKSHIRE HATHAWAY INC CL B  | 1.77332  |
-| GOOGL    | ALPHABET INC CL A            | 1.94224  |
-| AVGO     | BROADCOM INC                 | 2.41185  |
-| META     | META PLATFORMS INC CLASS A   | 2.96788  |
-| AMZN     | AMAZON.COM INC               | 3.88205  |
-| AAPL     | APPLE INC                    | 5.96648  |
-| NVDA     | NVIDIA CORP                  | 6.78701  |
-| MSFT     | MICROSOFT CORP               | 6.88277  |
+| NWS      | NEWS CORP   CLASS B          | 0.007034 |
+| BF.B     | BROWN FORMAN CORP CLASS B    | 0.009968 |
+| MHK      | MOHAWK INDUSTRIES INC        | 0.010465 |
+| ENPH     | ENPHASE ENERGY INC           | 0.010701 |
+| CZR      | CAESARS ENTERTAINMENT INC    | 0.010731 |
+| DVA      | DAVITA INC                   | 0.0119   |
+| IVZ      | INVESCO LTD                  | 0.012742 |
+| FOX      | FOX CORP   CLASS B           | 0.012924 |
+| BEN      | FRANKLIN RESOURCES INC       | 0.013278 |
+| CPB      | THE CAMPBELL S COMPANY       | 0.013293 |
+| APA      | APA CORP                     | 0.013466 |
+| MGM      | MGM RESORTS INTERNATIONAL    | 0.013791 |
+| ALB      | ALBEMARLE CORP               | 0.013834 |
+| PARA     | PARAMOUNT GLOBAL CLASS B     | 0.013947 |
+| FRT      | FEDERAL REALTY INVS TRUST    | 0.014375 |
+| CRL      | CHARLES RIVER LABORATORIES   | 0.014525 |
+| WYNN     | WYNN RESORTS LTD             | 0.014635 |
+| GNRC     | GENERAC HOLDINGS INC         | 0.014943 |
+| AOS      | SMITH (A.O.) CORP            | 0.015046 |
+| TECH     | BIO TECHNE CORP              | 0.015097 |
+| AES      | AES CORP                     | 0.015233 |
+| LW       | LAMB WESTON HOLDINGS INC     | 0.015584 |
+| MTCH     | MATCH GROUP INC              | 0.015691 |
+| WBA      | WALGREENS BOOTS ALLIANCE INC | 0.015859 |
+| MKTX     | MARKETAXESS HOLDINGS INC     | 0.016501 |
+| IPG      | INTERPUBLIC GROUP OF COS INC | 0.016861 |
+| NCLH     | NORWEGIAN CRUISE LINE HOLDIN | 0.016923 |
+| HAS      | HASBRO INC                   | 0.017098 |
+| HSIC     | HENRY SCHEIN INC             | 0.017222 |
+| HII      | HUNTINGTON INGALLS INDUSTRIE | 0.017472 |
+| HRL      | HORMEL FOODS CORP            | 0.01753  |
+| TAP      | MOLSON COORS BEVERAGE CO   B | 0.017563 |
+| EMN      | EASTMAN CHEMICAL CO          | 0.017936 |
+| ERIE     | ERIE INDEMNITY COMPANY CL A  | 0.018246 |
+| MRNA     | MODERNA INC                  | 0.018275 |
+| DAY      | DAYFORCE INC                 | 0.018702 |
+| BG       | BUNGE GLOBAL SA              | 0.019522 |
+| EPAM     | EPAM SYSTEMS INC             | 0.019844 |
+| PNW      | PINNACLE WEST CAPITAL        | 0.019905 |
+| LKQ      | LKQ CORP                     | 0.019945 |
+| KMX      | CARMAX INC                   | 0.019986 |
+| SWK      | STANLEY BLACK + DECKER INC   | 0.020035 |
+| GL       | GLOBE LIFE INC               | 0.020053 |
+| SOLV     | SOLVENTUM CORP               | 0.020343 |
+| AIZ      | ASSURANT INC                 | 0.020404 |
+| VTRS     | VIATRIS INC                  | 0.020454 |
+| NWSA     | NEWS CORP   CLASS A          | 0.020703 |
+| CAG      | CONAGRA BRANDS INC           | 0.020975 |
+| BXP      | BXP INC                      | 0.02119  |
+| RL       | RALPH LAUREN CORP            | 0.021275 |
+| ARE      | ALEXANDRIA REAL ESTATE EQUIT | 0.021311 |
+| MOS      | MOSAIC CO/THE                | 0.02156  |
+| HST      | HOST HOTELS + RESORTS INC    | 0.021623 |
+| INCY     | INCYTE CORP                  | 0.021628 |
+| TKO      | TKO GROUP HOLDINGS INC       | 0.021676 |
+| UHS      | UNIVERSAL HEALTH SERVICES B  | 0.021827 |
+| JBHT     | HUNT (JB) TRANSPRT SVCS INC  | 0.021921 |
+| RVTY     | REVVITY INC                  | 0.021967 |
+| CHRW     | C.H. ROBINSON WORLDWIDE INC  | 0.022103 |
+| POOL     | POOL CORP                    | 0.022196 |
+| SWKS     | SKYWORKS SOLUTIONS INC       | 0.022496 |
+| AKAM     | AKAMAI TECHNOLOGIES INC      | 0.022714 |
+| NDSN     | NORDSON CORP                 | 0.022897 |
+| REG      | REGENCY CENTERS CORP         | 0.023142 |
+| SJM      | JM SMUCKER CO/THE            | 0.023219 |
+| FOXA     | FOX CORP   CLASS A           | 0.023235 |
+| JNPR     | JUNIPER NETWORKS INC         | 0.023248 |
+| DOC      | HEALTHPEAK PROPERTIES INC    | 0.023696 |
+| ALLE     | ALLEGION PLC                 | 0.023743 |
+| UDR      | UDR INC                      | 0.024253 |
+| CPT      | CAMDEN PROPERTY TRUST        | 0.024304 |
+| PAYC     | PAYCOM SOFTWARE INC          | 0.024541 |
+| ALGN     | ALIGN TECHNOLOGY INC         | 0.024791 |
+| BLDR     | BUILDERS FIRSTSOURCE INC     | 0.025215 |
+| JKHY     | JACK HENRY + ASSOCIATES INC  | 0.026083 |
+| MAS      | MASCO CORP                   | 0.026274 |
+| TXT      | TEXTRON INC                  | 0.027066 |
+| LVS      | LAS VEGAS SANDS CORP         | 0.027113 |
+| IEX      | IDEX CORP                    | 0.027154 |
+| TER      | TERADYNE INC                 | 0.027243 |
+| OMC      | OMNICOM GROUP                | 0.027352 |
+| KIM      | KIMCO REALTY CORP            | 0.027658 |
+| BBY      | BEST BUY CO INC              | 0.028009 |
+| COO      | COOPER COS INC/THE           | 0.028191 |
+| HOLX     | HOLOGIC INC                  | 0.028316 |
+| AVY      | AVERY DENNISON CORP          | 0.028366 |
+| LYB      | LYONDELLBASELL INDU CL A     | 0.028835 |
+| EG       | EVEREST GROUP LTD            | 0.029209 |
+| EVRG     | EVERGY INC                   | 0.029334 |
+| ZBRA     | ZEBRA TECHNOLOGIES CORP CL A | 0.029827 |
+| APTV     | APTIV PLC                    | 0.029994 |
+| BAX      | BAXTER INTERNATIONAL INC     | 0.030386 |
+| LNT      | ALLIANT ENERGY CORP          | 0.030522 |
+| CLX      | CLOROX COMPANY               | 0.030681 |
+| J        | JACOBS SOLUTIONS INC         | 0.030692 |
+| EXPD     | EXPEDITORS INTL WASH INC     | 0.030871 |
+| L        | LOEWS CORP                   | 0.030894 |
+| TSN      | TYSON FOODS INC CL A         | 0.030921 |
+| GEN      | GEN DIGITAL INC              | 0.031257 |
+| EL       | ESTEE LAUDER COMPANIES CL A  | 0.03138  |
+| CF       | CF INDUSTRIES HOLDINGS INC   | 0.031473 |
+| BALL     | BALL CORP                    | 0.031477 |
+| DPZ      | DOMINO S PIZZA INC           | 0.031745 |
+| KEY      | KEYCORP                      | 0.03177  |
+| PFG      | PRINCIPAL FINANCIAL GROUP    | 0.031789 |
+| ROL      | ROLLINS INC                  | 0.031932 |
+| WST      | WEST PHARMACEUTICAL SERVICES | 0.031936 |
+| TPR      | TAPESTRY INC                 | 0.032059 |
+| FDS      | FACTSET RESEARCH SYSTEMS INC | 0.032244 |
+| PNR      | PENTAIR PLC                  | 0.032286 |
+| MOH      | MOLINA HEALTHCARE INC        | 0.032315 |
+| DECK     | DECKERS OUTDOOR CORP         | 0.032571 |
+| SNA      | SNAP ON INC                  | 0.033147 |
+| FFIV     | F5 INC                       | 0.03341  |
+| GPC      | GENUINE PARTS CO             | 0.034184 |
+| MAA      | MID AMERICA APARTMENT COMM   | 0.034275 |
+| PKG      | PACKAGING CORP OF AMERICA    | 0.034379 |
+| TRMB     | TRIMBLE INC                  | 0.034508 |
+| LII      | LENNOX INTERNATIONAL INC     | 0.034756 |
+| HAL      | HALLIBURTON CO               | 0.034943 |
+| FSLR     | FIRST SOLAR INC              | 0.034954 |
+| ESS      | ESSEX PROPERTY TRUST INC     | 0.035259 |
+| CFG      | CITIZENS FINANCIAL GROUP     | 0.035475 |
+| NI       | NISOURCE INC                 | 0.035985 |
+| ZBH      | ZIMMER BIOMET HOLDINGS INC   | 0.036097 |
+| MKC      | MCCORMICK + CO NON VTG SHRS  | 0.036628 |
+| CTRA     | COTERRA ENERGY INC           | 0.036984 |
+| INVH     | INVITATION HOMES INC         | 0.037114 |
+| STLD     | STEEL DYNAMICS INC           | 0.037118 |
+| GPN      | GLOBAL PAYMENTS INC          | 0.037339 |
+| DLTR     | DOLLAR TREE INC              | 0.037566 |
+| WDC      | WESTERN DIGITAL CORP         | 0.037623 |
+| JBL      | JABIL INC                    | 0.037954 |
+| DGX      | QUEST DIAGNOSTICS INC        | 0.037963 |
+| BIIB     | BIOGEN INC                   | 0.038075 |
+| WSM      | WILLIAMS SONOMA INC          | 0.03811  |
+| LDOS     | LEIDOS HOLDINGS INC          | 0.038119 |
+| WY       | WEYERHAEUSER CO              | 0.038122 |
+| IFF      | INTL FLAVORS + FRAGRANCES    | 0.038593 |
+| LUV      | SOUTHWEST AIRLINES CO        | 0.038925 |
+| DOW      | DOW INC                      | 0.039226 |
+| RF       | REGIONS FINANCIAL CORP       | 0.039337 |
+| PHM      | PULTEGROUP INC               | 0.039807 |
+| PTC      | PTC INC                      | 0.040161 |
+| FE       | FIRSTENERGY CORP             | 0.040815 |
+| EIX      | EDISON INTERNATIONAL         | 0.04085  |
+| WAT      | WATERS CORP                  | 0.040927 |
+| AMCR     | AMCOR PLC                    | 0.04093  |
+| CMS      | CMS ENERGY CORP              | 0.04105  |
+| SMCI     | SUPER MICRO COMPUTER INC     | 0.04107  |
+| TROW     | T ROWE PRICE GROUP INC       | 0.04111  |
+| TPL      | TEXAS PACIFIC LAND CORP      | 0.041164 |
+| ON       | ON SEMICONDUCTOR             | 0.041473 |
+| NTRS     | NORTHERN TRUST CORP          | 0.041484 |
+| HUBB     | HUBBELL INC                  | 0.041629 |
+| DVN      | DEVON ENERGY CORP            | 0.041633 |
+| NVR      | NVR INC                      | 0.041638 |
+| LH       | LABCORP HOLDINGS INC         | 0.041697 |
+| SW       | SMURFIT WESTROCK PLC         | 0.042058 |
+| ULTA     | ULTA BEAUTY INC              | 0.042362 |
+| NTAP     | NETAPP INC                   | 0.042378 |
+| EXPE     | EXPEDIA GROUP INC            | 0.042564 |
+| PODD     | INSULET CORP                 | 0.042795 |
+| WBD      | WARNER BROS DISCOVERY INC    | 0.043029 |
+| K        | KELLANOVA                    | 0.043314 |
+| WRB      | WR BERKLEY CORP              | 0.043516 |
+| LYV      | LIVE NATION ENTERTAINMENT IN | 0.044418 |
+| ADM      | ARCHER DANIELS MIDLAND CO    | 0.044504 |
+| SYF      | SYNCHRONY FINANCIAL          | 0.04526  |
+| VRSN     | VERISIGN INC                 | 0.045485 |
+| CBOE     | CBOE GLOBAL MARKETS INC      | 0.045611 |
+| KHC      | KRAFT HEINZ CO/THE           | 0.045741 |
+| EQR      | EQUITY RESIDENTIAL           | 0.045795 |
+| TDY      | TELEDYNE TECHNOLOGIES INC    | 0.045801 |
+| CPAY     | CORPAY INC                   | 0.046105 |
+| CINF     | CINCINNATI FINANCIAL CORP    | 0.046215 |
+| HBAN     | HUNTINGTON BANCSHARES INC    | 0.046254 |
+| HPQ      | HP INC                       | 0.046322 |
+| CDW      | CDW CORP/DE                  | 0.046625 |
+| HPE      | HEWLETT PACKARD ENTERPRISE   | 0.04666  |
+| CNP      | CENTERPOINT ENERGY INC       | 0.046831 |
+| HSY      | HERSHEY CO/THE               | 0.046905 |
+| STE      | STERIS PLC                   | 0.046971 |
+| ES       | EVERSOURCE ENERGY            | 0.047104 |
+| ATO      | ATMOS ENERGY CORP            | 0.047388 |
+| SBAC     | SBA COMMUNICATIONS CORP      | 0.047506 |
+| CHD      | CHURCH + DWIGHT CO INC       | 0.04753  |
+| DOV      | DOVER CORP                   | 0.04832  |
+| TYL      | TYLER TECHNOLOGIES INC       | 0.048373 |
+| EXE      | EXPAND ENERGY CORP           | 0.048406 |
+| MTD      | METTLER TOLEDO INTERNATIONAL | 0.04862  |
+| VLTO     | VERALTO CORP                 | 0.048674 |
+| IP       | INTERNATIONAL PAPER CO       | 0.048784 |
+| DG       | DOLLAR GENERAL CORP          | 0.048816 |
+| FTV      | FORTIVE CORP                 | 0.048881 |
+| PPL      | PPL CORP                     | 0.049306 |
+| CCL      | CARNIVAL CORP                | 0.049495 |
+| LEN      | LENNAR CORP A                | 0.049716 |
+| DRI      | DARDEN RESTAURANTS INC       | 0.049781 |
+| IQV      | IQVIA HOLDINGS INC           | 0.049991 |
+| GDDY     | GODADDY INC   CLASS A        | 0.050409 |
+| AEE      | AMEREN CORPORATION           | 0.050844 |
+| PPG      | PPG INDUSTRIES INC           | 0.051276 |
+| BRO      | BROWN + BROWN INC            | 0.051519 |
+| FANG     | DIAMONDBACK ENERGY INC       | 0.051556 |
+| FITB     | FIFTH THIRD BANCORP          | 0.051869 |
+| STZ      | CONSTELLATION BRANDS INC A   | 0.052416 |
+| STX      | SEAGATE TECHNOLOGY HOLDINGS  | 0.052562 |
+| RJF      | RAYMOND JAMES FINANCIAL INC  | 0.0527   |
+| TSCO     | TRACTOR SUPPLY COMPANY       | 0.053411 |
+| AWK      | AMERICAN WATER WORKS CO INC  | 0.05357  |
+| CNC      | CENTENE CORP                 | 0.053661 |
+| UAL      | UNITED AIRLINES HOLDINGS INC | 0.054373 |
+| DTE      | DTE ENERGY COMPANY           | 0.054409 |
+| HUM      | HUMANA INC                   | 0.054522 |
+| VTR      | VENTAS INC                   | 0.054572 |
+| KEYS     | KEYSIGHT TECHNOLOGIES IN     | 0.054925 |
+| DD       | DUPONT DE NEMOURS INC        | 0.055786 |
+| STT      | STATE STREET CORP            | 0.055807 |
+| NUE      | NUCOR CORP                   | 0.05603  |
+| BR       | BROADRIDGE FINANCIAL SOLUTIO | 0.056343 |
+| OXY      | OCCIDENTAL PETROLEUM CORP    | 0.056359 |
+| AVB      | AVALONBAY COMMUNITIES INC    | 0.056646 |
+| ANSS     | ANSYS INC                    | 0.058242 |
+| LULU     | LULULEMON ATHLETICA INC      | 0.058302 |
+| IRM      | IRON MOUNTAIN INC            | 0.058871 |
+| ODFL     | OLD DOMINION FREIGHT LINE    | 0.059143 |
+| GIS      | GENERAL MILLS INC            | 0.059224 |
+| MTB      | M + T BANK CORP              | 0.05997  |
+| XYL      | XYLEM INC                    | 0.060406 |
+| WTW      | WILLIS TOWERS WATSON PLC     | 0.060538 |
+| NRG      | NRG ENERGY INC               | 0.062001 |
+| EXR      | EXTRA SPACE STORAGE INC      | 0.062338 |
+| GRMN     | GARMIN LTD                   | 0.062556 |
+| IT       | GARTNER INC                  | 0.063483 |
+| DAL      | DELTA AIR LINES INC          | 0.064115 |
+| GEHC     | GE HEALTHCARE TECHNOLOGY     | 0.064223 |
+| MPWR     | MONOLITHIC POWER SYSTEMS INC | 0.064458 |
+| A        | AGILENT TECHNOLOGIES INC     | 0.064802 |
+| CSGP     | COSTAR GROUP INC             | 0.06491  |
+| VICI     | VICI PROPERTIES INC          | 0.065116 |
+| EFX      | EQUIFAX INC                  | 0.065321 |
+| WEC      | WEC ENERGY GROUP INC         | 0.065562 |
+| IR       | INGERSOLL RAND INC           | 0.065749 |
+| EQT      | EQT CORP                     | 0.065903 |
+| MLM      | MARTIN MARIETTA MATERIALS    | 0.066137 |
+| DXCM     | DEXCOM INC                   | 0.066444 |
+| PCG      | P G + E CORP                 | 0.067109 |
+| DHI      | DR HORTON INC                | 0.06717  |
+| VMC      | VULCAN MATERIALS CO          | 0.068627 |
+| MCHP     | MICROCHIP TECHNOLOGY INC     | 0.068776 |
+| ETR      | ENTERGY CORP                 | 0.069116 |
+| WAB      | WABTEC CORP                  | 0.069121 |
+| ED       | CONSOLIDATED EDISON INC      | 0.069139 |
+| NDAQ     | NASDAQ INC                   | 0.069538 |
+| EA       | ELECTRONIC ARTS INC          | 0.069589 |
+| DELL     | DELL TECHNOLOGIES  C         | 0.069614 |
+| ACGL     | ARCH CAPITAL GROUP LTD       | 0.070263 |
+| SYY      | SYSCO CORP                   | 0.071498 |
+| TRGP     | TARGA RESOURCES CORP         | 0.071521 |
+| ROK      | ROCKWELL AUTOMATION INC      | 0.071874 |
+| RMD      | RESMED INC                   | 0.072671 |
+| HIG      | HARTFORD INSURANCE GROUP INC | 0.072964 |
+| CAH      | CARDINAL HEALTH INC          | 0.073107 |
+| PRU      | PRUDENTIAL FINANCIAL INC     | 0.073318 |
+| BKR      | BAKER HUGHES CO              | 0.07361  |
+| HES      | HESS CORP                    | 0.073858 |
+| EBAY     | EBAY INC                     | 0.073911 |
+| CBRE     | CBRE GROUP INC   A           | 0.074545 |
+| OTIS     | OTIS WORLDWIDE CORP          | 0.074719 |
+| CHTR     | CHARTER COMMUNICATIONS INC A | 0.074858 |
+| GLW      | CORNING INC                  | 0.076699 |
+| XEL      | XCEL ENERGY INC              | 0.077222 |
+| TTWO     | TAKE TWO INTERACTIVE SOFTWRE | 0.077264 |
+| PEG      | PUBLIC SERVICE ENTERPRISE GP | 0.077811 |
+| CTSH     | COGNIZANT TECH SOLUTIONS A   | 0.077891 |
+| F        | FORD MOTOR CO                | 0.078345 |
+| YUM      | YUM  BRANDS INC              | 0.079334 |
+| VLO      | VALERO ENERGY CORP           | 0.079757 |
+| AME      | AMETEK INC                   | 0.080973 |
+| KVUE     | KENVUE INC                   | 0.081776 |
+| EXC      | EXELON CORP                  | 0.083755 |
+| IDXX     | IDEXX LABORATORIES INC       | 0.084368 |
+| FIS      | FIDELITY NATIONAL INFO SERV  | 0.084406 |
+| CCI      | CROWN CASTLE INC             | 0.084414 |
+| FICO     | FAIR ISAAC CORP              | 0.084869 |
+| CPRT     | COPART INC                   | 0.086263 |
+| KR       | KROGER CO                    | 0.086431 |
+| MSCI     | MSCI INC                     | 0.086606 |
+| MNST     | MONSTER BEVERAGE CORP        | 0.086799 |
+| KMB      | KIMBERLY CLARK CORP          | 0.086895 |
+| KDP      | KEURIG DR PEPPER INC         | 0.087296 |
+| TGT      | TARGET CORP                  | 0.087479 |
+| CMI      | CUMMINS INC                  | 0.08793  |
+| VRSK     | VERISK ANALYTICS INC         | 0.088582 |
+| EW       | EDWARDS LIFESCIENCES CORP    | 0.08974  |
+| LHX      | L3HARRIS TECHNOLOGIES INC    | 0.090231 |
+| URI      | UNITED RENTALS INC           | 0.090544 |
+| MET      | METLIFE INC                  | 0.090775 |
+| D        | DOMINION ENERGY INC          | 0.091951 |
+| PSX      | PHILLIPS 66                  | 0.092643 |
+| GM       | GENERAL MOTORS CO            | 0.092653 |
+| ROST     | ROSS STORES INC              | 0.093069 |
+| SLB      | SCHLUMBERGER LTD             | 0.093075 |
+| PSA      | PUBLIC STORAGE               | 0.093689 |
+| FAST     | FASTENAL CO                  | 0.09459  |
+| GWW      | WW GRAINGER INC              | 0.095201 |
+| SRE      | SEMPRA                       | 0.09545  |
+| FDX      | FEDEX CORP                   | 0.095463 |
+| O        | REALTY INCOME CORP           | 0.09605  |
+| PCAR     | PACCAR INC                   | 0.096144 |
+| SPG      | SIMON PROPERTY GROUP INC     | 0.09618  |
+| CTVA     | CORTEVA INC                  | 0.096342 |
+| TEL      | TE CONNECTIVITY PLC          | 0.096368 |
+| BDX      | BECTON DICKINSON AND CO      | 0.097111 |
+| COR      | CENCORA INC                  | 0.097829 |
+| AMP      | AMERIPRISE FINANCIAL INC     | 0.097851 |
+| OKE      | ONEOK INC                    | 0.099158 |
+| MPC      | MARATHON PETROLEUM CORP      | 0.099251 |
+| PAYX     | PAYCHEX INC                  | 0.100455 |
+| AFL      | AFLAC INC                    | 0.100666 |
+| RSG      | REPUBLIC SERVICES INC        | 0.100736 |
+| REGN     | REGENERON PHARMACEUTICALS    | 0.10151  |
+| AIG      | AMERICAN INTERNATIONAL GROUP | 0.101654 |
+| COIN     | COINBASE GLOBAL INC  CLASS A | 0.103278 |
+| NXPI     | NXP SEMICONDUCTORS NV        | 0.103607 |
+| PWR      | QUANTA SERVICES INC          | 0.104513 |
+| TFC      | TRUIST FINANCIAL CORP        | 0.104961 |
+| WDAY     | WORKDAY INC CLASS A          | 0.106088 |
+| AEP      | AMERICAN ELECTRIC POWER      | 0.106403 |
+| KMI      | KINDER MORGAN INC            | 0.106757 |
+| ALL      | ALLSTATE CORP                | 0.107616 |
+| DLR      | DIGITAL REALTY TRUST INC     | 0.109773 |
+| NSC      | NORFOLK SOUTHERN CORP        | 0.111357 |
+| CARR     | CARRIER GLOBAL CORP          | 0.112539 |
+| AXON     | AXON ENTERPRISE INC          | 0.11258  |
+| VST      | VISTRA CORP                  | 0.115944 |
+| NEM      | NEWMONT CORP                 | 0.116592 |
+| APO      | APOLLO GLOBAL MANAGEMENT INC | 0.116696 |
+| FCX      | FREEPORT MCMORAN INC         | 0.116919 |
+| ABNB     | AIRBNB INC CLASS A           | 0.119087 |
+| MAR      | MARRIOTT INTERNATIONAL  CL A | 0.119243 |
+| HLT      | HILTON WORLDWIDE HOLDINGS IN | 0.119326 |
+| ROP      | ROPER TECHNOLOGIES INC       | 0.120168 |
+| CSX      | CSX CORP                     | 0.12158  |
+| TRV      | TRAVELERS COS INC/THE        | 0.121731 |
+| APD      | AIR PRODUCTS + CHEMICALS INC | 0.122044 |
+| AZO      | AUTOZONE INC                 | 0.122438 |
+| ADSK     | AUTODESK INC                 | 0.125284 |
+| EOG      | EOG RESOURCES INC            | 0.125498 |
+| BK       | BANK OF NEW YORK MELLON CORP | 0.127154 |
+| ITW      | ILLINOIS TOOL WORKS          | 0.129705 |
+| FTNT     | FORTINET INC                 | 0.130604 |
+| NOC      | NORTHROP GRUMMAN CORP        | 0.130633 |
+| ECL      | ECOLAB INC                   | 0.131667 |
+| RCL      | ROYAL CARIBBEAN CRUISES LTD  | 0.134166 |
+| JCI      | JOHNSON CONTROLS INTERNATION | 0.134404 |
+| HCA      | HCA HEALTHCARE INC           | 0.134811 |
+| EMR      | EMERSON ELECTRIC CO          | 0.136629 |
+| MSI      | MOTOROLA SOLUTIONS INC       | 0.136658 |
+| USB      | US BANCORP                   | 0.136923 |
+| GD       | GENERAL DYNAMICS CORP        | 0.137626 |
+| PNC      | PNC FINANCIAL SERVICES GROUP | 0.138735 |
+| HWM      | HOWMET AEROSPACE INC         | 0.139337 |
+| CMG      | CHIPOTLE MEXICAN GRILL INC   | 0.139586 |
+| UPS      | UNITED PARCEL SERVICE CL B   | 0.140603 |
+| PYPL     | PAYPAL HOLDINGS INC          | 0.142498 |
+| CL       | COLGATE PALMOLIVE CO         | 0.143658 |
+| WMB      | WILLIAMS COS INC             | 0.144841 |
+| DASH     | DOORDASH INC   A             | 0.145387 |
+| NKE      | NIKE INC  CL B               | 0.14552  |
+| SNPS     | SYNOPSYS INC                 | 0.147363 |
+| MCO      | MOODY S CORP                 | 0.148479 |
+| ZTS      | ZOETIS INC                   | 0.149472 |
+| CTAS     | CINTAS CORP                  | 0.153054 |
+| MMM      | 3M CO                        | 0.154956 |
+| ORLY     | O REILLY AUTOMOTIVE INC      | 0.155328 |
+| CVS      | CVS HEALTH CORP              | 0.156931 |
+| AON      | AON PLC CLASS A              | 0.157048 |
+| CDNS     | CADENCE DESIGN SYS INC       | 0.159398 |
+| TDG      | TRANSDIGM GROUP INC          | 0.160877 |
+| SHW      | SHERWIN WILLIAMS CO/THE      | 0.162101 |
+| KKR      | KKR + CO INC                 | 0.163369 |
+| AJG      | ARTHUR J GALLAGHER + CO      | 0.163659 |
+| CI       | THE CIGNA GROUP              | 0.167274 |
+| MDLZ     | MONDELEZ INTERNATIONAL INC A | 0.16746  |
+| WM       | WASTE MANAGEMENT INC         | 0.168922 |
+| PH       | PARKER HANNIFIN CORP         | 0.16939  |
+| INTC     | INTEL CORP                   | 0.17001  |
+| EQIX     | EQUINIX INC                  | 0.174188 |
+| MCK      | MCKESSON CORP                | 0.17485  |
+| DUK      | DUKE ENERGY CORP             | 0.17501  |
+| ELV      | ELEVANCE HEALTH INC          | 0.178561 |
+| CEG      | CONSTELLATION ENERGY         | 0.183345 |
+| WELL     | WELLTOWER INC                | 0.184169 |
+| FI       | FISERV INC                   | 0.186002 |
+| TT       | TRANE TECHNOLOGIES PLC       | 0.188306 |
+| SO       | SOUTHERN CO/THE              | 0.189616 |
+| BMY      | BRISTOL MYERS SQUIBB CO      | 0.192532 |
+| CME      | CME GROUP INC                | 0.192911 |
+| AMT      | AMERICAN TOWER CORP          | 0.194402 |
+| MO       | ALTRIA GROUP INC             | 0.196859 |
+| ANET     | ARISTA NETWORKS INC          | 0.197002 |
+| LMT      | LOCKHEED MARTIN CORP         | 0.197525 |
+| PLD      | PROLOGIS INC                 | 0.197577 |
+| SBUX     | STARBUCKS CORP               | 0.19931  |
+| BX       | BLACKSTONE INC               | 0.201238 |
+| ICE      | INTERCONTINENTAL EXCHANGE IN | 0.201351 |
+| KLAC     | KLA CORP                     | 0.210196 |
+| CB       | CHUBB LTD                    | 0.214347 |
+| ADI      | ANALOG DEVICES INC           | 0.215863 |
+| LRCX     | LAM RESEARCH CORP            | 0.216989 |
+| COP      | CONOCOPHILLIPS               | 0.21786  |
+| MDT      | MEDTRONIC PLC                | 0.219497 |
+| APH      | AMPHENOL CORP CL A           | 0.221328 |
+| MMC      | MARSH + MCLENNAN COS         | 0.221503 |
+| CRWD     | CROWDSTRIKE HOLDINGS INC   A | 0.225853 |
+| VRTX     | VERTEX PHARMACEUTICALS INC   | 0.226467 |
+| TMUS     | T MOBILE US INC              | 0.230806 |
+| MU       | MICRON TECHNOLOGY INC        | 0.236774 |
+| DHR      | DANAHER CORP                 | 0.245612 |
+| COF      | CAPITAL ONE FINANCIAL CORP   | 0.247121 |
+| LOW      | LOWE S COS INC               | 0.249039 |
+| CMCSA    | COMCAST CORP CLASS A         | 0.256242 |
+| ETN      | EATON CORP PLC               | 0.256461 |
+| DE       | DEERE + CO                   | 0.257869 |
+| SYK      | STRYKER CORP                 | 0.258287 |
+| PANW     | PALO ALTO NETWORKS INC       | 0.258742 |
+| PFE      | PFIZER INC                   | 0.259074 |
+| ADP      | AUTOMATIC DATA PROCESSING    | 0.26034  |
+| GEV      | GE VERNOVA INC               | 0.262154 |
+| UNP      | UNION PACIFIC CORP           | 0.264363 |
+| AMAT     | APPLIED MATERIALS INC        | 0.265333 |
+| GILD     | GILEAD SCIENCES INC          | 0.274698 |
+| BLK      | BLACKROCK INC                | 0.281917 |
+| TJX      | TJX COMPANIES INC            | 0.282748 |
+| C        | CITIGROUP INC                | 0.287638 |
+| NEE      | NEXTERA ENERGY INC           | 0.290567 |
+| HON      | HONEYWELL INTERNATIONAL INC  | 0.291287 |
+| SCHW     | SCHWAB (CHARLES) CORP        | 0.294474 |
+| BSX      | BOSTON SCIENTIFIC CORP       | 0.294627 |
+| TMO      | THERMO FISHER SCIENTIFIC INC | 0.301013 |
+| AMGN     | AMGEN INC                    | 0.305389 |
+| BA       | BOEING CO/THE                | 0.309609 |
+| MS       | MORGAN STANLEY               | 0.319407 |
+| SPGI     | S+P GLOBAL INC               | 0.320365 |
+| PGR      | PROGRESSIVE CORP             | 0.320762 |
+| QCOM     | QUALCOMM INC                 | 0.323226 |
+| AXP      | AMERICAN EXPRESS CO          | 0.328733 |
+| CAT      | CATERPILLAR INC              | 0.330696 |
+| TXN      | TEXAS INSTRUMENTS INC        | 0.343017 |
+| PEP      | PEPSICO INC                  | 0.349608 |
+| UBER     | UBER TECHNOLOGIES INC        | 0.350194 |
+| ADBE     | ADOBE INC                    | 0.355404 |
+| VZ       | VERIZON COMMUNICATIONS INC   | 0.361468 |
+| RTX      | RTX CORP                     | 0.362871 |
+| BKNG     | BOOKING HOLDINGS INC         | 0.36392  |
+| AMD      | ADVANCED MICRO DEVICES       | 0.368726 |
+| GS       | GOLDMAN SACHS GROUP INC      | 0.375212 |
+| ISRG     | INTUITIVE SURGICAL INC       | 0.389424 |
+| ACN      | ACCENTURE PLC CL A           | 0.389428 |
+| MRK      | MERCK + CO. INC.             | 0.391215 |
+| T        | AT+T INC                     | 0.394743 |
+| DIS      | WALT DISNEY CO/THE           | 0.403256 |
+| NOW      | SERVICENOW INC               | 0.41564  |
+| INTU     | INTUIT INC                   | 0.422971 |
+| MCD      | MCDONALD S CORP              | 0.431388 |
+| LIN      | LINDE PLC                    | 0.440822 |
+| ABT      | ABBOTT LABORATORIES          | 0.453777 |
+| CVX      | CHEVRON CORP                 | 0.45896  |
+| IBM      | INTL BUSINESS MACHINES CORP  | 0.486931 |
+| WFC      | WELLS FARGO + CO             | 0.491695 |
+| PLTR     | PALANTIR TECHNOLOGIES INC A  | 0.512784 |
+| CRM      | SALESFORCE INC               | 0.514568 |
+| CSCO     | CISCO SYSTEMS INC            | 0.51532  |
+| GE       | GENERAL ELECTRIC             | 0.537372 |
+| KO       | COCA COLA CO/THE             | 0.541096 |
+| UNH      | UNITEDHEALTH GROUP INC       | 0.546549 |
+| ORCL     | ORACLE CORP                  | 0.552928 |
+| PM       | PHILIP MORRIS INTERNATIONAL  | 0.553448 |
+| BAC      | BANK OF AMERICA CORP         | 0.583248 |
+| ABBV     | ABBVIE INC                   | 0.656427 |
+| HD       | HOME DEPOT INC               | 0.714779 |
+| JNJ      | JOHNSON + JOHNSON            | 0.731153 |
+| PG       | PROCTER + GAMBLE CO/THE      | 0.753393 |
+| WMT      | WALMART INC                  | 0.828294 |
+| COST     | COSTCO WHOLESALE CORP        | 0.882579 |
+| XOM      | EXXON MOBIL CORP             | 0.889164 |
+| MA       | MASTERCARD INC   A           | 0.941493 |
+| NFLX     | NETFLIX INC                  | 1.04035  |
+| LLY      | ELI LILLY + CO               | 1.18839  |
+| V        | VISA INC CLASS A SHARES      | 1.24995  |
+| JPM      | JPMORGAN CHASE + CO          | 1.45566  |
+| GOOG     | ALPHABET INC CL C            | 1.61812  |
+| TSLA     | TESLA INC                    | 1.61813  |
+| BRK.B    | BERKSHIRE HATHAWAY INC CL B  | 1.77232  |
+| GOOGL    | ALPHABET INC CL A            | 1.98242  |
+| AVGO     | BROADCOM INC                 | 2.26771  |
+| META     | META PLATFORMS INC CLASS A   | 2.99358  |
+| AMZN     | AMAZON.COM INC               | 3.94681  |
+| AAPL     | APPLE INC                    | 6.00207  |
+| NVDA     | NVIDIA CORP                  | 6.80037  |
+| MSFT     | MICROSOFT CORP               | 6.85145  |
