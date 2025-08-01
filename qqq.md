@@ -1,103 +1,103 @@
 |     | Holding Ticker   | Name                                |   Weight |
 |----:|:-----------------|:------------------------------------|---------:|
-|   0 | NVDA             | NVIDIA Corp                         |   10.065 |
-|   1 | MSFT             | Microsoft Corp                      |    8.777 |
-|   2 | AAPL             | Apple Inc                           |    7.184 |
-|   3 | AMZN             | Amazon.com Inc                      |    5.623 |
-|   4 | AVGO             | Broadcom Inc                        |    5.415 |
-|   5 | META             | Meta Platforms Inc                  |    3.473 |
-|   6 | NFLX             | Netflix Inc                         |    2.853 |
-|   7 | TSLA             | Tesla Inc                           |    2.672 |
-|   8 | GOOGL            | Alphabet Inc                        |    2.632 |
-|   9 | GOOG             | Alphabet Inc                        |    2.48  |
-|  10 | COST             | Costco Wholesale Corp               |    2.33  |
-|  11 | PLTR             | Palantir Technologies Inc           |    2.032 |
-|  12 | AMD              | Advanced Micro Devices Inc          |    1.648 |
-|  13 | TMUS             | T-Mobile US Inc                     |    1.553 |
-|  14 | CSCO             | Cisco Systems Inc                   |    1.531 |
-|  15 | INTU             | Intuit Inc                          |    1.275 |
-|  16 | LIN              | Linde PLC                           |    1.242 |
-|  17 | PEP              | PepsiCo Inc                         |    1.109 |
-|  18 | BKNG             | Booking Holdings Inc                |    1.034 |
-|  19 | ISRG             | Intuitive Surgical Inc              |    1.016 |
-|  20 | QCOM             | QUALCOMM Inc                        |    0.989 |
-|  21 | TXN              | Texas Instruments Inc               |    0.968 |
-|  22 | AMGN             | Amgen Inc                           |    0.917 |
-|  23 | ADBE             | Adobe Inc                           |    0.878 |
-|  24 | AMAT             | Applied Materials Inc               |    0.86  |
-|  25 | SHOP             | Shopify Inc                         |    0.848 |
-|  26 | HON              | Honeywell International Inc         |    0.808 |
-|  27 | GILD             | Gilead Sciences Inc                 |    0.808 |
-|  28 | MU               | Micron Technology Inc               |    0.726 |
-|  29 | LRCX             | Lam Research Corp                   |    0.718 |
-|  30 | ADP              | Automatic Data Processing Inc       |    0.715 |
-|  31 | KLAC             | KLA Corp                            |    0.692 |
-|  32 | PANW             | Palo Alto Networks Inc              |    0.691 |
-|  33 | CMCSA            | Comcast Corp                        |    0.685 |
-|  34 | MELI             | MercadoLibre Inc                    |    0.683 |
-|  35 | VRTX             | Vertex Pharmaceuticals Inc          |    0.682 |
-|  36 | SNPS             | Synopsys Inc                        |    0.676 |
-|  37 | CRWD             | Crowdstrike Holdings Inc            |    0.653 |
-|  38 | ADI              | Analog Devices Inc                  |    0.649 |
-|  39 | APP              | AppLovin Corp                       |    0.633 |
-|  40 | CEG              | Constellation Energy Corp           |    0.613 |
-|  41 | SBUX             | Starbucks Corp                      |    0.597 |
-|  42 | CDNS             | Cadence Design Systems Inc          |    0.573 |
-|  43 | MSTR             | MicroStrategy Inc                   |    0.567 |
-|  44 | DASH             | DoorDash Inc                        |    0.56  |
-|  45 | CTAS             | Cintas Corp                         |    0.51  |
-|  46 | TRI              | Thomson Reuters Corp                |    0.509 |
-|  47 | INTC             | Intel Corp                          |    0.502 |
-|  48 | ORLY             | O'Reilly Automotive Inc             |    0.481 |
+|   0 | NVDA             | NVIDIA Corp                         |   10.041 |
+|   1 | MSFT             | Microsoft Corp                      |    9.174 |
+|   2 | AAPL             | Apple Inc                           |    7.172 |
+|   3 | AMZN             | Amazon.com Inc                      |    5.75  |
+|   4 | AVGO             | Broadcom Inc                        |    5.284 |
+|   5 | META             | Meta Platforms Inc                  |    3.885 |
+|   6 | NFLX             | Netflix Inc                         |    2.808 |
+|   7 | TSLA             | Tesla Inc                           |    2.596 |
+|   8 | GOOGL            | Alphabet Inc                        |    2.584 |
+|   9 | GOOG             | Alphabet Inc                        |    2.436 |
+|  10 | COST             | Costco Wholesale Corp               |    2.37  |
+|  11 | PLTR             | Palantir Technologies Inc           |    2.04  |
+|  12 | AMD              | Advanced Micro Devices Inc          |    1.627 |
+|  13 | TMUS             | T-Mobile US Inc                     |    1.541 |
+|  14 | CSCO             | Cisco Systems Inc                   |    1.534 |
+|  15 | INTU             | Intuit Inc                          |    1.247 |
+|  16 | LIN              | Linde PLC                           |    1.233 |
+|  17 | PEP              | PepsiCo Inc                         |    1.076 |
+|  18 | BKNG             | Booking Holdings Inc                |    1.019 |
+|  19 | ISRG             | Intuitive Surgical Inc              |    0.981 |
+|  20 | TXN              | Texas Instruments Inc               |    0.936 |
+|  21 | QCOM             | QUALCOMM Inc                        |    0.917 |
+|  22 | AMGN             | Amgen Inc                           |    0.903 |
+|  23 | ADBE             | Adobe Inc                           |    0.868 |
+|  24 | SHOP             | Shopify Inc                         |    0.847 |
+|  25 | AMAT             | Applied Materials Inc               |    0.822 |
+|  26 | HON              | Honeywell International Inc         |    0.813 |
+|  27 | GILD             | Gilead Sciences Inc                 |    0.795 |
+|  28 | ADP              | Automatic Data Processing Inc       |    0.715 |
+|  29 | CMCSA            | Comcast Corp                        |    0.704 |
+|  30 | MU               | Micron Technology Inc               |    0.694 |
+|  31 | LRCX             | Lam Research Corp                   |    0.69  |
+|  32 | MELI             | MercadoLibre Inc                    |    0.685 |
+|  33 | APP              | AppLovin Corp                       |    0.684 |
+|  34 | VRTX             | Vertex Pharmaceuticals Inc          |    0.668 |
+|  35 | SNPS             | Synopsys Inc                        |    0.667 |
+|  36 | KLAC             | KLA Corp                            |    0.662 |
+|  37 | PANW             | Palo Alto Networks Inc              |    0.659 |
+|  38 | CRWD             | Crowdstrike Holdings Inc            |    0.644 |
+|  39 | ADI              | Analog Devices Inc                  |    0.634 |
+|  40 | CEG              | Constellation Energy Corp           |    0.621 |
+|  41 | MSTR             | MicroStrategy Inc                   |    0.58  |
+|  42 | SBUX             | Starbucks Corp                      |    0.577 |
+|  43 | DASH             | DoorDash Inc                        |    0.568 |
+|  44 | CDNS             | Cadence Design Systems Inc          |    0.567 |
+|  45 | TRI              | Thomson Reuters Corp                |    0.515 |
+|  46 | CTAS             | Cintas Corp                         |    0.511 |
+|  47 | INTC             | Intel Corp                          |    0.492 |
+|  48 | ORLY             | O'Reilly Automotive Inc             |    0.478 |
 |  49 | MDLZ             | Mondelez International Inc          |    0.477 |
-|  50 | FTNT             | Fortinet Inc                        |    0.441 |
-|  51 | PDD              | PDD Holdings Inc ADR                |    0.427 |
-|  52 | MAR              | Marriott International Inc/MD       |    0.419 |
-|  53 | MRVL             | Marvell Technology Inc              |    0.399 |
-|  54 | PYPL             | PayPal Holdings Inc                 |    0.384 |
-|  55 | CSX              | CSX Corp                            |    0.375 |
-|  56 | ADSK             | Autodesk Inc                        |    0.373 |
-|  57 | ASML             | ASML Holding NV                     |    0.357 |
-|  58 | AEP              | American Electric Power Co Inc      |    0.342 |
-|  59 | MNST             | Monster Beverage Corp               |    0.337 |
-|  60 | ROP              | Roper Technologies Inc              |    0.336 |
-|  61 | REGN             | Regeneron Pharmaceuticals Inc       |    0.333 |
-|  62 | AXON             | Axon Enterprise Inc                 |    0.33  |
-|  63 | ABNB             | Airbnb Inc                          |    0.329 |
-|  64 | NXPI             | NXP Semiconductors NV               |    0.316 |
+|  50 | FTNT             | Fortinet Inc                        |    0.435 |
+|  51 | PDD              | PDD Holdings Inc ADR                |    0.431 |
+|  52 | MAR              | Marriott International Inc/MD       |    0.411 |
+|  53 | MRVL             | Marvell Technology Inc              |    0.394 |
+|  54 | PYPL             | PayPal Holdings Inc                 |    0.381 |
+|  55 | CSX              | CSX Corp                            |    0.38  |
+|  56 | ADSK             | Autodesk Inc                        |    0.369 |
+|  57 | ASML             | ASML Holding NV                     |    0.346 |
+|  58 | AEP              | American Electric Power Co Inc      |    0.344 |
+|  59 | ROP              | Roper Technologies Inc              |    0.337 |
+|  60 | AXON             | Axon Enterprise Inc                 |    0.335 |
+|  61 | REGN             | Regeneron Pharmaceuticals Inc       |    0.33  |
+|  62 | MNST             | Monster Beverage Corp               |    0.326 |
+|  63 | ABNB             | Airbnb Inc                          |    0.325 |
+|  64 | NXPI             | NXP Semiconductors NV               |    0.307 |
 |  65 | FAST             | Fastenal Co                         |    0.301 |
-|  66 | PAYX             | Paychex Inc                         |    0.298 |
-|  67 | PCAR             | PACCAR Inc                          |    0.294 |
-|  68 | WDAY             | Workday Inc                         |    0.291 |
-|  69 | DDOG             | Datadog Inc                         |    0.269 |
-|  70 | IDXX             | IDEXX Laboratories Inc              |    0.26  |
-|  71 | KDP              | Keurig Dr Pepper Inc                |    0.26  |
-|  72 | AZN              | AstraZeneca PLC ADR                 |    0.258 |
-|  73 | CCEP             | Coca-Cola Europacific Partners PLC  |    0.258 |
-|  74 | ROST             | Ross Stores Inc                     |    0.258 |
-|  75 | BKR              | Baker Hughes Co                     |    0.255 |
-|  76 | ZS               | Zscaler Inc                         |    0.254 |
-|  77 | CPRT             | Copart Inc                          |    0.253 |
-|  78 | EXC              | Exelon Corp                         |    0.253 |
-|  79 | FANG             | Diamondback Energy Inc              |    0.25  |
-|  80 | XEL              | Xcel Energy Inc                     |    0.236 |
+|  66 | PAYX             | Paychex Inc                         |    0.296 |
+|  67 | PCAR             | PACCAR Inc                          |    0.295 |
+|  68 | WDAY             | Workday Inc                         |    0.282 |
+|  69 | EXC              | Exelon Corp                         |    0.258 |
+|  70 | ROST             | Ross Stores Inc                     |    0.256 |
+|  71 | DDOG             | Datadog Inc                         |    0.255 |
+|  72 | BKR              | Baker Hughes Co                     |    0.254 |
+|  73 | CCEP             | Coca-Cola Europacific Partners PLC  |    0.253 |
+|  74 | ZS               | Zscaler Inc                         |    0.253 |
+|  75 | KDP              | Keurig Dr Pepper Inc                |    0.252 |
+|  76 | CPRT             | Copart Inc                          |    0.249 |
+|  77 | AZN              | AstraZeneca PLC ADR                 |    0.248 |
+|  78 | FANG             | Diamondback Energy Inc              |    0.247 |
+|  79 | IDXX             | IDEXX Laboratories Inc              |    0.245 |
+|  80 | XEL              | Xcel Energy Inc                     |    0.241 |
 |  81 | TTWO             | Take-Two Interactive Software Inc   |    0.231 |
-|  82 | CSGP             | CoStar Group Inc                    |    0.23  |
-|  83 | CHTR             | Charter Communications Inc          |    0.222 |
-|  84 | EA               | Electronic Arts Inc                 |    0.222 |
-|  85 | TTD              | Trade Desk Inc/The                  |    0.219 |
-|  86 | VRSK             | Verisk Analytics Inc                |    0.218 |
-|  87 | MCHP             | Microchip Technology Inc            |    0.215 |
-|  88 | CTSH             | Cognizant Technology Solutions Corp |    0.205 |
-|  89 | DXCM             | Dexcom Inc                          |    0.198 |
-|  90 | KHC              | Kraft Heinz Co/The                  |    0.191 |
-|  91 | WBD              | Warner Bros Discovery Inc           |    0.186 |
-|  92 | GEHC             | GE HealthCare Technologies Inc      |    0.186 |
-|  93 | TEAM             | Atlassian Corp                      |    0.184 |
-|  94 | ODFL             | Old Dominion Freight Line Inc       |    0.175 |
-|  95 | ON               | ON Semiconductor Corp               |    0.137 |
-|  96 | LULU             | Lululemon Athletica Inc             |    0.134 |
-|  97 | CDW              | CDW Corp/DE                         |    0.134 |
-|  98 | ARM              | ARM Holdings PLC ADR                |    0.124 |
-|  99 | GFS              | GLOBALFOUNDRIES Inc                 |    0.123 |
-| 100 | BIIB             | Biogen Inc                          |    0.105 |
+|  82 | CSGP             | CoStar Group Inc                    |    0.229 |
+|  83 | VRSK             | Verisk Analytics Inc                |    0.222 |
+|  84 | TTD              | Trade Desk Inc/The                  |    0.222 |
+|  85 | EA               | Electronic Arts Inc                 |    0.218 |
+|  86 | CHTR             | Charter Communications Inc          |    0.215 |
+|  87 | MCHP             | Microchip Technology Inc            |    0.208 |
+|  88 | CTSH             | Cognizant Technology Solutions Corp |    0.201 |
+|  89 | GEHC             | GE HealthCare Technologies Inc      |    0.186 |
+|  90 | WBD              | Warner Bros Discovery Inc           |    0.185 |
+|  91 | KHC              | Kraft Heinz Co/The                  |    0.185 |
+|  92 | TEAM             | Atlassian Corp                      |    0.18  |
+|  93 | DXCM             | Dexcom Inc                          |    0.18  |
+|  94 | ODFL             | Old Dominion Freight Line Inc       |    0.18  |
+|  95 | ON               | ON Semiconductor Corp               |    0.134 |
+|  96 | LULU             | Lululemon Athletica Inc             |    0.131 |
+|  97 | CDW              | CDW Corp/DE                         |    0.131 |
+|  98 | GFS              | GLOBALFOUNDRIES Inc                 |    0.118 |
+|  99 | ARM              | ARM Holdings PLC ADR                |    0.108 |
+| 100 | BIIB             | Biogen Inc                          |    0.107 |
