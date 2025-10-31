@@ -128,6 +128,10 @@ def _filter_and_clean(df: pl.DataFrame, provider: str) -> pl.DataFrame:
     Returns:
         Cleaned DataFrame with just Ticker column (uppercase symbols only)
     """
+    # 🏃 Handle empty DataFrame early - just select Ticker column
+    if len(df) == 0:
+        return df.select("Ticker") if "Ticker" in df.columns else pl.DataFrame({"Ticker": []})
+
     if provider in ("ssga", "ishares"):
         currency_col = "Local Currency" if provider == "ssga" else "Market Currency"
         df = df.filter((pl.col(currency_col) == "USD") & (pl.col("Ticker") != "-"))
@@ -137,8 +141,8 @@ def _filter_and_clean(df: pl.DataFrame, provider: str) -> pl.DataFrame:
         pl.col("Ticker").is_not_null()
         & (pl.col("Ticker") != "")
         & (pl.col("Ticker") != "-")
-        & ~pl.col("Ticker").str.contains("_")  # Exclude CASH_USD and similar placeholders
-        & ~pl.col("Ticker").str.contains(" ")  # Exclude warrants like "BBBY WS"
+        & ~pl.col("Ticker").str.contains("_", literal=True)  # Exclude CASH_USD and similar placeholders
+        & ~pl.col("Ticker").str.contains(" ", literal=True)  # Exclude warrants like "BBBY WS"
     ).select("Ticker").sort("Ticker")
     return df
 

@@ -411,7 +411,7 @@ def test_filter_and_clean_handles_empty_dataframe() -> None:
     result = _filter_and_clean(empty_df, "ssga")
 
     assert len(result) == 0
-    assert set(result.columns) == {"Ticker", "Name", "Weight"}
+    assert set(result.columns) == {"Ticker"}  # Only returns Ticker column
 
 
 def test_save_holdings_creates_directory_if_not_exists(
