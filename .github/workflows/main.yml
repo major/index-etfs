@@ -40,7 +40,7 @@ jobs:
         run: |-
           git config user.name "Major Hayden"
           git config user.email "major@mhtx.net"
-          git add *.csv *.md README.md
+          git add *.txt README.md
           timestamp=$(date -u)
           git commit -m "Updating ETF data: ${timestamp}" || exit 0
           git clean -fxd

@@ -1,17 +1,29 @@
-# Index ETF tracker
+# 📊 Index ETF Ticker Symbols
 
-Collecting the holdings of various index ETFs as they make adjustments.
+Extract ticker symbols from various index ETFs. Just the symbols (like AAPL, MSFT, NVDA), nothing else.
 
 _Not financial advice, just a fun project._
 
 ## Supported ETFs
 
-| ETF | CSV | Markdown |
-|-----|-----|----------|
-| SPY | [csv](spy.csv) | [markdown](spy.md) |
-| MDY | [csv](mdy.csv) | [markdown](mdy.md) |
-| SPSM | [csv](spsm.csv) | [markdown](spsm.md) |
-| QQQ | [csv](qqq.csv) | [markdown](qqq.md) |
-| IWM | [csv](iwm.csv) | [markdown](iwm.md) |
+| ETF | Tickers | Count |
+|-----|---------|-------|
+| SPY | [spy.txt](spy.txt) | ~503 |
+| MDY | [mdy.txt](mdy.txt) | ~402 |
+| SPSM | [spsm.txt](spsm.txt) | ~605 |
+| QQQ | [qqq.txt](qqq.txt) | ~102 |
+| IWM | [iwm.txt](iwm.txt) | ~1965 |
 
-To spot changes, look at the [commits in the main branch](commits/main/).
+Each file contains one ticker symbol per line, sorted alphabetically.
+
+## Usage
+
+```bash
+# Install dependencies
+uv sync
+
+# Download all ETF ticker symbols
+uv run get-holdings
+```
+
+To spot changes over time, look at the [commits in the main branch](commits/main/).

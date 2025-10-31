@@ -1,7 +1,7 @@
-"""📊 Get the holdings of various index ETFs.
+"""📊 Extract ticker symbols from various index ETFs.
 
-This module provides functions to download and process ETF holdings data
-from various providers (SSGA, iShares, Direxion).
+This module downloads ETF holdings from various providers (SSGA, iShares, Direxion)
+and extracts just the ticker symbols (e.g., AAPL, MSFT, GOOGL).
 """
 
 from pathlib import Path
@@ -85,10 +85,36 @@ def _load_direxion_csv(url: str) -> pl.DataFrame:
     Returns:
         Polars DataFrame with holdings data
     """
-    df = pl.read_csv(url, truncate_ragged_lines=True)
-    df = df.rename(
-        {"Ticker": "Ticker", "Description": "Name", "% of Net Assets": "Weight"}
-    )
+    df = pl.read_csv(url, skip_rows=5, truncate_ragged_lines=True)
+
+    # 🔄 Map possible column name variations to standard names
+    rename_map = {}
+
+    # Handle ticker column (could be "Ticker" or "StockTicker")
+    if "StockTicker" in df.columns:
+        rename_map["StockTicker"] = "Ticker"
+    elif "Ticker" not in df.columns:
+        raise ValueError("No ticker column found in Direxion CSV")
+
+    # Handle name/description column
+    if "SecurityDescription" in df.columns:
+        rename_map["SecurityDescription"] = "Name"
+    elif "Description" in df.columns:
+        rename_map["Description"] = "Name"
+    elif "Name" not in df.columns:
+        raise ValueError("No name/description column found in Direxion CSV")
+
+    # Handle weight column
+    if "HoldingsPercent" in df.columns:
+        rename_map["HoldingsPercent"] = "Weight"
+    elif "% of Net Assets" in df.columns:
+        rename_map["% of Net Assets"] = "Weight"
+    elif "Weight" not in df.columns:
+        raise ValueError("No weight column found in Direxion CSV")
+
+    if rename_map:
+        df = df.rename(rename_map)
+
     return df
 
 
@@ -100,22 +126,24 @@ def _filter_and_clean(df: pl.DataFrame, provider: str) -> pl.DataFrame:
         provider: ETF provider name (ssga, ishares, direxion)
 
     Returns:
-        Cleaned and filtered DataFrame with Ticker, Name, Weight columns
+        Cleaned DataFrame with just Ticker column (uppercase symbols only)
     """
     if provider in ("ssga", "ishares"):
         currency_col = "Local Currency" if provider == "ssga" else "Market Currency"
         df = df.filter((pl.col(currency_col) == "USD") & (pl.col("Ticker") != "-"))
 
-    # 📋 Select and sort common columns
-    df = df.select(["Ticker", "Name", "Weight"]).sort("Weight", descending=True)
+    # 🎯 Filter out null/empty tickers, get uppercase symbols only, sorted alphabetically
+    df = df.filter(
+        pl.col("Ticker").is_not_null() & (pl.col("Ticker") != "") & (pl.col("Ticker") != "-")
+    ).select("Ticker").sort("Ticker")
     return df
 
 
 def _save_holdings(df: pl.DataFrame, symbol: str, output_dir: Path | None = None) -> None:
-    """💾 Save holdings data to CSV and Markdown files.
+    """💾 Save ticker symbols to a text file.
 
     Args:
-        df: DataFrame containing holdings
+        df: DataFrame containing ticker symbols
         symbol: ETF symbol (used for filename)
         output_dir: Optional output directory (defaults to current directory)
     """
@@ -124,27 +152,26 @@ def _save_holdings(df: pl.DataFrame, symbol: str, output_dir: Path | None = None
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # 📊 Add ranking and save
-    df_with_rank = df.with_row_index("Rank")
-    df_with_rank.write_csv(output_dir / f"{symbol}.csv")
-    (output_dir / f"{symbol}.md").write_text(df.to_pandas().to_markdown())
+    # 📝 Save as simple newline-separated list of tickers
+    tickers = df["Ticker"].to_list()
+    (output_dir / f"{symbol}.txt").write_text("\n".join(tickers) + "\n")
 
 
 def get_etf_holdings(
     symbol: ETFSymbol,
     output_dir: Path | None = None,
 ) -> pl.DataFrame:
-    """📈 Get holdings for a specific ETF.
+    """📈 Get ticker symbols for a specific ETF.
 
-    This is the main function for downloading and processing ETF holdings.
+    This is the main function for downloading and extracting ticker symbols.
     It handles different provider formats automatically.
 
     Args:
         symbol: ETF symbol (spy, mdy, spsm, qqq, iwm)
-        output_dir: Optional directory to save output files
+        output_dir: Optional directory to save output file
 
     Returns:
-        DataFrame with Ticker, Name, and Weight columns sorted by weight
+        DataFrame with just the Ticker column (uppercase symbols, sorted alphabetically)
 
     Raises:
         ValueError: If the ETF symbol is not recognized
@@ -181,46 +208,46 @@ def get_etf_holdings(
 
 
 def get_spy_holdings() -> pl.DataFrame:
-    """📊 Get the holdings of the SPY ETF.
+    """📊 Get ticker symbols from the SPY ETF.
 
     Returns:
-        DataFrame with SPY holdings
+        DataFrame with SPY ticker symbols
     """
     return get_etf_holdings("spy")
 
 
 def get_mdy_holdings() -> pl.DataFrame:
-    """📊 Get the holdings of the MDY ETF.
+    """📊 Get ticker symbols from the MDY ETF.
 
     Returns:
-        DataFrame with MDY holdings
+        DataFrame with MDY ticker symbols
     """
     return get_etf_holdings("mdy")
 
 
 def get_spsm_holdings() -> pl.DataFrame:
-    """📊 Get the holdings of the SPSM ETF.
+    """📊 Get ticker symbols from the SPSM ETF.
 
     Returns:
-        DataFrame with SPSM holdings
+        DataFrame with SPSM ticker symbols
     """
     return get_etf_holdings("spsm")
 
 
 def get_qqq_holdings() -> pl.DataFrame:
-    """📊 Get the holdings of the QQQ ETF (using QQQE data as proxy).
+    """📊 Get ticker symbols from the QQQ ETF (using QQQE data as proxy).
 
     Returns:
-        DataFrame with QQQ holdings
+        DataFrame with QQQ ticker symbols
     """
     return get_etf_holdings("qqq")
 
 
 def get_iwm_holdings() -> pl.DataFrame:
-    """📊 Get the holdings of the IWM ETF.
+    """📊 Get ticker symbols from the IWM ETF.
 
     Returns:
-        DataFrame with IWM holdings
+        DataFrame with IWM ticker symbols
     """
     return get_etf_holdings("iwm")
 

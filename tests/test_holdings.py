@@ -98,11 +98,10 @@ def test_filter_and_clean(
     result = _filter_and_clean(data, provider)
 
     assert len(result) == expected_len
-    assert set(result.columns) == {"Ticker", "Name", "Weight"}
-    # ✅ Check sorted by weight descending
-    assert result["Weight"].to_list() == sorted(
-        result["Weight"].to_list(), reverse=True
-    )
+    assert set(result.columns) == {"Ticker"}
+    # ✅ Check sorted alphabetically
+    tickers = result["Ticker"].to_list()
+    assert tickers == sorted(tickers)
 
 
 def test_filter_and_clean_removes_dash_tickers(sample_ssga_data: pl.DataFrame) -> None:
@@ -202,24 +201,36 @@ def test_load_ishares_csv_renames_weight_column(mock_read_csv: MagicMock) -> Non
     assert "Weight (%)" not in result.columns
 
 
-@patch("index_etfs.holdings.pl.read_csv")
-def test_load_direxion_csv_renames_columns(mock_read_csv: MagicMock) -> None:
-    """🧪 Test that Direxion loader renames columns properly."""
-    mock_df = pl.DataFrame(
+@pytest.mark.parametrize(
+    "input_columns",
+    [
+        # Old format
+        {"Ticker": ["AAPL"], "Description": ["Apple Inc"], "% of Net Assets": [10.5]},
+        # New format (as of 2025)
         {
-            "Ticker": ["AAPL"],
-            "Description": ["Apple Inc"],
-            "% of Net Assets": [10.5],
-        }
-    )
+            "StockTicker": ["AAPL"],
+            "SecurityDescription": ["Apple Inc"],
+            "HoldingsPercent": [10.5],
+        },
+    ],
+)
+@patch("index_etfs.holdings.pl.read_csv")
+def test_load_direxion_csv_renames_columns(
+    mock_read_csv: MagicMock, input_columns: dict
+) -> None:
+    """🧪 Test that Direxion loader renames columns properly (handles format changes)."""
+    mock_df = pl.DataFrame(input_columns)
     mock_read_csv.return_value = mock_df
 
     result = _load_direxion_csv("http://example.com/data.csv")
 
+    assert "Ticker" in result.columns
     assert "Name" in result.columns
     assert "Weight" in result.columns
-    assert "Description" not in result.columns
-    assert "% of Net Assets" not in result.columns
+    # Original columns should be renamed
+    for col in input_columns.keys():
+        if col not in ["Ticker", "Name", "Weight"]:
+            assert col not in result.columns
 
 
 # 📈 Tests for get_etf_holdings
