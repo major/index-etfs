@@ -66,7 +66,7 @@ def get_spsm_holdings():
 def get_qqq_holdings():
     """Get the holdings of the QQQ ETF."""
     holdings_url = "https://www.invesco.com/us/financial-products/etfs/holdings/main/holdings/0?audienceType=Investor&action=download&ticker=QQQ"
-    df = pl.read_csv(holdings_url)
+    df = pl.read_csv(holdings_url, truncate_ragged_lines=True)
 
     df = df.rename({"Holding Ticker": "Ticker"})
     df = df.select(["Ticker", "Name", "Weight"]).sort("Weight", descending=True)
@@ -82,6 +82,7 @@ def get_iwm_holdings():
         iwm_holdings_url,
         skip_rows=9,
         columns=["Ticker", "Name", "Weight (%)", "Market Currency"],
+        truncate_ragged_lines=True,
     )
     df = df.rename({"Weight (%)": "Weight"})
     df = df.filter((pl.col("Market Currency") == "USD") & (pl.col("Ticker") != "-"))
