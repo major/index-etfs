@@ -132,9 +132,13 @@ def _filter_and_clean(df: pl.DataFrame, provider: str) -> pl.DataFrame:
         currency_col = "Local Currency" if provider == "ssga" else "Market Currency"
         df = df.filter((pl.col(currency_col) == "USD") & (pl.col("Ticker") != "-"))
 
-    # 🎯 Filter out null/empty tickers, get uppercase symbols only, sorted alphabetically
+    # 🎯 Filter out null/empty tickers, special placeholders, get uppercase symbols only, sorted alphabetically
     df = df.filter(
-        pl.col("Ticker").is_not_null() & (pl.col("Ticker") != "") & (pl.col("Ticker") != "-")
+        pl.col("Ticker").is_not_null()
+        & (pl.col("Ticker") != "")
+        & (pl.col("Ticker") != "-")
+        & ~pl.col("Ticker").str.contains("_")  # Exclude CASH_USD and similar placeholders
+        & ~pl.col("Ticker").str.contains(" ")  # Exclude warrants like "BBBY WS"
     ).select("Ticker").sort("Ticker")
     return df
 
