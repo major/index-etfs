@@ -22,7 +22,7 @@ Do not read the whole repo first. Start here:
    - Cleanup: `_filter_and_clean`.
    - Output: `_save_holdings`, `_tradingview_symbols`, `_watchlist_lines`.
 3. **Tests for behavior**: `tests/test_holdings.py`.
-4. **CI/update behavior** only if needed: `.github/workflows/ci.yml`, `.github/workflows/main.yml`.
+4. **CI/update behavior** only if needed: `.github/workflows/ci.yml`, `.github/workflows/data-refresh.yml`.
 5. **Generated data** only when changing data output: `tickers/*.txt`, `watchlists/*.txt`, and `metadata/*.json`.
 
 ## Layout
@@ -34,7 +34,7 @@ tickers/*.txt                plain ticker outputs, one ticker per line
 watchlists/*.txt             TradingView outputs, ###Section headers + EXCHANGE:TICKER lines
 metadata/*.json              latest generated counts/timestamps
 .github/workflows/ci.yml     lint + tests on PR/push
-.github/workflows/main.yml   scheduled/manual data refresh and commit
+.github/workflows/data-refresh.yml   scheduled/manual data refresh and commit
 ```
 
 ## Commands

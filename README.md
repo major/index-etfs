@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://github.com/major/index-etfs/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/major/index-etfs/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="https://github.com/major/index-etfs/actions/workflows/main.yml"><img alt="Data refresh" src="https://github.com/major/index-etfs/actions/workflows/main.yml/badge.svg"></a>
+  <a href="https://github.com/major/index-etfs/actions/workflows/data-refresh.yml"><img alt="Data refresh" src="https://github.com/major/index-etfs/actions/workflows/data-refresh.yml/badge.svg"></a>
   <a href="https://codecov.io/gh/major/index-etfs"><img alt="Coverage" src="https://codecov.io/gh/major/index-etfs/graph/badge.svg"></a>
   <img alt="Python 3.14" src="https://img.shields.io/badge/python-3.14-3776AB?logo=python&logoColor=white">
   <img alt="Built with uv" src="https://img.shields.io/badge/built%20with-uv-654FF0">
