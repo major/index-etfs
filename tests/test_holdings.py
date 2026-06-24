@@ -121,26 +121,24 @@ def test_filter_and_clean_keeps_only_usd(sample_ssga_data: pl.DataFrame) -> None
 # 💾 Tests for _save_holdings
 
 
-def test_save_holdings_creates_files(
+def test_save_holdings_creates_txt_file(
     sample_ssga_data: pl.DataFrame, temp_output_dir: Path
 ) -> None:
-    """🧪 Test that save_holdings creates CSV and MD files."""
+    """🧪 Test that save_holdings creates a ticker text file."""
     df = _filter_and_clean(sample_ssga_data, "ssga")
     _save_holdings(df, "test", temp_output_dir)
 
-    assert (temp_output_dir / "test.csv").exists()
-    assert (temp_output_dir / "test.md").exists()
+    assert (temp_output_dir / "test.txt").exists()
 
 
-def test_save_holdings_csv_has_rank_column(
+def test_save_holdings_writes_sorted_tickers_with_trailing_newline(
     sample_ssga_data: pl.DataFrame, temp_output_dir: Path
 ) -> None:
-    """🧪 Test that CSV output includes Rank column."""
+    """🧪 Test ticker text output shape."""
     df = _filter_and_clean(sample_ssga_data, "ssga")
     _save_holdings(df, "test", temp_output_dir)
 
-    result = pl.read_csv(temp_output_dir / "test.csv")
-    assert "Rank" in result.columns
+    assert (temp_output_dir / "test.txt").read_text() == "AAPL\nGOOGL\nMSFT\n"
 
 
 def test_save_holdings_defaults_to_cwd(
@@ -151,8 +149,7 @@ def test_save_holdings_defaults_to_cwd(
     df = _filter_and_clean(sample_ssga_data, "ssga")
     _save_holdings(df, "test")
 
-    assert (tmp_path / "test.csv").exists()
-    assert (tmp_path / "test.md").exists()
+    assert (tmp_path / "test.txt").exists()
 
 
 # 🏢 Tests for loader functions
@@ -425,7 +422,7 @@ def test_save_holdings_creates_directory_if_not_exists(
     _save_holdings(df, "test", output_dir)
 
     assert output_dir.exists()
-    assert (output_dir / "test.csv").exists()
+    assert (output_dir / "test.txt").exists()
 
 
 def test_get_etf_holdings_handles_case_insensitive_symbols() -> None:

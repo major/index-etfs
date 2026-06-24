@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+# Inherits shared defaults from github.com/major/coderabbit.
+inheritance: true
+
+reviews:
+  path_filters:
+    - "!spy.txt"
+    - "!mdy.txt"
+    - "!spsm.txt"
+    - "!qqq.txt"
+    - "!iwm.txt"
+    - "!watchlists/*.txt"
+    - "!metadata/latest.json"
+
+  path_instructions:
+    - path: "src/index_etfs/holdings.py"
+      instructions: |
+        This repo downloads public ETF/index holdings and writes generated ticker/watchlist files.
+        Review provider parsing, ticker filtering, and count validation carefully. Keep the existing
+        uv-packaged CLI shape; do not suggest a separate scripts runner or requirements.txt. Prefer
+        stdlib urllib/json for simple JSON HTTP fetches unless a broader HTTP client is actually needed.
+        Preserve dotted share-class tickers such as BRK.B for TradingView output.
+
+    - path: "tests/**/*.py"
+      instructions: |
+        Tests should mock provider/network calls and assert generated file shape. Prefer small
+        parametrized tests over broad fixture-heavy integration tests.
+
+    - path: ".github/workflows/**"
+      instructions: |
+        The workflow refreshes generated holdings/watchlist files and commits changes back to main.
+        Verify pinned actions, least permissions, and that git add includes root ticker files,
+        watchlists/*.txt, metadata/*.json, and README.md without committing local caches.
+
+    - path: "README.md"
+      instructions: |
+        README should clearly distinguish plain root ticker files from TradingView-importable
+        watchlists, and keep import/download instructions simple enough for non-developers.
