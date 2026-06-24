@@ -1,43 +1,59 @@
-# 📊 Index ETF Ticker Symbols
+# 📈 Index ETF Ticker Symbols
 
-Extract ticker symbols from various index ETFs, including TradingView-importable watchlists.
+<p align="center">
+  <strong>Fresh ticker lists for major US indexes — ready for TradingView, scripts, and quick market scans.</strong>
+</p>
 
-_Not financial advice, just a fun project._
+<p align="center">
+  <a href="https://github.com/major/index-etfs/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/major/index-etfs/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/major/index-etfs/actions/workflows/main.yml"><img alt="Data refresh" src="https://github.com/major/index-etfs/actions/workflows/main.yml/badge.svg"></a>
+  <a href="https://codecov.io/gh/major/index-etfs"><img alt="Coverage" src="https://codecov.io/gh/major/index-etfs/graph/badge.svg"></a>
+  <img alt="Python 3.14" src="https://img.shields.io/badge/python-3.14-3776AB?logo=python&logoColor=white">
+  <img alt="Built with uv" src="https://img.shields.io/badge/built%20with-uv-654FF0">
+</p>
 
-## TradingView watchlists
+> ⚠️ Not financial advice. Just a tiny robot that turns public ETF holdings into useful ticker files.
 
-Download one of these files, then import it in TradingView's watchlist menu.
+## ✨ What you get
 
-| Index | TradingView file | Count |
-|-----|---------|-------|
-| S&P 500 | [download sp500.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp500.txt) | ~503 |
-| Nasdaq-100 | [download nasdaq100.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/nasdaq100.txt) | ~101 |
-| S&P MidCap 400 | [download sp400.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp400.txt) | ~400 |
-| S&P SmallCap 600 | [download sp600.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp600.txt) | ~605 |
-| Russell 2000 | [download russell2000.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/russell2000.txt) | ~1906 |
+| 🧰 Output | 📍 Location | ✅ Best for |
+|---|---|---|
+| TradingView watchlists | [`watchlists/`](watchlists/) | Importing `EXCHANGE:TICKER` symbols directly into TradingView |
+| Plain ticker lists | [`tickers/`](tickers/) | Scripts, spreadsheets, scanners, and quick diffs |
+| Weekly refreshes | [GitHub Actions](https://github.com/major/index-etfs/actions/workflows/main.yml) | Keeping index membership changes visible over time |
 
-TradingView files contain one `EXCHANGE:TICKER` symbol per line, sorted alphabetically by ticker.
+```mermaid
+flowchart LR
+    A[Public ETF holdings] --> B[get-holdings]
+    B --> C[Clean tickers]
+    C --> D[tickers/*.txt]
+    C --> E[watchlists/*.txt]
+    E --> F[TradingView import]
+```
 
-## Plain ticker files
+## 🚀 Download files
 
-| ETF | Tickers | Count |
-|-----|---------|-------|
-| SPY | [spy.txt](tickers/spy.txt) | ~503 |
-| MDY | [mdy.txt](tickers/mdy.txt) | ~400 |
-| SPSM | [spsm.txt](tickers/spsm.txt) | ~605 |
-| QQQ | [qqq.txt](tickers/qqq.txt) | ~101 |
-| IWM | [iwm.txt](tickers/iwm.txt) | ~1906 |
+Grab the TradingView version for watchlist imports, or the plain ticker file for scripts and spreadsheets.
 
-Plain files in `tickers/` contain one ticker symbol per line, sorted alphabetically.
+| Index | ETF | TradingView watchlist | Plain tickers | Approx. count |
+|---|---|---|---|---:|
+| S&P 500 | SPY | [💾 sp500.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp500.txt) | [💾 spy.txt](tickers/spy.txt) | ~503 |
+| Nasdaq-100 | QQQ | [💾 nasdaq100.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/nasdaq100.txt) | [💾 qqq.txt](tickers/qqq.txt) | ~101 |
+| S&P MidCap 400 | MDY | [💾 sp400.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp400.txt) | [💾 mdy.txt](tickers/mdy.txt) | ~400 |
+| S&P SmallCap 600 | SPSM | [💾 sp600.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp600.txt) | [💾 spsm.txt](tickers/spsm.txt) | ~605 |
+| Russell 2000 | IWM | [💾 russell2000.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/russell2000.txt) | [💾 iwm.txt](tickers/iwm.txt) | ~1906 |
 
-## Usage
+TradingView files contain `EXCHANGE:TICKER` symbols. Plain files contain bare tickers. Both are sorted alphabetically by ticker.
+
+## 🛠️ Run it locally
 
 ```bash
-# Install dependencies
 uv sync
-
-# Download all ETF ticker symbols
 uv run get-holdings
 ```
 
-To spot changes over time, look at the [commits in the main branch](commits/main/).
+That rewrites `tickers/*.txt` and `watchlists/*.txt` from the latest available holdings data.
+
+## 🔎 Track changes
+
+Want to see index additions and removals? Check the [main branch commits](https://github.com/major/index-etfs/commits/main/) after each refresh.
