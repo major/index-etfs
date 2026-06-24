@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-      - cron: '0 8 * * 6'
+      - cron: '0 8 * * *'
   workflow_dispatch:
 
 permissions:
@@ -41,7 +41,7 @@ jobs:
         run: |-
           git config user.name "Major Hayden"
           git config user.email "major@mhtx.net"
-          git add tickers/*.txt watchlists/*.txt README.md
+          git add tickers/*.txt watchlists/*.txt metadata/*.json README.md
           timestamp=$(date -u)
           git commit -m "Updating ETF data: ${timestamp}" || exit 0
           git clean -fxd

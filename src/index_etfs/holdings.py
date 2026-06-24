@@ -6,7 +6,9 @@ and extracts just the ticker symbols (e.g., AAPL, MSFT, GOOGL).
 
 import io
 import json
+import math
 import urllib.request
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Literal
 
@@ -53,6 +55,54 @@ WATCHLIST_NAMES = {
     "qqq": "nasdaq100",
     "iwm": "russell2000",
 }
+EXPECTED_COUNTS = {
+    "spy": 503,
+    "mdy": 400,
+    "spsm": 600,
+    "qqq": 100,
+    "iwm": 2000,
+}
+MIN_EXPECTED_RATIO = 0.9
+
+
+def _validate_count(symbol: str, count: int) -> None:
+    """Fail closed on empty or suspiciously small source data."""
+    if count == 0:
+        raise ValueError(f"{symbol.upper()} returned zero rows")
+
+    expected = EXPECTED_COUNTS[symbol]
+    minimum = math.ceil(expected * MIN_EXPECTED_RATIO)
+    if count < minimum:
+        raise ValueError(
+            f"{symbol.upper()} returned {count} rows; expected at least {minimum}"
+        )
+
+
+def _write_metadata(results: dict[str, int], output_dir: Path | None = None) -> None:
+    """Write latest generated counts and source URLs."""
+    if output_dir is None:
+        output_dir = Path.cwd()
+
+    metadata = {
+        "generated_at": datetime.now(UTC)
+        .replace(microsecond=0)
+        .isoformat()
+        .replace("+00:00", "Z"),
+        "watchlists": {
+            WATCHLIST_NAMES[symbol]: {
+                "count": count,
+                "expected_count": EXPECTED_COUNTS[symbol],
+                "minimum_count": math.ceil(EXPECTED_COUNTS[symbol] * MIN_EXPECTED_RATIO),
+                "source": symbol,
+                "source_url": ETF_CONFIGS[symbol]["url"],
+            }
+            for symbol, count in results.items()
+        },
+    }
+
+    metadata_dir = output_dir / "metadata"
+    metadata_dir.mkdir(parents=True, exist_ok=True)
+    (metadata_dir / "latest.json").write_text(json.dumps(metadata, indent=2) + "\n")
 
 
 def _read_url(url: str) -> io.BytesIO:
@@ -246,6 +296,7 @@ def get_etf_holdings(
 
     # 🧹 Clean and filter
     df = _filter_and_clean(df, provider)
+    _validate_count(symbol_lower, len(df))
 
     # 💾 Save outputs
     _save_holdings(df, symbol_lower, output_dir)
@@ -301,12 +352,17 @@ def get_iwm_holdings() -> pl.DataFrame:
 def main() -> None:
     """🚀 Main function to download all ETF holdings."""
     print("📥 Downloading ETF holdings...")
+    output_dir = Path.cwd()
+    results = {}
 
     for symbol in ETF_CONFIGS.keys():
         print(f"  ⏳ Processing {symbol.upper()}...")
-        get_etf_holdings(symbol)  # type: ignore[arg-type]
-        print(f"  ✅ {symbol.upper()} complete!")
+        df = get_etf_holdings(symbol, output_dir)  # type: ignore[arg-type]
+        count = len(df)
+        results[symbol] = count
+        print(f"  ✅ {symbol.upper()} complete! ({count} rows)")
 
+    _write_metadata(results, output_dir)
     print("🎉 All holdings downloaded successfully!")
 
 

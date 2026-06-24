@@ -20,7 +20,8 @@
 |---|---|---|
 | TradingView watchlists | [`watchlists/`](watchlists/) | Importing `EXCHANGE:TICKER` symbols directly into TradingView |
 | Plain ticker lists | [`tickers/`](tickers/) | Scripts, spreadsheets, scanners, and quick diffs |
-| Weekly refreshes | [GitHub Actions](https://github.com/major/index-etfs/actions/workflows/main.yml) | Keeping index membership changes visible over time |
+| Refresh metadata | [`metadata/latest.json`](metadata/latest.json) | Generated time, counts, thresholds, and source URLs |
+| Daily refreshes | [GitHub Actions](https://github.com/major/index-etfs/actions/workflows/main.yml) | Keeping index membership changes visible over time |
 
 ```mermaid
 flowchart LR
@@ -28,6 +29,7 @@ flowchart LR
     B --> C[Clean tickers]
     C --> D[tickers/*.txt]
     C --> E[watchlists/*.txt]
+    C --> G[metadata/latest.json]
     E --> F[TradingView import]
 ```
 
