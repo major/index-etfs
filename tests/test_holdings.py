@@ -7,6 +7,7 @@ from unittest.mock import MagicMock, patch
 import polars as pl
 import pytest
 
+import index_etfs.holdings as holdings
 from index_etfs.holdings import (
     FIREFOX_HEADERS,
     _filter_and_clean,
@@ -243,6 +244,16 @@ def test_load_nasdaq_json_raises_on_missing_rows(_mock_read_url: MagicMock) -> N
         _load_nasdaq_json("http://example.com/data.json")
 
 
+@patch(
+    "index_etfs.holdings._read_url",
+    return_value=io.BytesIO(b'{"data":{"data":{"rows":[{}]}}}'),
+)
+def test_load_nasdaq_json_raises_on_missing_symbols(_mock_read_url: MagicMock) -> None:
+    """🧪 Test Nasdaq JSON fails closed when rows have no symbols."""
+    with pytest.raises(ValueError, match="symbols"):
+        _load_nasdaq_json("http://example.com/data.json")
+
+
 @patch("index_etfs.holdings.urllib.request.urlopen", return_value=io.BytesIO(b"ok"))
 def test_read_url_uses_firefox_headers(mock_urlopen: MagicMock) -> None:
     """🧪 Test URL reads use browser-ish headers."""
@@ -451,3 +462,25 @@ def test_get_etf_holdings_handles_case_insensitive_symbols() -> None:
 
         assert isinstance(result, pl.DataFrame)
         mock_load.assert_called_once()
+
+
+def test_get_etf_holdings_raises_on_unknown_provider(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """🧪 Test that bad provider config fails closed."""
+    monkeypatch.setitem(
+        holdings.ETF_CONFIGS,
+        "bad",
+        {"url": "http://example.com/data", "provider": "bad"},
+    )
+
+    with pytest.raises(ValueError, match="Unknown provider"):
+        get_etf_holdings("bad")  # type: ignore[arg-type]
+
+
+@patch("index_etfs.holdings.get_etf_holdings")
+def test_main_downloads_all_configured_etfs(mock_get_holdings: MagicMock) -> None:
+    """🧪 Test CLI entry point processes every configured ETF."""
+    holdings.main()
+
+    assert mock_get_holdings.call_count == len(holdings.ETF_CONFIGS)

@@ -33,4 +33,11 @@ addopts = [
     "--strict-config",
     "--cov=index_etfs",
     "--cov-report=term-missing",
+    "--cov-report=xml",
+    "--cov-fail-under=90",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.19",
 ]
