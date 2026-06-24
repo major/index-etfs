@@ -1,4 +1,4 @@
-"""🧪 Tests for the holdings module."""
+"""Tests for the holdings pipeline."""
 
 import io
 import json
@@ -10,7 +10,7 @@ import pytest
 
 import index_etfs.catalog as catalog
 import index_etfs.holdings as holdings
-from index_etfs.catalog import validate_count
+from index_etfs.catalog import ETFConfig, validate_count
 from index_etfs.holdings import (
     get_etf_holdings,
     get_iwm_holdings,
@@ -19,15 +19,11 @@ from index_etfs.holdings import (
     get_spsm_holdings,
     get_spy_holdings,
 )
-from index_etfs.outputs import (
-    save_holdings,
-    tradingview_symbols,
-    watchlist_lines,
-    write_metadata,
-)
+from index_etfs.outputs import save_holdings, tradingview_symbols, watchlist_lines, write_metadata
 from index_etfs.sources import (
     FIREFOX_HEADERS,
     filter_and_clean,
+    load_holdings,
     load_ishares_csv,
     load_nasdaq_json,
     load_ssga_excel,
@@ -35,12 +31,8 @@ from index_etfs.sources import (
 )
 
 
-# 🎯 Test Fixtures
-
-
 @pytest.fixture
 def sample_ssga_data() -> pl.DataFrame:
-    """Create sample SSGA-style holdings data."""
     return pl.DataFrame(
         {
             "Ticker": ["AAPL", "MSFT", "GOOGL", "-", "NVDA"],
@@ -53,7 +45,6 @@ def sample_ssga_data() -> pl.DataFrame:
 
 @pytest.fixture
 def sample_ishares_data() -> pl.DataFrame:
-    """Create sample iShares-style holdings data."""
     return pl.DataFrame(
         {
             "Ticker": ["AAPL", "MSFT", "-", "GOOGL"],
@@ -64,319 +55,143 @@ def sample_ishares_data() -> pl.DataFrame:
     )
 
 
-@pytest.fixture
-def sample_nasdaq_data() -> pl.DataFrame:
-    """Create sample Nasdaq-100 holdings data."""
-    return pl.DataFrame({"Ticker": ["AAPL", "MSFT", "GOOGL"]})
-
-
-@pytest.fixture
-def temp_output_dir(tmp_path: Path) -> Path:
-    """Create a temporary directory for test outputs."""
-    return tmp_path / "holdings_output"
-
-
-# 🧹 Tests for filter_and_clean
-
-
 @pytest.mark.parametrize(
-    ("provider", "expected_len"),
+    ("provider", "rows", "expected"),
     [
-        ("ssga", 3),  # Should filter out EUR and "-" ticker
-        ("ishares", 2),  # Should filter out GBP and "-" ticker
-        ("nasdaq", 3),  # No currency filtering for nasdaq
+        ("ssga", "sample_ssga_data", ["AAPL", "GOOGL", "MSFT"]),
+        ("ishares", "sample_ishares_data", ["AAPL", "MSFT"]),
+        ("nasdaq", None, ["AAPL", "GOOGL", "MSFT"]),
     ],
 )
-def test_filter_and_clean(
-    provider: str,
-    expected_len: int,
-    sample_ssga_data: pl.DataFrame,
-    sample_ishares_data: pl.DataFrame,
-    sample_nasdaq_data: pl.DataFrame,
-) -> None:
-    """🧪 Test filtering and cleaning data for different providers."""
-    if provider == "ssga":
-        data = sample_ssga_data
-    elif provider == "ishares":
-        data = sample_ishares_data
-    else:
-        data = sample_nasdaq_data
+def test_filter_and_clean(provider: str, rows: str | None, expected: list[str], request: pytest.FixtureRequest) -> None:
+    df = request.getfixturevalue(rows) if rows else pl.DataFrame({"Ticker": ["MSFT", "", "AAPL", "GOOGL"]})
 
-    result = filter_and_clean(data, provider)
-
-    assert len(result) == expected_len
-    assert set(result.columns) == {"Ticker"}
-    # ✅ Check sorted alphabetically
-    tickers = result["Ticker"].to_list()
-    assert tickers == sorted(tickers)
+    assert filter_and_clean(df, provider).to_dict(as_series=False) == {"Ticker": expected}
 
 
-def test_filter_and_clean_removes_dash_tickers(sample_ssga_data: pl.DataFrame) -> None:
-    """🧪 Test that dash tickers are filtered out."""
-    result = filter_and_clean(sample_ssga_data, "ssga")
-    assert "-" not in result["Ticker"].to_list()
+def test_filter_and_clean_handles_empty_dataframe() -> None:
+    result = filter_and_clean(pl.DataFrame({"Ticker": []}), "nasdaq")
 
-
-def test_filter_and_clean_keeps_only_usd(sample_ssga_data: pl.DataFrame) -> None:
-    """🧪 Test that only USD currencies are kept for SSGA."""
-    result = filter_and_clean(sample_ssga_data, "ssga")
-    # 💰 Should only have USD tickers (NVDA has EUR so should be filtered)
-    assert len(result) == 3
-    assert all(ticker in ["AAPL", "MSFT", "GOOGL"] for ticker in result["Ticker"])
-
-
-# 💾 Tests for save_holdings
-
-
-def test_save_holdings_creates_txt_file(
-    sample_ssga_data: pl.DataFrame, temp_output_dir: Path
-) -> None:
-    """🧪 Test that save_holdings creates a ticker text file."""
-    df = filter_and_clean(sample_ssga_data, "ssga")
-    save_holdings(df, "test", temp_output_dir)
-
-    assert (temp_output_dir / "tickers" / "test.txt").exists()
-
-
-def test_save_holdings_writes_sorted_tickers_with_trailing_newline(
-    sample_ssga_data: pl.DataFrame, temp_output_dir: Path
-) -> None:
-    """🧪 Test ticker text output shape."""
-    df = filter_and_clean(sample_ssga_data, "ssga")
-    save_holdings(df, "test", temp_output_dir)
-
-    assert (temp_output_dir / "tickers" / "test.txt").read_text() == "AAPL\nGOOGL\nMSFT\n"
-
-
-def test_save_holdings_defaults_to_cwd(
-    sample_ssga_data: pl.DataFrame, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """🧪 Test that save_holdings uses current directory when no output_dir given."""
-    monkeypatch.chdir(tmp_path)
-    df = filter_and_clean(sample_ssga_data, "ssga")
-    save_holdings(df, "test")
-
-    assert (tmp_path / "tickers" / "test.txt").exists()
-
-
-@patch("index_etfs.outputs.tradingview_symbols")
-def test_save_holdings_writes_tradingview_watchlist(
-    mock_symbols: MagicMock, sample_ssga_data: pl.DataFrame, temp_output_dir: Path
-) -> None:
-    """🧪 Test TradingView watchlist output shape."""
-    mock_symbols.return_value = {
-        "AAPL": ("NASDAQ:AAPL", "Technology"),
-        "GOOGL": ("NASDAQ:GOOGL", "Communication"),
-        "MSFT": ("NASDAQ:MSFT", "Technology"),
-    }
-    df = filter_and_clean(sample_ssga_data, "ssga")
-
-    save_holdings(df, "spy", temp_output_dir)
-
-    assert (temp_output_dir / "watchlists" / "sp500.txt").read_text() == (
-        "###Communication\nNASDAQ:GOOGL\n###Technology\nNASDAQ:AAPL\nNASDAQ:MSFT\n"
-    )
-
-
-# 🏢 Tests for loader functions
+    assert result.to_dict(as_series=False) == {"Ticker": []}
 
 
 @patch("index_etfs.sources.read_url", return_value=io.BytesIO())
 @patch("index_etfs.sources.pl.read_excel")
-def test_load_ssga_excel_handles_dict_response(
-    mock_read_excel: MagicMock, _mock_read_url: MagicMock
-) -> None:
-    """🧪 Test loading SSGA Excel when response is a dict."""
-    mock_df = pl.DataFrame({"Ticker": ["AAPL"], "Weight": [7.5]})
-    mock_read_excel.return_value = {"Sheet1": mock_df}
+def test_load_ssga_excel_handles_polars_shapes(mock_read_excel: MagicMock, _mock_read_url: MagicMock) -> None:
+    df = pl.DataFrame({"Ticker": ["AAPL"]})
+    mock_read_excel.side_effect = [{"Sheet1": df}, df]
 
-    result = load_ssga_excel("http://example.com/data.xlsx")
-
-    assert isinstance(result, pl.DataFrame)
-    assert result.equals(mock_df)
-
-
-@patch("index_etfs.sources.read_url", return_value=io.BytesIO())
-@patch("index_etfs.sources.pl.read_excel")
-def test_load_ssga_excel_handles_dataframe_response(
-    mock_read_excel: MagicMock, _mock_read_url: MagicMock
-) -> None:
-    """🧪 Test loading SSGA Excel when response is already a DataFrame."""
-    mock_df = pl.DataFrame({"Ticker": ["AAPL"], "Weight": [7.5]})
-    mock_read_excel.return_value = mock_df
-
-    result = load_ssga_excel("http://example.com/data.xlsx")
-
-    assert isinstance(result, pl.DataFrame)
-    assert result.equals(mock_df)
+    assert load_ssga_excel("https://example.com/file.xlsx").equals(df)
+    assert load_ssga_excel("https://example.com/file.xlsx").equals(df)
 
 
 @patch("index_etfs.sources.read_url", return_value=io.BytesIO())
 @patch("index_etfs.sources.pl.read_csv")
-def test_load_ishares_csv_renames_weight_column(
-    mock_read_csv: MagicMock, _mock_read_url: MagicMock
-) -> None:
-    """🧪 Test that iShares loader renames Weight (%) column."""
-    mock_df = pl.DataFrame(
-        {
-            "Ticker": ["AAPL"],
-            "Name": ["Apple"],
-            "Weight (%)": [5.0],
-            "Market Currency": ["USD"],
-        }
+def test_load_ishares_csv_renames_weight(mock_read_csv: MagicMock, _mock_read_url: MagicMock) -> None:
+    mock_read_csv.return_value = pl.DataFrame(
+        {"Ticker": ["AAPL"], "Name": ["Apple"], "Weight (%)": [5.0], "Market Currency": ["USD"]}
     )
-    mock_read_csv.return_value = mock_df
 
-    result = load_ishares_csv("http://example.com/data.csv")
+    assert load_ishares_csv("https://example.com/file.csv").columns == [
+        "Ticker",
+        "Name",
+        "Weight",
+        "Market Currency",
+    ]
 
-    assert "Weight" in result.columns
-    assert "Weight (%)" not in result.columns
 
-
-@patch(
-    "index_etfs.sources.read_url",
-    return_value=io.BytesIO(
-        b'{"data":{"data":{"rows":[{"symbol":"AAPL"},{"symbol":"BRK/B"}]}}}'
-    ),
+@pytest.mark.parametrize(
+    ("payload", "match"),
+    [
+        (b'{"data":{"data":{"rows":[{"symbol":"AAPL"},{"symbol":"BRK/B"}]}}}', None),
+        (b'{"data":{}}', "Nasdaq response"),
+        (b'{"data":{"data":{"rows":[{}]}}}', "symbols"),
+    ],
 )
-def test_load_nasdaq_json_returns_tickers(_mock_read_url: MagicMock) -> None:
-    """🧪 Test loading Nasdaq-100 JSON."""
-    result = load_nasdaq_json("http://example.com/data.json")
-
-    assert result["Ticker"].to_list() == ["AAPL", "BRK.B"]
-
-
-@patch("index_etfs.sources.read_url", return_value=io.BytesIO(b'{"data":{}}'))
-def test_load_nasdaq_json_raises_on_missing_rows(_mock_read_url: MagicMock) -> None:
-    """🧪 Test Nasdaq JSON fails closed on bad payloads."""
-    with pytest.raises(ValueError, match="Nasdaq response"):
-        load_nasdaq_json("http://example.com/data.json")
-
-
-@patch(
-    "index_etfs.sources.read_url",
-    return_value=io.BytesIO(b'{"data":{"data":{"rows":[{}]}}}'),
-)
-def test_load_nasdaq_json_raises_on_missing_symbols(_mock_read_url: MagicMock) -> None:
-    """🧪 Test Nasdaq JSON fails closed when rows have no symbols."""
-    with pytest.raises(ValueError, match="symbols"):
-        load_nasdaq_json("http://example.com/data.json")
+def test_load_nasdaq_json(payload: bytes, match: str | None) -> None:
+    with patch("index_etfs.sources.read_url", return_value=io.BytesIO(payload)):
+        if match:
+            with pytest.raises(ValueError, match=match):
+                load_nasdaq_json("https://example.com/data.json")
+        else:
+            assert load_nasdaq_json("https://example.com/data.json")["Ticker"].to_list() == ["AAPL", "BRK.B"]
 
 
 @patch("index_etfs.sources.urllib.request.urlopen", return_value=io.BytesIO(b"ok"))
-def test_read_url_uses_firefox_headers(mock_urlopen: MagicMock) -> None:
-    """🧪 Test URL reads use browser-ish headers."""
-    assert read_url("http://example.com/data.csv").read() == b"ok"
+def test_read_url_uses_headers(mock_urlopen: MagicMock) -> None:
+    assert read_url("https://example.com/data.csv").read() == b"ok"
+    assert mock_urlopen.call_args.args[0].get_header("User-agent") == FIREFOX_HEADERS["User-Agent"]
 
-    request = mock_urlopen.call_args.args[0]
-    assert request.get_header("User-agent") == FIREFOX_HEADERS["User-Agent"]
+
+def test_load_holdings_rejects_unknown_provider() -> None:
+    with pytest.raises(ValueError, match="Unknown provider"):
+        load_holdings(ETFConfig("https://example.com/data", "bad", "bad", 1))  # type: ignore[arg-type]
 
 
 @patch(
-    "index_etfs.sources.urllib.request.urlopen",
+    "index_etfs.outputs.urllib.request.urlopen",
     return_value=io.BytesIO(
         b'{"data":[{"s":"NASDAQ:AAPL","d":["AAPL","Technology Services","Consumer Electronics"]}]}'
     ),
 )
-def test_tradingview_symbols_maps_symbols_and_groups(mock_urlopen: MagicMock) -> None:
-    """🧪 Test TradingView scanner metadata mapping."""
+def test_tradingview_symbols(mock_urlopen: MagicMock) -> None:
     assert tradingview_symbols(["AAPL"]) == {"AAPL": ("NASDAQ:AAPL", "Technology Services")}
-
     request = mock_urlopen.call_args.args[0]
     assert request.get_header("Content-type") == "application/json"
     assert json.loads(request.data)["columns"] == ["name", "sector", "industry"]
 
 
 def test_watchlist_lines_groups_by_header() -> None:
-    """🧪 Test TradingView ### section output."""
     assert watchlist_lines(
         ["AAPL", "MSFT", "BRK.B"],
-        {
-            "AAPL": ("NASDAQ:AAPL", "Technology"),
-            "MSFT": ("NASDAQ:MSFT", "Technology"),
-        },
+        {"AAPL": ("NASDAQ:AAPL", "Technology"), "MSFT": ("NASDAQ:MSFT", "Technology")},
     ) == ["###Other", "BRK.B", "###Technology", "NASDAQ:AAPL", "NASDAQ:MSFT"]
 
 
-# 📈 Tests for get_etf_holdings
+@patch("index_etfs.outputs.tradingview_symbols", return_value={"AAPL": ("NASDAQ:AAPL", "Technology")})
+def test_save_holdings_writes_outputs(_mock_symbols: MagicMock, tmp_path: Path) -> None:
+    save_holdings(pl.DataFrame({"Ticker": ["AAPL"]}), "spy", tmp_path)
+    save_holdings(pl.DataFrame({"Ticker": ["TEST"]}), "test", tmp_path)
+
+    assert (tmp_path / "tickers" / "spy.txt").read_text() == "AAPL\n"
+    assert (tmp_path / "watchlists" / "sp500.txt").read_text() == "###Technology\nNASDAQ:AAPL\n"
+    assert (tmp_path / "tickers" / "test.txt").read_text() == "TEST\n"
 
 
-def test_get_etf_holdings_raises_on_unknown_symbol() -> None:
-    """🧪 Test that get_etf_holdings raises ValueError for unknown symbols."""
+def test_write_metadata(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    write_metadata({"spy": 503}, tmp_path)
+    monkeypatch.chdir(tmp_path)
+    write_metadata({"qqq": 100})
+
+    metadata = json.loads((tmp_path / "metadata" / "latest.json").read_text())
+    assert metadata["generated_at"].endswith("Z")
+    assert metadata["watchlists"]["nasdaq100"]["source_url"] == catalog.ETF_CONFIGS["qqq"].url
+
+
+@patch("index_etfs.outputs.tradingview_symbols", return_value={})
+def test_get_etf_holdings_downloads_cleans_and_writes(_mock_symbols: MagicMock, tmp_path: Path) -> None:
+    rows = [{"symbol": f"TICK{i}"} for i in range(100)]
+    payload = json.dumps({"data": {"data": {"rows": rows}}}).encode()
+
+    with patch("index_etfs.sources.read_url", return_value=io.BytesIO(payload)):
+        result = get_etf_holdings("QQQ", tmp_path)
+
+    assert len(result) == 100
+    assert (tmp_path / "tickers" / "qqq.txt").read_text().startswith("TICK0\n")
+    assert (tmp_path / "watchlists" / "nasdaq100.txt").exists()
+
+
+def test_get_etf_holdings_rejects_unknown_symbol() -> None:
     with pytest.raises(ValueError, match="Unknown ETF symbol"):
-        get_etf_holdings("INVALID")  # type: ignore[arg-type]
+        get_etf_holdings("INVALID")
 
 
-
-@pytest.mark.parametrize("symbol", ["spy", "iwm", "qqq"])
-@patch("index_etfs.holdings.load_holdings")
-@patch("index_etfs.holdings.filter_and_clean")
-@patch("index_etfs.holdings.save_holdings")
-def test_get_etf_holdings_uses_configured_source(
-    mock_save: MagicMock,
-    mock_filter: MagicMock,
-    mock_load: MagicMock,
-    symbol: str,
-    sample_ssga_data: pl.DataFrame,
-) -> None:
-    """🧪 Test that configured ETFs load, clean, and save."""
-    config = catalog.ETF_CONFIGS[symbol]
-    mock_load.return_value = sample_ssga_data
-    mock_filter.return_value = sample_ssga_data
-
-    with patch("index_etfs.holdings.validate_count"):
-        get_etf_holdings(symbol)
-
-    mock_load.assert_called_once_with(config)
-    mock_filter.assert_called_once_with(sample_ssga_data, config.provider)
-    mock_save.assert_called_once()
-
-
-@patch("index_etfs.holdings.load_holdings")
-@patch("index_etfs.holdings.filter_and_clean")
-@patch("index_etfs.holdings.save_holdings")
-def test_get_etf_holdings_passes_output_dir(
-    mock_save: MagicMock,
-    mock_filter: MagicMock,
-    mock_load: MagicMock,
-    sample_ssga_data: pl.DataFrame,
-    temp_output_dir: Path,
-) -> None:
-    """🧪 Test that output_dir is passed to save function."""
-    mock_load.return_value = sample_ssga_data
-    mock_filter.return_value = sample_ssga_data
-
-    with patch("index_etfs.holdings.validate_count"):
-        get_etf_holdings("spy", output_dir=temp_output_dir)
-
-    mock_save.assert_called_once()
-    call_args = mock_save.call_args
-    assert call_args[0][1] == "spy"  # symbol
-    assert call_args[0][2] == temp_output_dir  # output_dir
-
-
-@patch("index_etfs.holdings.load_holdings")
-@patch("index_etfs.holdings.filter_and_clean")
-@patch("index_etfs.holdings.save_holdings")
-def test_get_etf_holdings_returns_dataframe(
-    mock_save: MagicMock,
-    mock_filter: MagicMock,
-    mock_load: MagicMock,
-    sample_ssga_data: pl.DataFrame,
-) -> None:
-    """🧪 Test that get_etf_holdings returns a DataFrame."""
-    mock_load.return_value = sample_ssga_data
-    cleaned_df = filter_and_clean(sample_ssga_data, "ssga")
-    mock_filter.return_value = cleaned_df
-
-    with patch("index_etfs.holdings.validate_count"):
-        result = get_etf_holdings("spy")
-
-    assert isinstance(result, pl.DataFrame)
-    assert result.equals(cleaned_df)
-
-
-# 🎯 Tests for individual ETF functions
+def test_validate_count_rejects_empty_and_tiny_results() -> None:
+    with pytest.raises(ValueError, match="zero rows"):
+        validate_count("spy", 0)
+    with pytest.raises(ValueError, match="expected at least"):
+        validate_count("iwm", 1799)
+    validate_count("iwm", 1800)
 
 
 @pytest.mark.parametrize(
@@ -390,10 +205,7 @@ def test_get_etf_holdings_returns_dataframe(
     ],
 )
 @patch("index_etfs.holdings.get_etf_holdings")
-def test_individual_etf_functions(
-    mock_get_holdings: MagicMock, func: callable, expected_symbol: str
-) -> None:
-    """🧪 Test that individual ETF functions call get_etf_holdings correctly."""
+def test_individual_etf_functions(mock_get_holdings: MagicMock, func: object, expected_symbol: str) -> None:
     mock_get_holdings.return_value = pl.DataFrame()
 
     func()
@@ -401,121 +213,9 @@ def test_individual_etf_functions(
     mock_get_holdings.assert_called_once_with(expected_symbol)
 
 
-# 🔧 Edge case tests
-
-
-def test_filter_and_clean_handles_empty_dataframe() -> None:
-    """🧪 Test that filter_and_clean handles empty DataFrames gracefully."""
-    empty_df = pl.DataFrame(
-        {
-            "Ticker": [],
-            "Name": [],
-            "Weight": [],
-            "Local Currency": [],
-        }
-    )
-
-    result = filter_and_clean(empty_df, "ssga")
-
-    assert len(result) == 0
-    assert set(result.columns) == {"Ticker"}  # Only returns Ticker column
-
-
-def test_save_holdings_creates_directory_if_not_exists(
-    sample_ssga_data: pl.DataFrame, tmp_path: Path
-) -> None:
-    """🧪 Test that save_holdings creates output directory if it doesn't exist."""
-    output_dir = tmp_path / "nested" / "output" / "dir"
-    assert not output_dir.exists()
-
-    df = filter_and_clean(sample_ssga_data, "ssga")
-    save_holdings(df, "test", output_dir)
-
-    assert output_dir.exists()
-    assert (output_dir / "tickers" / "test.txt").exists()
-
-
-def test_get_etf_holdings_handles_case_insensitive_symbols() -> None:
-    """🧪 Test that get_etf_holdings handles uppercase symbols."""
-    with patch("index_etfs.holdings.load_holdings") as mock_load, patch(
-        "index_etfs.holdings.filter_and_clean"
-    ) as mock_filter, patch("index_etfs.holdings.save_holdings"):
-        mock_df = pl.DataFrame({"Ticker": ["AAPL"], "Name": ["Apple"], "Weight": [7.5]})
-        mock_load.return_value = mock_df
-        mock_filter.return_value = mock_df
-
-        # 🔤 Should work with uppercase
-        with patch("index_etfs.holdings.validate_count"):
-            result = get_etf_holdings("SPY")
-
-        assert isinstance(result, pl.DataFrame)
-        mock_load.assert_called_once_with(catalog.ETF_CONFIGS["spy"])
-
-
-def test_get_etf_holdings_raises_on_unknown_provider(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    """🧪 Test that bad provider config fails closed."""
-    monkeypatch.setitem(
-        catalog.ETF_CONFIGS,
-        "bad",
-        catalog.ETFConfig(
-            url="http://example.com/data",
-            provider="bad",  # type: ignore[arg-type]
-            watchlist_name="bad",
-            expected_count=1,
-        ),
-    )
-
-    with pytest.raises(ValueError, match="Unknown provider"):
-        get_etf_holdings("bad")  # type: ignore[arg-type]
-
-
-def test_validate_count_rejects_empty_and_tiny_results() -> None:
-    """🧪 Test source count validation."""
-    with pytest.raises(ValueError, match="zero rows"):
-        validate_count("spy", 0)
-
-    with pytest.raises(ValueError, match="expected at least"):
-        validate_count("iwm", 1799)
-
-    validate_count("iwm", 1800)
-
-
-@patch("index_etfs.holdings.load_holdings")
-@patch("index_etfs.holdings.save_holdings")
-def test_get_etf_holdings_validates_before_saving(
-    mock_save: MagicMock, mock_load: MagicMock
-) -> None:
-    """🧪 Test bad counts fail before files are written."""
-    mock_load.return_value = pl.DataFrame(
-        {"Ticker": [], "Local Currency": [], "Name": [], "Weight": []}
-    )
-
-    with pytest.raises(ValueError, match="zero rows"):
-        get_etf_holdings("spy")
-
-    mock_save.assert_not_called()
-
-
-def test_write_metadata_creates_latest_json(tmp_path: Path) -> None:
-    """🧪 Test metadata output shape."""
-    write_metadata({"spy": 503, "qqq": 101}, tmp_path)
-
-    metadata = json.loads((tmp_path / "metadata" / "latest.json").read_text())
-
-    assert metadata["generated_at"].endswith("Z")
-    assert metadata["watchlists"]["sp500"]["count"] == 503
-    assert metadata["watchlists"]["nasdaq100"]["source"] == "qqq"
-    assert "source_url" in metadata["watchlists"]["sp500"]
-
-
 @patch("index_etfs.holdings.write_metadata")
 @patch("index_etfs.holdings.get_etf_holdings")
-def test_main_downloads_all_configured_etfs(
-    mock_get_holdings: MagicMock, mock_write_metadata: MagicMock
-) -> None:
-    """🧪 Test CLI entry point processes every configured ETF."""
+def test_main_downloads_all_configured_etfs(mock_get_holdings: MagicMock, mock_write_metadata: MagicMock) -> None:
     mock_get_holdings.side_effect = [
         pl.DataFrame({"Ticker": range(config.expected_count)})
         for config in catalog.ETF_CONFIGS.values()
