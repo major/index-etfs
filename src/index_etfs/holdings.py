@@ -112,16 +112,20 @@ def _read_url(url: str) -> io.BytesIO:
         return io.BytesIO(response.read())
 
 
-def _tradingview_prefixes(tickers: list[str], chunk_size: int = 200) -> dict[str, str]:
-    """Map tickers to TradingView exchange-prefixed symbols."""
-    prefixes = {}
-    headers = FIREFOX_HEADERS | {"Content-Type": "application/json"}
+def _tradingview_symbols(tickers: list[str], chunk_size: int = 200) -> dict[str, tuple[str, str]]:
+    """Map tickers to TradingView symbols and sector-ish group names."""
+    symbols = {}
+    headers = FIREFOX_HEADERS | {
+        "Content-Type": "application/json",
+        "Origin": "https://www.tradingview.com",
+        "Referer": "https://www.tradingview.com/",
+    }
 
     for start in range(0, len(tickers), chunk_size):
         chunk = tickers[start : start + chunk_size]
         payload = {
             "filter": [{"left": "name", "operation": "in_range", "right": chunk}],
-            "columns": ["name"],
+            "columns": ["name", "sector", "industry"],
             "markets": ["america"],
         }
         request = urllib.request.Request(
@@ -133,12 +137,24 @@ def _tradingview_prefixes(tickers: list[str], chunk_size: int = 200) -> dict[str
             rows = json.load(response).get("data", [])
 
         for row in rows:
-            ticker = row.get("d", [None])[0]
+            data = row.get("d", [])
+            ticker = data[0] if data else None
             symbol = row.get("s", "")
+            group = next((value for value in data[1:3] if value), "Other")
             if ticker in chunk and ":" in symbol:
-                prefixes.setdefault(ticker, symbol)
+                symbols.setdefault(ticker, (symbol, group))
 
-    return prefixes
+    return symbols
+
+
+def _watchlist_lines(tickers: list[str], symbols: dict[str, tuple[str, str]]) -> list[str]:
+    """Build TradingView watchlist lines grouped by ### headers."""
+    groups: dict[str, list[str]] = {}
+    for ticker in tickers:
+        symbol, group = symbols.get(ticker, (ticker, "Other"))
+        groups.setdefault(group, []).append(symbol)
+
+    return [line for group in sorted(groups) for line in (f"###{group}", *groups[group])]
 
 
 def _load_ssga_excel(url: str) -> pl.DataFrame:
@@ -245,12 +261,13 @@ def _save_holdings(df: pl.DataFrame, symbol: str, output_dir: Path | None = None
     if watchlist_name:
         watchlist_dir = output_dir / "watchlists"
         watchlist_dir.mkdir(exist_ok=True)
-        prefixes = _tradingview_prefixes(tickers)
-        missing = [ticker for ticker in tickers if ticker not in prefixes]
+        symbols = _tradingview_symbols(tickers)
+        missing = [ticker for ticker in tickers if ticker not in symbols]
         if missing:
-            print(f"⚠️  No TradingView prefix for {', '.join(missing)}")
-        lines = [prefixes.get(ticker, ticker) for ticker in tickers]
-        (watchlist_dir / f"{watchlist_name}.txt").write_text("\n".join(lines) + "\n")
+            print(f"⚠️  No TradingView metadata for {', '.join(missing)}")
+        (watchlist_dir / f"{watchlist_name}.txt").write_text(
+            "\n".join(_watchlist_lines(tickers, symbols)) + "\n"
+        )
 
 
 def get_etf_holdings(
