@@ -17,6 +17,7 @@ Download one of these files, then import it in TradingView's watchlist menu.
 | Russell 2000 | [download russell2000.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/russell2000.txt) | ~1906 |
 
 TradingView files contain one `EXCHANGE:TICKER` symbol per line, sorted alphabetically by ticker.
+Latest generated counts and source URLs are in [metadata/latest.json](metadata/latest.json).
 
 ## Plain ticker files
 

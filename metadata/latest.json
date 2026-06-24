@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-06-24T21:57:56Z",
+  "watchlists": {
+    "sp500": {
+      "count": 503,
+      "expected_count": 503,
+      "minimum_count": 453,
+      "source": "spy",
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx"
+    },
+    "sp400": {
+      "count": 400,
+      "expected_count": 400,
+      "minimum_count": 360,
+      "source": "mdy",
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-mdy.xlsx"
+    },
+    "sp600": {
+      "count": 605,
+      "expected_count": 600,
+      "minimum_count": 540,
+      "source": "spsm",
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spsm.xlsx"
+    },
+    "nasdaq100": {
+      "count": 101,
+      "expected_count": 100,
+      "minimum_count": 90,
+      "source": "qqq",
+      "source_url": "https://api.nasdaq.com/api/quote/list-type/nasdaq100"
+    },
+    "russell2000": {
+      "count": 1906,
+      "expected_count": 2000,
+      "minimum_count": 1800,
+      "source": "iwm",
+      "source_url": "https://www.blackrock.com/varnish-api/blk-one01-product-data/product-data/api/v1/get-fund-document?appType=PRODUCT_PAGE&appSubType=ISHARES&targetSite=us-ishares&locale=en_US&portfolioId=239710&userType=individual&component=holdings"
+    }
+  }
+}

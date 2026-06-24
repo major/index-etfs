@@ -1,6 +1,7 @@
 """🧪 Tests for the holdings module."""
 
 import io
+import json
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
@@ -12,6 +13,8 @@ from index_etfs.holdings import (
     FIREFOX_HEADERS,
     _filter_and_clean,
     _tradingview_prefixes,
+    _validate_count,
+    _write_metadata,
     _load_ishares_csv,
     _load_nasdaq_json,
     _load_ssga_excel,
@@ -300,7 +303,8 @@ def test_get_etf_holdings_calls_correct_loader_for_ssga(
     mock_load.return_value = sample_ssga_data
     mock_filter.return_value = sample_ssga_data
 
-    get_etf_holdings("spy")
+    with patch("index_etfs.holdings._validate_count"):
+        get_etf_holdings("spy")
 
     mock_load.assert_called_once()
     mock_filter.assert_called_once_with(sample_ssga_data, "ssga")
@@ -320,7 +324,8 @@ def test_get_etf_holdings_calls_correct_loader_for_ishares(
     mock_load.return_value = sample_ishares_data
     mock_filter.return_value = sample_ishares_data
 
-    get_etf_holdings("iwm")
+    with patch("index_etfs.holdings._validate_count"):
+        get_etf_holdings("iwm")
 
     mock_load.assert_called_once()
     mock_filter.assert_called_once_with(sample_ishares_data, "ishares")
@@ -340,7 +345,8 @@ def test_get_etf_holdings_calls_correct_loader_for_nasdaq(
     mock_load.return_value = sample_nasdaq_data
     mock_filter.return_value = sample_nasdaq_data
 
-    get_etf_holdings("qqq")
+    with patch("index_etfs.holdings._validate_count"):
+        get_etf_holdings("qqq")
 
     mock_load.assert_called_once()
     mock_filter.assert_called_once_with(sample_nasdaq_data, "nasdaq")
@@ -361,7 +367,8 @@ def test_get_etf_holdings_passes_output_dir(
     mock_load.return_value = sample_ssga_data
     mock_filter.return_value = sample_ssga_data
 
-    get_etf_holdings("spy", output_dir=temp_output_dir)
+    with patch("index_etfs.holdings._validate_count"):
+        get_etf_holdings("spy", output_dir=temp_output_dir)
 
     mock_save.assert_called_once()
     call_args = mock_save.call_args
@@ -383,7 +390,8 @@ def test_get_etf_holdings_returns_dataframe(
     cleaned_df = _filter_and_clean(sample_ssga_data, "ssga")
     mock_filter.return_value = cleaned_df
 
-    result = get_etf_holdings("spy")
+    with patch("index_etfs.holdings._validate_count"):
+        result = get_etf_holdings("spy")
 
     assert isinstance(result, pl.DataFrame)
     assert result.equals(cleaned_df)
@@ -458,7 +466,8 @@ def test_get_etf_holdings_handles_case_insensitive_symbols() -> None:
         mock_filter.return_value = mock_df
 
         # 🔤 Should work with uppercase
-        result = get_etf_holdings("SPY")  # type: ignore[arg-type]
+        with patch("index_etfs.holdings._validate_count"):
+            result = get_etf_holdings("SPY")  # type: ignore[arg-type]
 
         assert isinstance(result, pl.DataFrame)
         mock_load.assert_called_once()
@@ -478,9 +487,57 @@ def test_get_etf_holdings_raises_on_unknown_provider(
         get_etf_holdings("bad")  # type: ignore[arg-type]
 
 
+def test_validate_count_rejects_empty_and_tiny_results() -> None:
+    """🧪 Test source count validation."""
+    with pytest.raises(ValueError, match="zero rows"):
+        _validate_count("spy", 0)
+
+    with pytest.raises(ValueError, match="expected at least"):
+        _validate_count("iwm", 1799)
+
+    _validate_count("iwm", 1800)
+
+
+@patch("index_etfs.holdings._load_ssga_excel")
+@patch("index_etfs.holdings._save_holdings")
+def test_get_etf_holdings_validates_before_saving(
+    mock_save: MagicMock, mock_load: MagicMock
+) -> None:
+    """🧪 Test bad counts fail before files are written."""
+    mock_load.return_value = pl.DataFrame(
+        {"Ticker": [], "Local Currency": [], "Name": [], "Weight": []}
+    )
+
+    with pytest.raises(ValueError, match="zero rows"):
+        get_etf_holdings("spy")
+
+    mock_save.assert_not_called()
+
+
+def test_write_metadata_creates_latest_json(tmp_path: Path) -> None:
+    """🧪 Test metadata output shape."""
+    _write_metadata({"spy": 503, "qqq": 101}, tmp_path)
+
+    metadata = json.loads((tmp_path / "metadata" / "latest.json").read_text())
+
+    assert metadata["generated_at"].endswith("Z")
+    assert metadata["watchlists"]["sp500"]["count"] == 503
+    assert metadata["watchlists"]["nasdaq100"]["source"] == "qqq"
+    assert "source_url" in metadata["watchlists"]["sp500"]
+
+
+@patch("index_etfs.holdings._write_metadata")
 @patch("index_etfs.holdings.get_etf_holdings")
-def test_main_downloads_all_configured_etfs(mock_get_holdings: MagicMock) -> None:
+def test_main_downloads_all_configured_etfs(
+    mock_get_holdings: MagicMock, mock_write_metadata: MagicMock
+) -> None:
     """🧪 Test CLI entry point processes every configured ETF."""
+    mock_get_holdings.side_effect = [
+        pl.DataFrame({"Ticker": range(holdings.EXPECTED_COUNTS[symbol])})
+        for symbol in holdings.ETF_CONFIGS
+    ]
+
     holdings.main()
 
     assert mock_get_holdings.call_count == len(holdings.ETF_CONFIGS)
+    mock_write_metadata.assert_called_once()
