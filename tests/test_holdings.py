@@ -12,8 +12,9 @@ import index_etfs.holdings as holdings
 from index_etfs.holdings import (
     FIREFOX_HEADERS,
     _filter_and_clean,
-    _tradingview_prefixes,
+    _tradingview_symbols,
     _validate_count,
+    _watchlist_lines,
     _write_metadata,
     _load_ishares_csv,
     _load_nasdaq_json,
@@ -153,22 +154,22 @@ def test_save_holdings_defaults_to_cwd(
     assert (tmp_path / "tickers" / "test.txt").exists()
 
 
-@patch("index_etfs.holdings._tradingview_prefixes")
+@patch("index_etfs.holdings._tradingview_symbols")
 def test_save_holdings_writes_tradingview_watchlist(
-    mock_prefixes: MagicMock, sample_ssga_data: pl.DataFrame, temp_output_dir: Path
+    mock_symbols: MagicMock, sample_ssga_data: pl.DataFrame, temp_output_dir: Path
 ) -> None:
     """🧪 Test TradingView watchlist output shape."""
-    mock_prefixes.return_value = {
-        "AAPL": "NASDAQ:AAPL",
-        "GOOGL": "NASDAQ:GOOGL",
-        "MSFT": "NASDAQ:MSFT",
+    mock_symbols.return_value = {
+        "AAPL": ("NASDAQ:AAPL", "Technology"),
+        "GOOGL": ("NASDAQ:GOOGL", "Communication"),
+        "MSFT": ("NASDAQ:MSFT", "Technology"),
     }
     df = _filter_and_clean(sample_ssga_data, "ssga")
 
     _save_holdings(df, "spy", temp_output_dir)
 
     assert (temp_output_dir / "watchlists" / "sp500.txt").read_text() == (
-        "NASDAQ:AAPL\nNASDAQ:GOOGL\nNASDAQ:MSFT\n"
+        "###Communication\nNASDAQ:GOOGL\n###Technology\nNASDAQ:AAPL\nNASDAQ:MSFT\n"
     )
 
 
@@ -269,15 +270,27 @@ def test_read_url_uses_firefox_headers(mock_urlopen: MagicMock) -> None:
 @patch(
     "index_etfs.holdings.urllib.request.urlopen",
     return_value=io.BytesIO(
-        b'{"data":[{"s":"NASDAQ:AAPL","d":["AAPL","NASDAQ","stock"]}]}'
+        b'{"data":[{"s":"NASDAQ:AAPL","d":["AAPL","Technology Services","Consumer Electronics"]}]}'
     ),
 )
-def test_tradingview_prefixes_maps_symbols(mock_urlopen: MagicMock) -> None:
-    """🧪 Test TradingView scanner mapping."""
-    assert _tradingview_prefixes(["AAPL"]) == {"AAPL": "NASDAQ:AAPL"}
+def test_tradingview_symbols_maps_symbols_and_groups(mock_urlopen: MagicMock) -> None:
+    """🧪 Test TradingView scanner metadata mapping."""
+    assert _tradingview_symbols(["AAPL"]) == {"AAPL": ("NASDAQ:AAPL", "Technology Services")}
 
     request = mock_urlopen.call_args.args[0]
     assert request.get_header("Content-type") == "application/json"
+    assert json.loads(request.data)["columns"] == ["name", "sector", "industry"]
+
+
+def test_watchlist_lines_groups_by_header() -> None:
+    """🧪 Test TradingView ### section output."""
+    assert _watchlist_lines(
+        ["AAPL", "MSFT", "BRK.B"],
+        {
+            "AAPL": ("NASDAQ:AAPL", "Technology"),
+            "MSFT": ("NASDAQ:MSFT", "Technology"),
+        },
+    ) == ["###Other", "BRK.B", "###Technology", "NASDAQ:AAPL", "NASDAQ:MSFT"]
 
 
 # 📈 Tests for get_etf_holdings

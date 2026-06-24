@@ -26,7 +26,7 @@ Grab the TradingView version for watchlist imports, or the plain ticker file for
 | S&P SmallCap 600 | SPSM | [💾 sp600.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp600.txt) | [💾 spsm.txt](tickers/spsm.txt) | ~605 |
 | Russell 2000 | IWM | [💾 russell2000.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/russell2000.txt) | [💾 iwm.txt](tickers/iwm.txt) | ~1906 |
 
-TradingView files contain `EXCHANGE:TICKER` symbols. Plain files contain bare tickers. Both are sorted alphabetically by ticker.
+TradingView files contain `###Section` headers grouped by sector/industry plus `EXCHANGE:TICKER` symbols. Plain files contain bare tickers.
 
 ## 🛠️ Run it locally
 
