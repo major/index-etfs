@@ -16,11 +16,11 @@ Downloads public ETF/index holdings and writes ticker lists for humans and Tradi
 Do not read the whole repo first. Start here:
 
 1. **User-facing shape**: `README.md` for outputs and install/run commands.
-2. **Config/flow**: `src/index_etfs/holdings.py`.
-   - `ETF_CONFIGS`: source URLs/providers.
-   - Provider loaders: `_load_ssga_excel`, `_load_ishares_csv`, `_load_nasdaq_json`.
-   - Cleanup: `_filter_and_clean`.
-   - Output: `_save_holdings`, `_tradingview_symbols`, `_watchlist_lines`.
+2. **Config/flow**:
+   - `src/index_etfs/catalog.py`: `ETF_CONFIGS`, expected counts, validation.
+   - `src/index_etfs/sources.py`: provider loaders and cleanup.
+   - `src/index_etfs/outputs.py`: ticker/watchlist/metadata writers.
+   - `src/index_etfs/holdings.py`: public API and CLI orchestration.
 3. **Tests for behavior**: `tests/test_holdings.py`.
 4. **CI/update behavior** only if needed: `.github/workflows/ci.yml`, `.github/workflows/data-refresh.yml`.
 5. **Generated data** only when changing data output: `tickers/*.txt`, `watchlists/*.txt`, and `metadata/*.json`.
@@ -28,7 +28,10 @@ Do not read the whole repo first. Start here:
 ## Layout
 
 ```text
-src/index_etfs/holdings.py   downloader, cleaners, writers, CLI entry point
+src/index_etfs/catalog.py    ETF config and count validation
+src/index_etfs/sources.py    downloader, provider parsers, cleaners
+src/index_etfs/outputs.py    ticker, watchlist, and metadata writers
+src/index_etfs/holdings.py   public API and CLI entry point
 tests/test_holdings.py       mocked unit tests; no network required
 tickers/*.txt                plain ticker outputs, one ticker per line
 watchlists/*.txt             TradingView outputs, ###Section headers + EXCHANGE:TICKER lines
