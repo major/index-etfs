@@ -45,12 +45,50 @@ FIREFOX_HEADERS = {
     "Accept-Language": "en-US,en;q=0.5",
 }
 
+TRADINGVIEW_SCAN_URL = "https://scanner.tradingview.com/america/scan"
+WATCHLIST_NAMES = {
+    "spy": "sp500",
+    "mdy": "sp400",
+    "spsm": "sp600",
+    "qqq": "nasdaq100",
+    "iwm": "russell2000",
+}
+
 
 def _read_url(url: str) -> io.BytesIO:
     """Read a URL with browser-ish headers."""
     request = urllib.request.Request(url, headers=FIREFOX_HEADERS)
     with urllib.request.urlopen(request, timeout=30) as response:
         return io.BytesIO(response.read())
+
+
+def _tradingview_prefixes(tickers: list[str], chunk_size: int = 200) -> dict[str, str]:
+    """Map tickers to TradingView exchange-prefixed symbols."""
+    prefixes = {}
+    headers = FIREFOX_HEADERS | {"Content-Type": "application/json"}
+
+    for start in range(0, len(tickers), chunk_size):
+        chunk = tickers[start : start + chunk_size]
+        payload = {
+            "filter": [{"left": "name", "operation": "in_range", "right": chunk}],
+            "columns": ["name"],
+            "markets": ["america"],
+        }
+        request = urllib.request.Request(
+            TRADINGVIEW_SCAN_URL,
+            data=json.dumps(payload).encode(),
+            headers=headers,
+        )
+        with urllib.request.urlopen(request, timeout=30) as response:
+            rows = json.load(response).get("data", [])
+
+        for row in rows:
+            ticker = row.get("d", [None])[0]
+            symbol = row.get("s", "")
+            if ticker in chunk and ":" in symbol:
+                prefixes.setdefault(ticker, symbol)
+
+    return prefixes
 
 
 def _load_ssga_excel(url: str) -> pl.DataFrame:
@@ -150,6 +188,17 @@ def _save_holdings(df: pl.DataFrame, symbol: str, output_dir: Path | None = None
     # 📝 Save as simple newline-separated list of tickers
     tickers = df["Ticker"].to_list()
     (output_dir / f"{symbol}.txt").write_text("\n".join(tickers) + "\n")
+
+    watchlist_name = WATCHLIST_NAMES.get(symbol)
+    if watchlist_name:
+        watchlist_dir = output_dir / "watchlists"
+        watchlist_dir.mkdir(exist_ok=True)
+        prefixes = _tradingview_prefixes(tickers)
+        missing = [ticker for ticker in tickers if ticker not in prefixes]
+        if missing:
+            print(f"⚠️  No TradingView prefix for {', '.join(missing)}")
+        lines = [prefixes.get(ticker, ticker) for ticker in tickers]
+        (watchlist_dir / f"{watchlist_name}.txt").write_text("\n".join(lines) + "\n")
 
 
 def get_etf_holdings(
