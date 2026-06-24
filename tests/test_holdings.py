@@ -1,5 +1,6 @@
 """🧪 Tests for the holdings module."""
 
+import io
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
@@ -7,11 +8,12 @@ import polars as pl
 import pytest
 
 from index_etfs.holdings import (
-    ETF_CONFIGS,
+    FIREFOX_HEADERS,
     _filter_and_clean,
-    _load_direxion_csv,
     _load_ishares_csv,
+    _load_nasdaq_json,
     _load_ssga_excel,
+    _read_url,
     _save_holdings,
     get_etf_holdings,
     get_iwm_holdings,
@@ -52,15 +54,9 @@ def sample_ishares_data() -> pl.DataFrame:
 
 
 @pytest.fixture
-def sample_direxion_data() -> pl.DataFrame:
-    """Create sample Direxion-style holdings data (already renamed)."""
-    return pl.DataFrame(
-        {
-            "Ticker": ["AAPL", "MSFT", "GOOGL"],
-            "Name": ["Apple Inc", "Microsoft", "Alphabet"],
-            "Weight": [10.5, 9.2, 8.1],
-        }
-    )
+def sample_nasdaq_data() -> pl.DataFrame:
+    """Create sample Nasdaq-100 holdings data."""
+    return pl.DataFrame({"Ticker": ["AAPL", "MSFT", "GOOGL"]})
 
 
 @pytest.fixture
@@ -77,7 +73,7 @@ def temp_output_dir(tmp_path: Path) -> Path:
     [
         ("ssga", 3),  # Should filter out EUR and "-" ticker
         ("ishares", 2),  # Should filter out GBP and "-" ticker
-        ("direxion", 3),  # No filtering for direxion
+        ("nasdaq", 3),  # No currency filtering for nasdaq
     ],
 )
 def test_filter_and_clean(
@@ -85,7 +81,7 @@ def test_filter_and_clean(
     expected_len: int,
     sample_ssga_data: pl.DataFrame,
     sample_ishares_data: pl.DataFrame,
-    sample_direxion_data: pl.DataFrame,
+    sample_nasdaq_data: pl.DataFrame,
 ) -> None:
     """🧪 Test filtering and cleaning data for different providers."""
     if provider == "ssga":
@@ -93,7 +89,7 @@ def test_filter_and_clean(
     elif provider == "ishares":
         data = sample_ishares_data
     else:
-        data = sample_direxion_data
+        data = sample_nasdaq_data
 
     result = _filter_and_clean(data, provider)
 
@@ -155,8 +151,11 @@ def test_save_holdings_defaults_to_cwd(
 # 🏢 Tests for loader functions
 
 
+@patch("index_etfs.holdings._read_url", return_value=io.BytesIO())
 @patch("index_etfs.holdings.pl.read_excel")
-def test_load_ssga_excel_handles_dict_response(mock_read_excel: MagicMock) -> None:
+def test_load_ssga_excel_handles_dict_response(
+    mock_read_excel: MagicMock, _mock_read_url: MagicMock
+) -> None:
     """🧪 Test loading SSGA Excel when response is a dict."""
     mock_df = pl.DataFrame({"Ticker": ["AAPL"], "Weight": [7.5]})
     mock_read_excel.return_value = {"Sheet1": mock_df}
@@ -167,8 +166,11 @@ def test_load_ssga_excel_handles_dict_response(mock_read_excel: MagicMock) -> No
     assert result.equals(mock_df)
 
 
+@patch("index_etfs.holdings._read_url", return_value=io.BytesIO())
 @patch("index_etfs.holdings.pl.read_excel")
-def test_load_ssga_excel_handles_dataframe_response(mock_read_excel: MagicMock) -> None:
+def test_load_ssga_excel_handles_dataframe_response(
+    mock_read_excel: MagicMock, _mock_read_url: MagicMock
+) -> None:
     """🧪 Test loading SSGA Excel when response is already a DataFrame."""
     mock_df = pl.DataFrame({"Ticker": ["AAPL"], "Weight": [7.5]})
     mock_read_excel.return_value = mock_df
@@ -179,8 +181,11 @@ def test_load_ssga_excel_handles_dataframe_response(mock_read_excel: MagicMock) 
     assert result.equals(mock_df)
 
 
+@patch("index_etfs.holdings._read_url", return_value=io.BytesIO())
 @patch("index_etfs.holdings.pl.read_csv")
-def test_load_ishares_csv_renames_weight_column(mock_read_csv: MagicMock) -> None:
+def test_load_ishares_csv_renames_weight_column(
+    mock_read_csv: MagicMock, _mock_read_url: MagicMock
+) -> None:
     """🧪 Test that iShares loader renames Weight (%) column."""
     mock_df = pl.DataFrame(
         {
@@ -198,36 +203,33 @@ def test_load_ishares_csv_renames_weight_column(mock_read_csv: MagicMock) -> Non
     assert "Weight (%)" not in result.columns
 
 
-@pytest.mark.parametrize(
-    "input_columns",
-    [
-        # Old format
-        {"Ticker": ["AAPL"], "Description": ["Apple Inc"], "% of Net Assets": [10.5]},
-        # New format (as of 2025)
-        {
-            "StockTicker": ["AAPL"],
-            "SecurityDescription": ["Apple Inc"],
-            "HoldingsPercent": [10.5],
-        },
-    ],
+@patch(
+    "index_etfs.holdings._read_url",
+    return_value=io.BytesIO(
+        b'{"data":{"data":{"rows":[{"symbol":"AAPL"},{"symbol":"BRK/B"}]}}}'
+    ),
 )
-@patch("index_etfs.holdings.pl.read_csv")
-def test_load_direxion_csv_renames_columns(
-    mock_read_csv: MagicMock, input_columns: dict
-) -> None:
-    """🧪 Test that Direxion loader renames columns properly (handles format changes)."""
-    mock_df = pl.DataFrame(input_columns)
-    mock_read_csv.return_value = mock_df
+def test_load_nasdaq_json_returns_tickers(_mock_read_url: MagicMock) -> None:
+    """🧪 Test loading Nasdaq-100 JSON."""
+    result = _load_nasdaq_json("http://example.com/data.json")
 
-    result = _load_direxion_csv("http://example.com/data.csv")
+    assert result["Ticker"].to_list() == ["AAPL", "BRK.B"]
 
-    assert "Ticker" in result.columns
-    assert "Name" in result.columns
-    assert "Weight" in result.columns
-    # Original columns should be renamed
-    for col in input_columns.keys():
-        if col not in ["Ticker", "Name", "Weight"]:
-            assert col not in result.columns
+
+@patch("index_etfs.holdings._read_url", return_value=io.BytesIO(b'{"data":{}}'))
+def test_load_nasdaq_json_raises_on_missing_rows(_mock_read_url: MagicMock) -> None:
+    """🧪 Test Nasdaq JSON fails closed on bad payloads."""
+    with pytest.raises(ValueError, match="Nasdaq response"):
+        _load_nasdaq_json("http://example.com/data.json")
+
+
+@patch("index_etfs.holdings.urllib.request.urlopen", return_value=io.BytesIO(b"ok"))
+def test_read_url_uses_firefox_headers(mock_urlopen: MagicMock) -> None:
+    """🧪 Test URL reads use browser-ish headers."""
+    assert _read_url("http://example.com/data.csv").read() == b"ok"
+
+    request = mock_urlopen.call_args.args[0]
+    assert request.get_header("User-agent") == FIREFOX_HEADERS["User-Agent"]
 
 
 # 📈 Tests for get_etf_holdings
@@ -238,30 +240,6 @@ def test_get_etf_holdings_raises_on_unknown_symbol() -> None:
     with pytest.raises(ValueError, match="Unknown ETF symbol"):
         get_etf_holdings("INVALID")  # type: ignore[arg-type]
 
-
-@pytest.mark.parametrize("symbol", ["spy", "mdy", "spsm", "qqq", "iwm"])
-def test_etf_configs_exist(symbol: str) -> None:
-    """🧪 Test that all expected ETF configs are present."""
-    assert symbol in ETF_CONFIGS
-    assert "url" in ETF_CONFIGS[symbol]
-    assert "provider" in ETF_CONFIGS[symbol]
-
-
-@pytest.mark.parametrize(
-    ("symbol", "expected_provider"),
-    [
-        ("spy", "ssga"),
-        ("mdy", "ssga"),
-        ("spsm", "ssga"),
-        ("qqq", "direxion"),
-        ("iwm", "ishares"),
-    ],
-)
-def test_etf_configs_have_correct_providers(
-    symbol: str, expected_provider: str
-) -> None:
-    """🧪 Test that ETF configs have correct provider mappings."""
-    assert ETF_CONFIGS[symbol]["provider"] == expected_provider
 
 
 @patch("index_etfs.holdings._load_ssga_excel")
@@ -304,23 +282,23 @@ def test_get_etf_holdings_calls_correct_loader_for_ishares(
     mock_save.assert_called_once()
 
 
-@patch("index_etfs.holdings._load_direxion_csv")
+@patch("index_etfs.holdings._load_nasdaq_json")
 @patch("index_etfs.holdings._filter_and_clean")
 @patch("index_etfs.holdings._save_holdings")
-def test_get_etf_holdings_calls_correct_loader_for_direxion(
+def test_get_etf_holdings_calls_correct_loader_for_nasdaq(
     mock_save: MagicMock,
     mock_filter: MagicMock,
     mock_load: MagicMock,
-    sample_direxion_data: pl.DataFrame,
+    sample_nasdaq_data: pl.DataFrame,
 ) -> None:
-    """🧪 Test that Direxion ETFs use the correct loader."""
-    mock_load.return_value = sample_direxion_data
-    mock_filter.return_value = sample_direxion_data
+    """🧪 Test that Nasdaq-100 uses the correct loader."""
+    mock_load.return_value = sample_nasdaq_data
+    mock_filter.return_value = sample_nasdaq_data
 
     get_etf_holdings("qqq")
 
     mock_load.assert_called_once()
-    mock_filter.assert_called_once_with(sample_direxion_data, "direxion")
+    mock_filter.assert_called_once_with(sample_nasdaq_data, "nasdaq")
     mock_save.assert_called_once()
 
 

@@ -1,9 +1,12 @@
 """📊 Extract ticker symbols from various index ETFs.
 
-This module downloads ETF holdings from various providers (SSGA, iShares, Direxion)
+This module downloads ETF/index holdings from public providers (SSGA, iShares, Nasdaq)
 and extracts just the ticker symbols (e.g., AAPL, MSFT, GOOGL).
 """
 
+import io
+import json
+import urllib.request
 from pathlib import Path
 from typing import Literal
 
@@ -25,16 +28,29 @@ ETF_CONFIGS = {
         "provider": "ssga",
     },
     "qqq": {
-        "url": "https://www.direxion.com/holdings/QQQE.csv",
-        "provider": "direxion",
+        "url": "https://api.nasdaq.com/api/quote/list-type/nasdaq100",
+        "provider": "nasdaq",
     },
     "iwm": {
-        "url": "https://www.ishares.com/us/products/239710/ishares-russell-2000-etf/1467271812596.ajax?fileType=csv&fileName=IWM_holdings&dataType=fund",
+        "url": "https://www.blackrock.com/varnish-api/blk-one01-product-data/product-data/api/v1/get-fund-document?appType=PRODUCT_PAGE&appSubType=ISHARES&targetSite=us-ishares&locale=en_US&portfolioId=239710&userType=individual&component=holdings",
         "provider": "ishares",
     },
 }
 
 ETFSymbol = Literal["spy", "mdy", "spsm", "qqq", "iwm"]
+
+FIREFOX_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0",
+    "Accept": "*/*",
+    "Accept-Language": "en-US,en;q=0.5",
+}
+
+
+def _read_url(url: str) -> io.BytesIO:
+    """Read a URL with browser-ish headers."""
+    request = urllib.request.Request(url, headers=FIREFOX_HEADERS)
+    with urllib.request.urlopen(request, timeout=30) as response:
+        return io.BytesIO(response.read())
 
 
 def _load_ssga_excel(url: str) -> pl.DataFrame:
@@ -46,7 +62,7 @@ def _load_ssga_excel(url: str) -> pl.DataFrame:
     Returns:
         Polars DataFrame with holdings data
     """
-    df_dict = pl.read_excel(url, sheet_id=0, read_options={"header_row": 4})
+    df_dict = pl.read_excel(_read_url(url), sheet_id=0, read_options={"header_row": 4})
 
     # 🎲 Handle both dict and DataFrame returns
     if isinstance(df_dict, dict):
@@ -67,7 +83,7 @@ def _load_ishares_csv(url: str) -> pl.DataFrame:
         Polars DataFrame with holdings data
     """
     df = pl.read_csv(
-        url,
+        _read_url(url),
         skip_rows=9,
         columns=["Ticker", "Name", "Weight (%)", "Market Currency"],
         truncate_ragged_lines=True,
@@ -76,46 +92,17 @@ def _load_ishares_csv(url: str) -> pl.DataFrame:
     return df
 
 
-def _load_direxion_csv(url: str) -> pl.DataFrame:
-    """🏢 Load Direxion CSV format holdings data.
+def _load_nasdaq_json(url: str) -> pl.DataFrame:
+    """🏢 Load Nasdaq-100 symbols from Nasdaq's public JSON endpoint."""
+    rows = json.load(_read_url(url)).get("data", {}).get("data", {}).get("rows")
+    if not rows:
+        raise ValueError("Nasdaq response did not contain any Nasdaq-100 rows")
 
-    Args:
-        url: URL to the Direxion CSV file
+    tickers = [row["symbol"].strip().replace("/", ".") for row in rows if row.get("symbol")]
+    if not tickers:
+        raise ValueError("Nasdaq response did not contain any symbols")
 
-    Returns:
-        Polars DataFrame with holdings data
-    """
-    df = pl.read_csv(url, skip_rows=5, truncate_ragged_lines=True)
-
-    # 🔄 Map possible column name variations to standard names
-    rename_map = {}
-
-    # Handle ticker column (could be "Ticker" or "StockTicker")
-    if "StockTicker" in df.columns:
-        rename_map["StockTicker"] = "Ticker"
-    elif "Ticker" not in df.columns:
-        raise ValueError("No ticker column found in Direxion CSV")
-
-    # Handle name/description column
-    if "SecurityDescription" in df.columns:
-        rename_map["SecurityDescription"] = "Name"
-    elif "Description" in df.columns:
-        rename_map["Description"] = "Name"
-    elif "Name" not in df.columns:
-        raise ValueError("No name/description column found in Direxion CSV")
-
-    # Handle weight column
-    if "HoldingsPercent" in df.columns:
-        rename_map["HoldingsPercent"] = "Weight"
-    elif "% of Net Assets" in df.columns:
-        rename_map["% of Net Assets"] = "Weight"
-    elif "Weight" not in df.columns:
-        raise ValueError("No weight column found in Direxion CSV")
-
-    if rename_map:
-        df = df.rename(rename_map)
-
-    return df
+    return pl.DataFrame({"Ticker": tickers})
 
 
 def _filter_and_clean(df: pl.DataFrame, provider: str) -> pl.DataFrame:
@@ -123,7 +110,7 @@ def _filter_and_clean(df: pl.DataFrame, provider: str) -> pl.DataFrame:
 
     Args:
         df: Input DataFrame
-        provider: ETF provider name (ssga, ishares, direxion)
+        provider: ETF provider name (ssga, ishares, nasdaq)
 
     Returns:
         Cleaned DataFrame with just Ticker column (uppercase symbols only)
@@ -201,8 +188,8 @@ def get_etf_holdings(
         df = _load_ssga_excel(url)
     elif provider == "ishares":
         df = _load_ishares_csv(url)
-    elif provider == "direxion":
-        df = _load_direxion_csv(url)
+    elif provider == "nasdaq":
+        df = _load_nasdaq_json(url)
     else:
         raise ValueError(f"Unknown provider: {provider}")
 
@@ -243,7 +230,7 @@ def get_spsm_holdings() -> pl.DataFrame:
 
 
 def get_qqq_holdings() -> pl.DataFrame:
-    """📊 Get ticker symbols from the QQQ ETF (using QQQE data as proxy).
+    """📊 Get ticker symbols from the Nasdaq-100.
 
     Returns:
         DataFrame with QQQ ticker symbols
