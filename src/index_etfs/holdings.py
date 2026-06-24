@@ -29,31 +29,6 @@ def get_etf_holdings(
     return df
 
 
-def get_spy_holdings() -> pl.DataFrame:
-    """📊 Get ticker symbols from the SPY ETF."""
-    return get_etf_holdings("spy")
-
-
-def get_mdy_holdings() -> pl.DataFrame:
-    """📊 Get ticker symbols from the MDY ETF."""
-    return get_etf_holdings("mdy")
-
-
-def get_spsm_holdings() -> pl.DataFrame:
-    """📊 Get ticker symbols from the SPSM ETF."""
-    return get_etf_holdings("spsm")
-
-
-def get_qqq_holdings() -> pl.DataFrame:
-    """📊 Get ticker symbols from the Nasdaq-100."""
-    return get_etf_holdings("qqq")
-
-
-def get_iwm_holdings() -> pl.DataFrame:
-    """📊 Get ticker symbols from the IWM ETF."""
-    return get_etf_holdings("iwm")
-
-
 def main() -> None:
     """🚀 Download all ETF holdings."""
     print("📥 Downloading ETF holdings...")
