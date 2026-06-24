@@ -10,6 +10,7 @@ import pytest
 from index_etfs.holdings import (
     FIREFOX_HEADERS,
     _filter_and_clean,
+    _tradingview_prefixes,
     _load_ishares_csv,
     _load_nasdaq_json,
     _load_ssga_excel,
@@ -148,6 +149,25 @@ def test_save_holdings_defaults_to_cwd(
     assert (tmp_path / "test.txt").exists()
 
 
+@patch("index_etfs.holdings._tradingview_prefixes")
+def test_save_holdings_writes_tradingview_watchlist(
+    mock_prefixes: MagicMock, sample_ssga_data: pl.DataFrame, temp_output_dir: Path
+) -> None:
+    """🧪 Test TradingView watchlist output shape."""
+    mock_prefixes.return_value = {
+        "AAPL": "NASDAQ:AAPL",
+        "GOOGL": "NASDAQ:GOOGL",
+        "MSFT": "NASDAQ:MSFT",
+    }
+    df = _filter_and_clean(sample_ssga_data, "ssga")
+
+    _save_holdings(df, "spy", temp_output_dir)
+
+    assert (temp_output_dir / "watchlists" / "sp500.txt").read_text() == (
+        "NASDAQ:AAPL\nNASDAQ:GOOGL\nNASDAQ:MSFT\n"
+    )
+
+
 # 🏢 Tests for loader functions
 
 
@@ -230,6 +250,20 @@ def test_read_url_uses_firefox_headers(mock_urlopen: MagicMock) -> None:
 
     request = mock_urlopen.call_args.args[0]
     assert request.get_header("User-agent") == FIREFOX_HEADERS["User-Agent"]
+
+
+@patch(
+    "index_etfs.holdings.urllib.request.urlopen",
+    return_value=io.BytesIO(
+        b'{"data":[{"s":"NASDAQ:AAPL","d":["AAPL","NASDAQ","stock"]}]}'
+    ),
+)
+def test_tradingview_prefixes_maps_symbols(mock_urlopen: MagicMock) -> None:
+    """🧪 Test TradingView scanner mapping."""
+    assert _tradingview_prefixes(["AAPL"]) == {"AAPL": "NASDAQ:AAPL"}
+
+    request = mock_urlopen.call_args.args[0]
+    assert request.get_header("Content-type") == "application/json"
 
 
 # 📈 Tests for get_etf_holdings
