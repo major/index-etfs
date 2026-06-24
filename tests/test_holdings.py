@@ -493,7 +493,12 @@ def test_get_etf_holdings_raises_on_unknown_provider(
     monkeypatch.setitem(
         holdings.ETF_CONFIGS,
         "bad",
-        {"url": "http://example.com/data", "provider": "bad"},
+        holdings.ETFConfig(
+            url="http://example.com/data",
+            provider="bad",  # type: ignore[arg-type]
+            watchlist_name="bad",
+            expected_count=1,
+        ),
     )
 
     with pytest.raises(ValueError, match="Unknown provider"):
@@ -546,8 +551,8 @@ def test_main_downloads_all_configured_etfs(
 ) -> None:
     """🧪 Test CLI entry point processes every configured ETF."""
     mock_get_holdings.side_effect = [
-        pl.DataFrame({"Ticker": range(holdings.EXPECTED_COUNTS[symbol])})
-        for symbol in holdings.ETF_CONFIGS
+        pl.DataFrame({"Ticker": range(config.expected_count)})
+        for config in holdings.ETF_CONFIGS.values()
     ]
 
     holdings.main()

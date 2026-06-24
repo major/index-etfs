@@ -8,6 +8,7 @@ import io
 import json
 import math
 import urllib.request
+from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Literal
@@ -15,31 +16,50 @@ from typing import Literal
 import polars as pl
 
 
+Provider = Literal["ssga", "ishares", "nasdaq"]
+
+
+@dataclass(frozen=True)
+class ETFConfig:
+    url: str
+    provider: Provider
+    watchlist_name: str
+    expected_count: int
+
+
 # 🎯 ETF Configuration
 ETF_CONFIGS = {
-    "spy": {
-        "url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
-        "provider": "ssga",
-    },
-    "mdy": {
-        "url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-mdy.xlsx",
-        "provider": "ssga",
-    },
-    "spsm": {
-        "url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spsm.xlsx",
-        "provider": "ssga",
-    },
-    "qqq": {
-        "url": "https://api.nasdaq.com/api/quote/list-type/nasdaq100",
-        "provider": "nasdaq",
-    },
-    "iwm": {
-        "url": "https://www.blackrock.com/varnish-api/blk-one01-product-data/product-data/api/v1/get-fund-document?appType=PRODUCT_PAGE&appSubType=ISHARES&targetSite=us-ishares&locale=en_US&portfolioId=239710&userType=individual&component=holdings",
-        "provider": "ishares",
-    },
+    "spy": ETFConfig(
+        url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
+        provider="ssga",
+        watchlist_name="sp500",
+        expected_count=503,
+    ),
+    "mdy": ETFConfig(
+        url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-mdy.xlsx",
+        provider="ssga",
+        watchlist_name="sp400",
+        expected_count=400,
+    ),
+    "spsm": ETFConfig(
+        url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spsm.xlsx",
+        provider="ssga",
+        watchlist_name="sp600",
+        expected_count=600,
+    ),
+    "qqq": ETFConfig(
+        url="https://api.nasdaq.com/api/quote/list-type/nasdaq100",
+        provider="nasdaq",
+        watchlist_name="nasdaq100",
+        expected_count=100,
+    ),
+    "iwm": ETFConfig(
+        url="https://www.blackrock.com/varnish-api/blk-one01-product-data/product-data/api/v1/get-fund-document?appType=PRODUCT_PAGE&appSubType=ISHARES&targetSite=us-ishares&locale=en_US&portfolioId=239710&userType=individual&component=holdings",
+        provider="ishares",
+        watchlist_name="russell2000",
+        expected_count=2000,
+    ),
 }
-
-ETFSymbol = Literal["spy", "mdy", "spsm", "qqq", "iwm"]
 
 FIREFOX_HEADERS = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0",
@@ -48,20 +68,6 @@ FIREFOX_HEADERS = {
 }
 
 TRADINGVIEW_SCAN_URL = "https://scanner.tradingview.com/america/scan"
-WATCHLIST_NAMES = {
-    "spy": "sp500",
-    "mdy": "sp400",
-    "spsm": "sp600",
-    "qqq": "nasdaq100",
-    "iwm": "russell2000",
-}
-EXPECTED_COUNTS = {
-    "spy": 503,
-    "mdy": 400,
-    "spsm": 600,
-    "qqq": 100,
-    "iwm": 2000,
-}
 MIN_EXPECTED_RATIO = 0.9
 
 
@@ -70,7 +76,7 @@ def _validate_count(symbol: str, count: int) -> None:
     if count == 0:
         raise ValueError(f"{symbol.upper()} returned zero rows")
 
-    expected = EXPECTED_COUNTS[symbol]
+    expected = ETF_CONFIGS[symbol].expected_count
     minimum = math.ceil(expected * MIN_EXPECTED_RATIO)
     if count < minimum:
         raise ValueError(
@@ -89,14 +95,15 @@ def _write_metadata(results: dict[str, int], output_dir: Path | None = None) -> 
         .isoformat()
         .replace("+00:00", "Z"),
         "watchlists": {
-            WATCHLIST_NAMES[symbol]: {
+            config.watchlist_name: {
                 "count": count,
-                "expected_count": EXPECTED_COUNTS[symbol],
-                "minimum_count": math.ceil(EXPECTED_COUNTS[symbol] * MIN_EXPECTED_RATIO),
+                "expected_count": config.expected_count,
+                "minimum_count": math.ceil(config.expected_count * MIN_EXPECTED_RATIO),
                 "source": symbol,
-                "source_url": ETF_CONFIGS[symbol]["url"],
+                "source_url": config.url,
             }
             for symbol, count in results.items()
+            for config in [ETF_CONFIGS[symbol]]
         },
     }
 
@@ -257,21 +264,23 @@ def _save_holdings(df: pl.DataFrame, symbol: str, output_dir: Path | None = None
     tickers_dir.mkdir(exist_ok=True)
     (tickers_dir / f"{symbol}.txt").write_text("\n".join(tickers) + "\n")
 
-    watchlist_name = WATCHLIST_NAMES.get(symbol)
-    if watchlist_name:
-        watchlist_dir = output_dir / "watchlists"
-        watchlist_dir.mkdir(exist_ok=True)
-        symbols = _tradingview_symbols(tickers)
-        missing = [ticker for ticker in tickers if ticker not in symbols]
-        if missing:
-            print(f"⚠️  No TradingView metadata for {', '.join(missing)}")
-        (watchlist_dir / f"{watchlist_name}.txt").write_text(
-            "\n".join(_watchlist_lines(tickers, symbols)) + "\n"
-        )
+    config = ETF_CONFIGS.get(symbol)
+    if config is None:
+        return
+
+    watchlist_dir = output_dir / "watchlists"
+    watchlist_dir.mkdir(exist_ok=True)
+    symbols = _tradingview_symbols(tickers)
+    missing = [ticker for ticker in tickers if ticker not in symbols]
+    if missing:
+        print(f"⚠️  No TradingView metadata for {', '.join(missing)}")
+    (watchlist_dir / f"{config.watchlist_name}.txt").write_text(
+        "\n".join(_watchlist_lines(tickers, symbols)) + "\n"
+    )
 
 
 def get_etf_holdings(
-    symbol: ETFSymbol,
+    symbol: str,
     output_dir: Path | None = None,
 ) -> pl.DataFrame:
     """📈 Get ticker symbols for a specific ETF.
@@ -298,21 +307,21 @@ def get_etf_holdings(
         )
 
     config = ETF_CONFIGS[symbol_lower]
-    provider = config["provider"]
-    url = config["url"]
+    loaders = {
+        "ssga": _load_ssga_excel,
+        "ishares": _load_ishares_csv,
+        "nasdaq": _load_nasdaq_json,
+    }
+    try:
+        loader = loaders[config.provider]
+    except KeyError as exc:
+        raise ValueError(f"Unknown provider: {config.provider}") from exc
 
     # 🔄 Load data based on provider
-    if provider == "ssga":
-        df = _load_ssga_excel(url)
-    elif provider == "ishares":
-        df = _load_ishares_csv(url)
-    elif provider == "nasdaq":
-        df = _load_nasdaq_json(url)
-    else:
-        raise ValueError(f"Unknown provider: {provider}")
+    df = loader(config.url)
 
     # 🧹 Clean and filter
-    df = _filter_and_clean(df, provider)
+    df = _filter_and_clean(df, config.provider)
     _validate_count(symbol_lower, len(df))
 
     # 💾 Save outputs
@@ -374,7 +383,7 @@ def main() -> None:
 
     for symbol in ETF_CONFIGS.keys():
         print(f"  ⏳ Processing {symbol.upper()}...")
-        df = get_etf_holdings(symbol, output_dir)  # type: ignore[arg-type]
+        df = get_etf_holdings(symbol, output_dir)
         count = len(df)
         results[symbol] = count
         print(f"  ✅ {symbol.upper()} complete! ({count} rows)")
