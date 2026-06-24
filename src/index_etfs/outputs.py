@@ -42,31 +42,37 @@ def write_metadata(results: dict[str, int], output_dir: Path | None = None) -> N
     (metadata_dir / "latest.json").write_text(json.dumps(metadata, indent=2) + "\n")
 
 
+def _scan_tradingview(tickers: list[str]) -> list[dict]:
+    """Fetch one TradingView scanner page."""
+    payload = {
+        "filter": [{"left": "name", "operation": "in_range", "right": tickers}],
+        "columns": ["name", "sector", "industry"],
+        "markets": ["america"],
+    }
+    request = urllib.request.Request(
+        TRADINGVIEW_SCAN_URL,
+        data=json.dumps(payload).encode(),
+        headers=FIREFOX_HEADERS
+        | {
+            "Content-Type": "application/json",
+            "Origin": "https://www.tradingview.com",
+            "Referer": "https://www.tradingview.com/",
+        },
+    )
+    with urllib.request.urlopen(request, timeout=30) as response:
+        return json.load(response).get("data", [])
+
+
 def tradingview_symbols(tickers: list[str], chunk_size: int = 200) -> dict[str, tuple[str, str]]:
     """Map tickers to TradingView symbols and sector-ish group names."""
+    if chunk_size <= 0:
+        raise ValueError("chunk_size must be positive")
+
     symbols = {}
-    headers = FIREFOX_HEADERS | {
-        "Content-Type": "application/json",
-        "Origin": "https://www.tradingview.com",
-        "Referer": "https://www.tradingview.com/",
-    }
 
     for start in range(0, len(tickers), chunk_size):
         chunk = tickers[start : start + chunk_size]
-        payload = {
-            "filter": [{"left": "name", "operation": "in_range", "right": chunk}],
-            "columns": ["name", "sector", "industry"],
-            "markets": ["america"],
-        }
-        request = urllib.request.Request(
-            TRADINGVIEW_SCAN_URL,
-            data=json.dumps(payload).encode(),
-            headers=headers,
-        )
-        with urllib.request.urlopen(request, timeout=30) as response:
-            rows = json.load(response).get("data", [])
-
-        for row in rows:
+        for row in _scan_tradingview(chunk):
             data = row.get("d", [])
             ticker = data[0] if data else None
             symbol = row.get("s", "")
@@ -87,28 +93,30 @@ def watchlist_lines(tickers: list[str], symbols: dict[str, tuple[str, str]]) -> 
     return [line for group in sorted(groups) for line in (f"###{group}", *groups[group])]
 
 
+def _write_lines(path: Path, lines: list[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines) + "\n")
+
+
+def _save_watchlist(tickers: list[str], watchlist_name: str, output_dir: Path) -> None:
+    symbols = tradingview_symbols(tickers)
+    missing = [ticker for ticker in tickers if ticker not in symbols]
+    if missing:
+        print(f"⚠️  No TradingView metadata for {', '.join(missing)}")
+
+    _write_lines(
+        output_dir / "watchlists" / f"{watchlist_name}.txt",
+        watchlist_lines(tickers, symbols),
+    )
+
+
 def save_holdings(df: pl.DataFrame, symbol: str, output_dir: Path | None = None) -> None:
     """Save ticker symbols and TradingView watchlists."""
     if output_dir is None:
         output_dir = Path.cwd()
 
-    output_dir.mkdir(parents=True, exist_ok=True)
-
     tickers = df["Ticker"].to_list()
-    tickers_dir = output_dir / "tickers"
-    tickers_dir.mkdir(exist_ok=True)
-    (tickers_dir / f"{symbol}.txt").write_text("\n".join(tickers) + "\n")
+    _write_lines(output_dir / "tickers" / f"{symbol}.txt", tickers)
 
-    config = ETF_CONFIGS.get(symbol)
-    if config is None:
-        return
-
-    watchlist_dir = output_dir / "watchlists"
-    watchlist_dir.mkdir(exist_ok=True)
-    symbols = tradingview_symbols(tickers)
-    missing = [ticker for ticker in tickers if ticker not in symbols]
-    if missing:
-        print(f"⚠️  No TradingView metadata for {', '.join(missing)}")
-    (watchlist_dir / f"{config.watchlist_name}.txt").write_text(
-        "\n".join(watchlist_lines(tickers, symbols)) + "\n"
-    )
+    if config := ETF_CONFIGS.get(symbol):
+        _save_watchlist(tickers, config.watchlist_name, output_dir)

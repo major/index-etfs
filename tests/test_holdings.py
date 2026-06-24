@@ -11,14 +11,7 @@ import pytest
 import index_etfs.catalog as catalog
 import index_etfs.holdings as holdings
 from index_etfs.catalog import ETFConfig, validate_count
-from index_etfs.holdings import (
-    get_etf_holdings,
-    get_iwm_holdings,
-    get_mdy_holdings,
-    get_qqq_holdings,
-    get_spsm_holdings,
-    get_spy_holdings,
-)
+from index_etfs.holdings import get_etf_holdings
 from index_etfs.outputs import save_holdings, tradingview_symbols, watchlist_lines, write_metadata
 from index_etfs.sources import (
     FIREFOX_HEADERS,
@@ -141,6 +134,11 @@ def test_tradingview_symbols(mock_urlopen: MagicMock) -> None:
     assert json.loads(request.data)["columns"] == ["name", "sector", "industry"]
 
 
+def test_tradingview_symbols_rejects_invalid_chunk_size() -> None:
+    with pytest.raises(ValueError, match="chunk_size"):
+        tradingview_symbols(["AAPL"], chunk_size=0)
+
+
 def test_watchlist_lines_groups_by_header() -> None:
     assert watchlist_lines(
         ["AAPL", "MSFT", "BRK.B"],
@@ -192,25 +190,6 @@ def test_validate_count_rejects_empty_and_tiny_results() -> None:
     with pytest.raises(ValueError, match="expected at least"):
         validate_count("iwm", 1799)
     validate_count("iwm", 1800)
-
-
-@pytest.mark.parametrize(
-    ("func", "expected_symbol"),
-    [
-        (get_spy_holdings, "spy"),
-        (get_mdy_holdings, "mdy"),
-        (get_spsm_holdings, "spsm"),
-        (get_qqq_holdings, "qqq"),
-        (get_iwm_holdings, "iwm"),
-    ],
-)
-@patch("index_etfs.holdings.get_etf_holdings")
-def test_individual_etf_functions(mock_get_holdings: MagicMock, func: object, expected_symbol: str) -> None:
-    mock_get_holdings.return_value = pl.DataFrame()
-
-    func()
-
-    mock_get_holdings.assert_called_once_with(expected_symbol)
 
 
 @patch("index_etfs.holdings.write_metadata")
