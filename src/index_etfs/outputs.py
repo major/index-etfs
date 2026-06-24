@@ -42,31 +42,37 @@ def write_metadata(results: dict[str, int], output_dir: Path | None = None) -> N
     (metadata_dir / "latest.json").write_text(json.dumps(metadata, indent=2) + "\n")
 
 
+def _scan_tradingview(tickers: list[str]) -> list[dict]:
+    """Fetch one TradingView scanner page."""
+    payload = {
+        "filter": [{"left": "name", "operation": "in_range", "right": tickers}],
+        "columns": ["name", "sector", "industry"],
+        "markets": ["america"],
+    }
+    request = urllib.request.Request(
+        TRADINGVIEW_SCAN_URL,
+        data=json.dumps(payload).encode(),
+        headers=FIREFOX_HEADERS
+        | {
+            "Content-Type": "application/json",
+            "Origin": "https://www.tradingview.com",
+            "Referer": "https://www.tradingview.com/",
+        },
+    )
+    with urllib.request.urlopen(request, timeout=30) as response:
+        return json.load(response).get("data", [])
+
+
 def tradingview_symbols(tickers: list[str], chunk_size: int = 200) -> dict[str, tuple[str, str]]:
     """Map tickers to TradingView symbols and sector-ish group names."""
+    if chunk_size <= 0:
+        raise ValueError("chunk_size must be positive")
+
     symbols = {}
-    headers = FIREFOX_HEADERS | {
-        "Content-Type": "application/json",
-        "Origin": "https://www.tradingview.com",
-        "Referer": "https://www.tradingview.com/",
-    }
 
     for start in range(0, len(tickers), chunk_size):
         chunk = tickers[start : start + chunk_size]
-        payload = {
-            "filter": [{"left": "name", "operation": "in_range", "right": chunk}],
-            "columns": ["name", "sector", "industry"],
-            "markets": ["america"],
-        }
-        request = urllib.request.Request(
-            TRADINGVIEW_SCAN_URL,
-            data=json.dumps(payload).encode(),
-            headers=headers,
-        )
-        with urllib.request.urlopen(request, timeout=30) as response:
-            rows = json.load(response).get("data", [])
-
-        for row in rows:
+        for row in _scan_tradingview(chunk):
             data = row.get("d", [])
             ticker = data[0] if data else None
             symbol = row.get("s", "")

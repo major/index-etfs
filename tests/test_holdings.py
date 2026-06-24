@@ -141,6 +141,11 @@ def test_tradingview_symbols(mock_urlopen: MagicMock) -> None:
     assert json.loads(request.data)["columns"] == ["name", "sector", "industry"]
 
 
+def test_tradingview_symbols_rejects_invalid_chunk_size() -> None:
+    with pytest.raises(ValueError, match="chunk_size"):
+        tradingview_symbols(["AAPL"], chunk_size=0)
+
+
 def test_watchlist_lines_groups_by_header() -> None:
     assert watchlist_lines(
         ["AAPL", "MSFT", "BRK.B"],
