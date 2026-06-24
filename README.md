@@ -14,25 +14,6 @@
 
 > ⚠️ Not financial advice. Just a tiny robot that turns public ETF holdings into useful ticker files.
 
-## ✨ What you get
-
-| 🧰 Output | 📍 Location | ✅ Best for |
-|---|---|---|
-| TradingView watchlists | [`watchlists/`](watchlists/) | Importing `EXCHANGE:TICKER` symbols directly into TradingView |
-| Plain ticker lists | [`tickers/`](tickers/) | Scripts, spreadsheets, scanners, and quick diffs |
-| Refresh metadata | [`metadata/latest.json`](metadata/latest.json) | Generated time, counts, thresholds, and source URLs |
-| Daily refreshes | [GitHub Actions](https://github.com/major/index-etfs/actions/workflows/main.yml) | Keeping index membership changes visible over time |
-
-```mermaid
-flowchart LR
-    A[Public ETF holdings] --> B[get-holdings]
-    B --> C[Clean tickers]
-    C --> D[tickers/*.txt]
-    C --> E[watchlists/*.txt]
-    C --> G[metadata/latest.json]
-    E --> F[TradingView import]
-```
-
 ## 🚀 Download files
 
 Grab the TradingView version for watchlist imports, or the plain ticker file for scripts and spreadsheets.
