@@ -11,8 +11,8 @@ _Not financial advice, just a fun project._
 | SPY | [spy.txt](spy.txt) | ~503 |
 | MDY | [mdy.txt](mdy.txt) | ~402 |
 | SPSM | [spsm.txt](spsm.txt) | ~605 |
-| QQQ | [qqq.txt](qqq.txt) | ~102 |
-| IWM | [iwm.txt](iwm.txt) | ~1965 |
+| QQQ | [qqq.txt](qqq.txt) | ~101 |
+| IWM | [iwm.txt](iwm.txt) | ~1906 |
 
 Each file contains one ticker symbol per line, sorted alphabetically.
 
