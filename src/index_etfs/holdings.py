@@ -187,7 +187,9 @@ def _save_holdings(df: pl.DataFrame, symbol: str, output_dir: Path | None = None
 
     # 📝 Save as simple newline-separated list of tickers
     tickers = df["Ticker"].to_list()
-    (output_dir / f"{symbol}.txt").write_text("\n".join(tickers) + "\n")
+    tickers_dir = output_dir / "tickers"
+    tickers_dir.mkdir(exist_ok=True)
+    (tickers_dir / f"{symbol}.txt").write_text("\n".join(tickers) + "\n")
 
     watchlist_name = WATCHLIST_NAMES.get(symbol)
     if watchlist_name:

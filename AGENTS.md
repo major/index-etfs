@@ -23,14 +23,14 @@ Do not read the whole repo first. Start here:
    - Output: `_save_holdings`, `_tradingview_prefixes`.
 3. **Tests for behavior**: `tests/test_holdings.py`.
 4. **CI/update behavior** only if needed: `.github/workflows/ci.yml`, `.github/workflows/main.yml`.
-5. **Generated data** only when changing data output: root `*.txt` and `watchlists/*.txt`.
+5. **Generated data** only when changing data output: `tickers/*.txt` and `watchlists/*.txt`.
 
 ## Layout
 
 ```text
 src/index_etfs/holdings.py   downloader, cleaners, writers, CLI entry point
 tests/test_holdings.py       mocked unit tests; no network required
-spy.txt mdy.txt ...          plain ticker outputs, one ticker per line
+tickers/*.txt                plain ticker outputs, one ticker per line
 watchlists/*.txt             TradingView outputs, EXCHANGE:TICKER per line
 .github/workflows/ci.yml     lint + tests on PR/push
 .github/workflows/main.yml   scheduled/manual data refresh and commit
@@ -57,5 +57,5 @@ uv run get-holdings          # networked; rewrites ticker/watchlist files
 ## Git hygiene
 
 - Code-only change: update tests, do not refresh generated ticker files unless behavior affects them.
-- Data refresh: commit root `*.txt` with matching `watchlists/*.txt`.
+- Data refresh: commit `tickers/*.txt` with matching `watchlists/*.txt`.
 - Do not commit `.venv/`, caches, coverage files, or temporary downloads.

@@ -126,7 +126,7 @@ def test_save_holdings_creates_txt_file(
     df = _filter_and_clean(sample_ssga_data, "ssga")
     _save_holdings(df, "test", temp_output_dir)
 
-    assert (temp_output_dir / "test.txt").exists()
+    assert (temp_output_dir / "tickers" / "test.txt").exists()
 
 
 def test_save_holdings_writes_sorted_tickers_with_trailing_newline(
@@ -136,7 +136,7 @@ def test_save_holdings_writes_sorted_tickers_with_trailing_newline(
     df = _filter_and_clean(sample_ssga_data, "ssga")
     _save_holdings(df, "test", temp_output_dir)
 
-    assert (temp_output_dir / "test.txt").read_text() == "AAPL\nGOOGL\nMSFT\n"
+    assert (temp_output_dir / "tickers" / "test.txt").read_text() == "AAPL\nGOOGL\nMSFT\n"
 
 
 def test_save_holdings_defaults_to_cwd(
@@ -147,7 +147,7 @@ def test_save_holdings_defaults_to_cwd(
     df = _filter_and_clean(sample_ssga_data, "ssga")
     _save_holdings(df, "test")
 
-    assert (tmp_path / "test.txt").exists()
+    assert (tmp_path / "tickers" / "test.txt").exists()
 
 
 @patch("index_etfs.holdings._tradingview_prefixes")
@@ -445,7 +445,7 @@ def test_save_holdings_creates_directory_if_not_exists(
     _save_holdings(df, "test", output_dir)
 
     assert output_dir.exists()
-    assert (output_dir / "test.txt").exists()
+    assert (output_dir / "tickers" / "test.txt").exists()
 
 
 def test_get_etf_holdings_handles_case_insensitive_symbols() -> None:

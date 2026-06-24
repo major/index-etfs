@@ -22,13 +22,13 @@ TradingView files contain one `EXCHANGE:TICKER` symbol per line, sorted alphabet
 
 | ETF | Tickers | Count |
 |-----|---------|-------|
-| SPY | [spy.txt](spy.txt) | ~503 |
-| MDY | [mdy.txt](mdy.txt) | ~400 |
-| SPSM | [spsm.txt](spsm.txt) | ~605 |
-| QQQ | [qqq.txt](qqq.txt) | ~101 |
-| IWM | [iwm.txt](iwm.txt) | ~1906 |
+| SPY | [spy.txt](tickers/spy.txt) | ~503 |
+| MDY | [mdy.txt](tickers/mdy.txt) | ~400 |
+| SPSM | [spsm.txt](tickers/spsm.txt) | ~605 |
+| QQQ | [qqq.txt](tickers/qqq.txt) | ~101 |
+| IWM | [iwm.txt](tickers/iwm.txt) | ~1906 |
 
-Plain files contain one ticker symbol per line, sorted alphabetically.
+Plain files in `tickers/` contain one ticker symbol per line, sorted alphabetically.
 
 ## Usage
 
