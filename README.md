@@ -18,15 +18,15 @@
 
 Grab the TradingView version for watchlist imports, or the plain ticker file for scripts and spreadsheets.
 
-| Index | ETF | TradingView watchlist | Plain tickers | Approx. count |
-|---|---|---|---|---:|
-| S&P 500 | SPY | [💾 sp500.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp500.txt) | [💾 spy.txt](tickers/spy.txt) | ~503 |
-| Nasdaq-100 | QQQ | [💾 nasdaq100.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/nasdaq100.txt) | [💾 qqq.txt](tickers/qqq.txt) | ~101 |
-| S&P MidCap 400 | MDY | [💾 sp400.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp400.txt) | [💾 mdy.txt](tickers/mdy.txt) | ~400 |
-| S&P SmallCap 600 | SPSM | [💾 sp600.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp600.txt) | [💾 spsm.txt](tickers/spsm.txt) | ~605 |
-| Russell 2000 | IWM | [💾 russell2000.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/russell2000.txt) | [💾 iwm.txt](tickers/iwm.txt) | ~1906 |
+| Index | ETF | TradingView watchlist | Grouped watchlist | Plain tickers | Approx. count |
+|---|---|---|---|---|---:|
+| S&P 500 | SPY | [💾 sp500.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp500.txt) | [💾 sp500-grouped.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp500-grouped.txt) | [💾 spy.txt](tickers/spy.txt) | ~503 |
+| Nasdaq-100 | QQQ | [💾 nasdaq100.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/nasdaq100.txt) | [💾 nasdaq100-grouped.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/nasdaq100-grouped.txt) | [💾 qqq.txt](tickers/qqq.txt) | ~101 |
+| S&P MidCap 400 | MDY | [💾 sp400.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp400.txt) | [💾 sp400-grouped.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp400-grouped.txt) | [💾 mdy.txt](tickers/mdy.txt) | ~400 |
+| S&P SmallCap 600 | SPSM | [💾 sp600.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp600.txt) | [💾 sp600-grouped.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp600-grouped.txt) | [💾 spsm.txt](tickers/spsm.txt) | ~605 |
+| Russell 2000 | IWM | [💾 russell2000.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/russell2000.txt) | [💾 russell2000-grouped.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/russell2000-grouped.txt) | [💾 iwm.txt](tickers/iwm.txt) | ~1906 |
 
-TradingView files contain `###Section` headers grouped by sector/industry plus `EXCHANGE:TICKER` symbols. Plain files contain bare tickers.
+TradingView watchlists contain `EXCHANGE:TICKER` symbols. Grouped files add sector-only `###Section` headers. Plain files contain bare tickers.
 
 ## 🛠️ Run it locally
 

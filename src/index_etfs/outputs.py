@@ -46,7 +46,7 @@ def _scan_tradingview(tickers: list[str]) -> list[dict]:
     """Fetch one TradingView scanner page."""
     payload = {
         "filter": [{"left": "name", "operation": "in_range", "right": tickers}],
-        "columns": ["name", "sector", "industry"],
+        "columns": ["name", "sector"],
         "markets": ["america"],
     }
     request = urllib.request.Request(
@@ -64,7 +64,7 @@ def _scan_tradingview(tickers: list[str]) -> list[dict]:
 
 
 def tradingview_symbols(tickers: list[str], chunk_size: int = 200) -> dict[str, tuple[str, str]]:
-    """Map tickers to TradingView symbols and sector-ish group names."""
+    """Map tickers to TradingView symbols and sector group names."""
     if chunk_size <= 0:
         raise ValueError("chunk_size must be positive")
 
@@ -76,7 +76,7 @@ def tradingview_symbols(tickers: list[str], chunk_size: int = 200) -> dict[str, 
             data = row.get("d", [])
             ticker = data[0] if data else None
             symbol = row.get("s", "")
-            group = next((value for value in data[1:3] if value), "Other")
+            group = data[1] if len(data) > 1 and data[1] else "Other"
             if ticker in chunk and ":" in symbol:
                 symbols.setdefault(ticker, (symbol, group))
 
@@ -84,6 +84,11 @@ def tradingview_symbols(tickers: list[str], chunk_size: int = 200) -> dict[str, 
 
 
 def watchlist_lines(tickers: list[str], symbols: dict[str, tuple[str, str]]) -> list[str]:
+    """Build ungrouped TradingView watchlist lines."""
+    return [symbols.get(ticker, (ticker, "Other"))[0] for ticker in tickers]
+
+
+def grouped_watchlist_lines(tickers: list[str], symbols: dict[str, tuple[str, str]]) -> list[str]:
     """Build TradingView watchlist lines grouped by ### headers."""
     groups: dict[str, list[str]] = {}
     for ticker in tickers:
@@ -104,9 +109,11 @@ def _save_watchlist(tickers: list[str], watchlist_name: str, output_dir: Path) -
     if missing:
         print(f"⚠️  No TradingView metadata for {', '.join(missing)}")
 
+    watchlist_dir = output_dir / "watchlists"
+    _write_lines(watchlist_dir / f"{watchlist_name}.txt", watchlist_lines(tickers, symbols))
     _write_lines(
-        output_dir / "watchlists" / f"{watchlist_name}.txt",
-        watchlist_lines(tickers, symbols),
+        watchlist_dir / f"{watchlist_name}-grouped.txt",
+        grouped_watchlist_lines(tickers, symbols),
     )
 
 

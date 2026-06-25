@@ -12,7 +12,13 @@ import index_etfs.catalog as catalog
 import index_etfs.holdings as holdings
 from index_etfs.catalog import ETFConfig, validate_count
 from index_etfs.holdings import get_etf_holdings
-from index_etfs.outputs import save_holdings, tradingview_symbols, watchlist_lines, write_metadata
+from index_etfs.outputs import (
+    grouped_watchlist_lines,
+    save_holdings,
+    tradingview_symbols,
+    watchlist_lines,
+    write_metadata,
+)
 from index_etfs.sources import (
     FIREFOX_HEADERS,
     filter_and_clean,
@@ -124,14 +130,14 @@ def test_load_holdings_rejects_unknown_provider() -> None:
 @patch(
     "index_etfs.outputs.urllib.request.urlopen",
     return_value=io.BytesIO(
-        b'{"data":[{"s":"NASDAQ:AAPL","d":["AAPL","Technology Services","Consumer Electronics"]}]}'
+        b'{"data":[{"s":"NASDAQ:AAPL","d":["AAPL","Technology Services"]}]}'
     ),
 )
 def test_tradingview_symbols(mock_urlopen: MagicMock) -> None:
     assert tradingview_symbols(["AAPL"]) == {"AAPL": ("NASDAQ:AAPL", "Technology Services")}
     request = mock_urlopen.call_args.args[0]
     assert request.get_header("Content-type") == "application/json"
-    assert json.loads(request.data)["columns"] == ["name", "sector", "industry"]
+    assert json.loads(request.data)["columns"] == ["name", "sector"]
 
 
 def test_tradingview_symbols_rejects_invalid_chunk_size() -> None:
@@ -139,8 +145,15 @@ def test_tradingview_symbols_rejects_invalid_chunk_size() -> None:
         tradingview_symbols(["AAPL"], chunk_size=0)
 
 
-def test_watchlist_lines_groups_by_header() -> None:
+def test_watchlist_lines_are_ungrouped() -> None:
     assert watchlist_lines(
+        ["AAPL", "MSFT", "BRK.B"],
+        {"AAPL": ("NASDAQ:AAPL", "Technology"), "MSFT": ("NASDAQ:MSFT", "Technology")},
+    ) == ["NASDAQ:AAPL", "NASDAQ:MSFT", "BRK.B"]
+
+
+def test_grouped_watchlist_lines_groups_by_header() -> None:
+    assert grouped_watchlist_lines(
         ["AAPL", "MSFT", "BRK.B"],
         {"AAPL": ("NASDAQ:AAPL", "Technology"), "MSFT": ("NASDAQ:MSFT", "Technology")},
     ) == ["###Other", "BRK.B", "###Technology", "NASDAQ:AAPL", "NASDAQ:MSFT"]
@@ -152,7 +165,8 @@ def test_save_holdings_writes_outputs(_mock_symbols: MagicMock, tmp_path: Path) 
     save_holdings(pl.DataFrame({"Ticker": ["TEST"]}), "test", tmp_path)
 
     assert (tmp_path / "tickers" / "spy.txt").read_text() == "AAPL\n"
-    assert (tmp_path / "watchlists" / "sp500.txt").read_text() == "###Technology\nNASDAQ:AAPL\n"
+    assert (tmp_path / "watchlists" / "sp500.txt").read_text() == "NASDAQ:AAPL\n"
+    assert (tmp_path / "watchlists" / "sp500-grouped.txt").read_text() == "###Technology\nNASDAQ:AAPL\n"
     assert (tmp_path / "tickers" / "test.txt").read_text() == "TEST\n"
 
 
