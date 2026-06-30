@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-29T09:39:38Z",
+  "generated_at": "2026-06-30T09:10:40Z",
   "watchlists": {
     "sp500": {
-      "count": 504,
+      "count": 505,
       "expected_count": 503,
       "minimum_count": 453,
       "source": "spy",
@@ -16,14 +16,14 @@
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-mdy.xlsx"
     },
     "sp600": {
-      "count": 604,
+      "count": 605,
       "expected_count": 600,
       "minimum_count": 540,
       "source": "spsm",
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spsm.xlsx"
     },
     "nasdaq100": {
-      "count": 101,
+      "count": 102,
       "expected_count": 100,
       "minimum_count": 90,
       "source": "qqq",
