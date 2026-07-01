@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-30T09:10:40Z",
+  "generated_at": "2026-07-01T09:12:10Z",
   "watchlists": {
     "sp500": {
-      "count": 505,
+      "count": 504,
       "expected_count": 503,
       "minimum_count": 453,
       "source": "spy",
@@ -30,7 +30,7 @@
       "source_url": "https://api.nasdaq.com/api/quote/list-type/nasdaq100"
     },
     "russell2000": {
-      "count": 2022,
+      "count": 2015,
       "expected_count": 2000,
       "minimum_count": 1800,
       "source": "iwm",
