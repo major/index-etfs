@@ -3,6 +3,7 @@ NASDAQ:CTAS
 NASDAQ:PYPL
 NASDAQ:SHOP
 ###Communications
+NASDAQ:SPCX
 NASDAQ:TMUS
 ###Consumer Durables
 NASDAQ:TSLA

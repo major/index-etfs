@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T09:09:42Z",
+  "generated_at": "2026-07-08T08:54:28Z",
   "watchlists": {
     "sp500": {
       "count": 504,
@@ -23,14 +23,14 @@
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spsm.xlsx"
     },
     "nasdaq100": {
-      "count": 102,
+      "count": 103,
       "expected_count": 100,
       "minimum_count": 90,
       "source": "qqq",
       "source_url": "https://api.nasdaq.com/api/quote/list-type/nasdaq100"
     },
     "russell2000": {
-      "count": 1993,
+      "count": 1987,
       "expected_count": 2000,
       "minimum_count": 1800,
       "source": "iwm",
