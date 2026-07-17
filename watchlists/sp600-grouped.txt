@@ -439,7 +439,6 @@ NYSE:WS
 ###Other
 2200963D
 2200964D
-CPRX
 RTYU6
 ###Process Industries
 NYSE:AIN
