@@ -65,6 +65,8 @@ NASDAQ:VRTX
 ###Industrial Services
 NASDAQ:BKR
 NASDAQ:FER
+###Other
+EA
 ###Process Industries
 NASDAQ:LIN
 ###Producer Manufacturing
@@ -90,7 +92,6 @@ NASDAQ:CDNS
 NASDAQ:CRWD
 NASDAQ:CRWV
 NASDAQ:DDOG
-NASDAQ:EA
 NASDAQ:FTNT
 NASDAQ:GOOG
 NASDAQ:GOOGL
