@@ -65,8 +65,6 @@ NASDAQ:VRTX
 ###Industrial Services
 NASDAQ:BKR
 NASDAQ:FER
-###Other
-EA
 ###Process Industries
 NASDAQ:LIN
 ###Producer Manufacturing
