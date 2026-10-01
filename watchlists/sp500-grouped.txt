@@ -347,6 +347,7 @@ NASDAQ:STLD
 NYSE:VMC
 ###Other
 2602335D
+NYSE:VYLR
 ###Process Industries
 NYSE:ADM
 NYSE:ALB
