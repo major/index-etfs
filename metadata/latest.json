@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-10-05T16:47:18Z",
+  "generated_at": "2026-10-06T14:44:10Z",
   "watchlists": {
     "sp500": {
-      "count": 505,
+      "count": 504,
       "expected_count": 503,
       "minimum_count": 453,
       "source": "spy",
@@ -16,7 +16,7 @@
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-mdy.xlsx"
     },
     "sp600": {
-      "count": 606,
+      "count": 607,
       "expected_count": 600,
       "minimum_count": 540,
       "source": "spsm",
