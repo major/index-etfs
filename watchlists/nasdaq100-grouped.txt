@@ -19,7 +19,6 @@ NASDAQ:BKNG
 NASDAQ:CMCSA
 NASDAQ:MAR
 NASDAQ:SBUX
-NASDAQ:WBD
 ###Distribution Services
 NASDAQ:FAST
 ###Electronic Technology
