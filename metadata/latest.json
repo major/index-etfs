@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-10-14T13:18:29Z",
+  "generated_at": "2026-10-15T13:04:00Z",
   "watchlists": {
     "sp500": {
-      "count": 505,
+      "count": 504,
       "expected_count": 503,
       "minimum_count": 453,
       "source": "spy",
