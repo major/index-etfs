@@ -431,7 +431,6 @@ NYSE:WS
 ###Other
 2200963D
 2200964D
-ACA
 RTYZ6
 ###Process Industries
 NYSE:AIN
