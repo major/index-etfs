@@ -37,6 +37,14 @@ uv run get-holdings
 
 That rewrites `tickers/*.txt` and `watchlists/*.txt` from the latest available holdings data.
 
+## Adding an index
+
+- Start with a representative source file and check its terms of use. ETF holdings are proxies for index membership, not official constituent lists. Nasdaq-100 currently uses a direct Nasdaq endpoint rather than QQQ holdings.
+- Add a configuration in `src/index_etfs/catalog.py` with a positive expected count and safe, unique output names. Names such as `foo` and `foo-grouped` collide with generated grouped watchlists and are rejected before a full refresh starts.
+- Reuse a provider only when its format matches: SSGA uses an Excel header at row five, iShares skips nine CSV preamble rows, and Nasdaq expects a Nasdaq-100-specific JSON shape.
+- Check filtering carefully. Current ETF cleanup keeps USD rows, which does not by itself prove that a row is an equity. TradingView lookup supports the America market only.
+- Add a tiny offline fixture and parser test, run `uv run ruff check .` and `uv run pytest`, then check matching ticker, watchlist, and metadata outputs in a separate data refresh.
+
 ## 🔎 Track changes
 
 Want to see index additions and removals? Check the [main branch commits](https://github.com/major/index-etfs/commits/main/) after each refresh.

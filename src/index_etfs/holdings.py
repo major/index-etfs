@@ -4,7 +4,7 @@ from pathlib import Path
 
 import polars as pl
 
-from .catalog import ETF_CONFIGS, validate_count
+from .catalog import ETF_CONFIGS, validate_catalog, validate_count
 from .outputs import save_holdings, write_metadata
 from .sources import filter_and_clean, load_holdings
 
@@ -31,6 +31,7 @@ def get_etf_holdings(
 
 def main() -> None:
     """🚀 Download all ETF holdings."""
+    validate_catalog()
     print("📥 Downloading ETF holdings...")
     output_dir = Path.cwd()
     results = {}
