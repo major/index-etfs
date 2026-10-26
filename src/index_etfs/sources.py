@@ -1,5 +1,6 @@
 """Download and clean holdings data from upstream providers."""
 
+import http.cookiejar
 import io
 import json
 import urllib.request
@@ -26,6 +27,26 @@ def load_ssga_excel(url: str) -> pl.DataFrame:
     """Load SSGA Excel format holdings data."""
     df_dict = pl.read_excel(read_url(url), sheet_id=0, read_options={"header_row": 4})
     return next(iter(df_dict.values())) if isinstance(df_dict, dict) else df_dict
+
+
+def load_vaneck_excel(url: str) -> pl.DataFrame:
+    """Load VanEck workbook stock holdings with trimmed ticker symbols."""
+    cookie_jar = http.cookiejar.CookieJar()
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cookie_jar))
+    request = urllib.request.Request(url, headers=FIREFOX_HEADERS)
+    workbook = io.BytesIO(fetch_bytes(request, opener=opener))
+    df_dict = pl.read_excel(workbook, sheet_id=0, read_options={"header_row": 2})
+    df = next(iter(df_dict.values())) if isinstance(df_dict, dict) else df_dict
+
+    required_columns = {"Ticker", "Asset Class"}
+    missing_columns = sorted(required_columns - set(df.columns))
+    if missing_columns:
+        missing = ", ".join(missing_columns)
+        raise ValueError(f"VanEck workbook is missing required columns: {missing}")
+
+    return df.filter(pl.col("Asset Class") == "Stock").with_columns(
+        pl.col("Ticker").cast(pl.String, strict=False).str.strip_chars()
+    )
 
 
 def load_ishares_csv(url: str) -> pl.DataFrame:
@@ -56,6 +77,7 @@ def load_holdings(config: ETFConfig) -> pl.DataFrame:
     """Load holdings from the configured provider."""
     loaders = {
         "ssga": load_ssga_excel,
+        "vaneck": load_vaneck_excel,
         "ishares": load_ishares_csv,
         "nasdaq": load_nasdaq_json,
     }
@@ -79,6 +101,21 @@ def filter_and_clean(df: pl.DataFrame, provider: Provider) -> pl.DataFrame:
     if provider in ("ssga", "ishares"):
         currency_col = "Local Currency" if provider == "ssga" else "Market Currency"
         df = df.filter((pl.col(currency_col) == "USD") & (pl.col("Ticker") != "-"))
+    elif provider == "vaneck":
+        ticker = pl.col("Ticker")
+        cash_markers = ["--", "-USD CASH-"]
+        foreign_qualified = (
+            ticker.is_not_null()
+            & ticker.str.contains(r"\s")
+            & ~ticker.is_in(cash_markers)
+        )
+        excluded_count = df.filter(foreign_qualified).height
+        if excluded_count > 0:
+            print(
+                f"Warning: excluded {excluded_count} VanEck stock rows outside the "
+                "US-listed subset."
+            )
+        df = df.filter(~foreign_qualified & ~ticker.is_in(cash_markers))
 
     cleaned = df.filter(
         pl.col("Ticker").is_not_null()

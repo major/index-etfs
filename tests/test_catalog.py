@@ -19,6 +19,24 @@ def test_validate_catalog_accepts_current_configuration() -> None:
 
 
 @pytest.mark.parametrize(
+    ("symbol", "watchlist_name"),
+    [("smh", "smh"), ("gdx", "gdx-us")],
+)
+def test_validate_catalog_accepts_vaneck_configs(
+    symbol: str, watchlist_name: str
+) -> None:
+    """Accept VanEck configs, including the scoped GDX watchlist name."""
+    # Arrange
+    config = ETFConfig("https://example.com/data", "vaneck", watchlist_name, 1)
+
+    # Act
+    result = validate_catalog({symbol: config})
+
+    # Assert
+    assert result is None
+
+
+@pytest.mark.parametrize(
     "provider",
     ["unsupported", ""],
 )

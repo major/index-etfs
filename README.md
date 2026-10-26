@@ -24,9 +24,13 @@ Grab the TradingView version for watchlist imports, or the plain ticker file for
 | Nasdaq-100 | QQQ | [💾 nasdaq100.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/nasdaq100.txt) | [💾 nasdaq100-grouped.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/nasdaq100-grouped.txt) | [💾 qqq.txt](tickers/qqq.txt) | ~101 |
 | S&P MidCap 400 | MDY | [💾 sp400.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp400.txt) | [💾 sp400-grouped.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp400-grouped.txt) | [💾 mdy.txt](tickers/mdy.txt) | ~400 |
 | S&P SmallCap 600 | SPSM | [💾 sp600.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp600.txt) | [💾 sp600-grouped.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/sp600-grouped.txt) | [💾 spsm.txt](tickers/spsm.txt) | ~605 |
-| Russell 2000 | IWM | [💾 russell2000.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/russell2000.txt) | [💾 russell2000-grouped.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/russell2000-grouped.txt) | [💾 iwm.txt](tickers/iwm.txt) | ~1906 |
+| Russell 2000 | IWM | [💾 russell2000.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/russell2000.txt) | [💾 russell2000-grouped.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/russell2000-grouped.txt) | [💾 iwm.txt](tickers/iwm.txt) | ~1973 |
+| MVIS US Listed Semiconductor 25 Index | SMH | [💾 smh.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/smh.txt) | [💾 smh-grouped.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/smh-grouped.txt) | [💾 smh.txt](tickers/smh.txt) | ~25 |
+| MarketVector Global Gold Miners Index (US-listed subset) | GDX | [💾 gdx-us.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/gdx-us.txt) | [💾 gdx-us-grouped.txt](https://raw.githubusercontent.com/major/index-etfs/main/watchlists/gdx-us-grouped.txt) | [💾 gdx.txt](tickers/gdx.txt) | ~32 |
 
 TradingView watchlists contain `EXCHANGE:TICKER` symbols. Grouped files add sector-only `###Section` headers. Plain files contain bare tickers.
+
+SMH tracks the MVIS US Listed Semiconductor 25 Index. GDX tracks the MarketVector Global Gold Miners Index, but the files here are only its US-listed subset. In a verified October 23, 2026 snapshot, the GDX workbook had 59 stock rows: 32 unqualified US-listed symbols and 27 foreign-market-qualified symbols. The output excludes those 27 symbols without removing suffixes or creating US aliases. It is not the full global GDX constituent list. The GDX scope is also recorded in `metadata/latest.json` as `scope_note`.
 
 ## 🛠️ Run it locally
 
@@ -51,9 +55,11 @@ Holdings downloads and read-only TradingView requests retry selected transient f
 
 - Start with a representative source file and check its terms of use. ETF holdings are proxies for index membership, not official constituent lists. Nasdaq-100 currently uses a direct Nasdaq endpoint rather than QQQ holdings.
 - Add a configuration in `src/index_etfs/catalog.py` with a positive expected count and safe, unique output names. Names such as `foo` and `foo-grouped` collide with generated grouped watchlists and are rejected before a full refresh starts.
-- Reuse a provider only when its format matches: SSGA uses an Excel header at row five, iShares skips nine CSV preamble rows, and Nasdaq expects a Nasdaq-100-specific JSON shape.
-- Check filtering carefully. Current ETF cleanup keeps USD rows, which does not by itself prove that a row is an equity. TradingView lookup supports the America market only.
+- Reuse a provider only when its format matches: SSGA uses an Excel header at row five, iShares skips nine CSV preamble rows, Nasdaq expects a Nasdaq-100-specific JSON shape, and VanEck uses an Excel header on row three with cookie-enabled downloads.
+- Check filtering carefully. SSGA and iShares cleanup keeps USD rows, which does not by itself prove that a row is an equity. VanEck filters to `Asset Class` = `Stock`; GDX also excludes foreign-market-qualified symbols for its US-listed subset. TradingView lookup supports the America market only.
 - Add a tiny offline fixture and parser test, run `uv run ruff check .` and `uv run pytest`, then check matching ticker, watchlist, and metadata outputs in a separate data refresh.
+
+Provider holdings pages are publicly accessible, but public access does not grant a redistribution license. Check the provider's terms before using or republishing source data.
 
 ## 🔎 Track changes
 

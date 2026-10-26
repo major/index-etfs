@@ -32,7 +32,15 @@ from index_etfs.sources import (
 
 def test_etf_config_registry_keys_preserve_order() -> None:
     """Keep configured ETF symbols and their iteration order stable."""
-    assert list(catalog.ETF_CONFIGS) == ["spy", "mdy", "spsm", "qqq", "iwm"]
+    assert list(catalog.ETF_CONFIGS) == [
+        "spy",
+        "mdy",
+        "spsm",
+        "qqq",
+        "iwm",
+        "smh",
+        "gdx",
+    ]
 
 
 @pytest.mark.parametrize(
@@ -54,6 +62,25 @@ def test_etf_config_registry_keys_preserve_order() -> None:
                 provider="nasdaq",
                 watchlist_name="nasdaq100",
                 expected_count=100,
+            ),
+        ),
+        (
+            "smh",
+            ETFConfig(
+                url="https://www.vaneck.com/us/en/investments/semiconductor-etf-smh/downloads/holdings/",
+                provider="vaneck",
+                watchlist_name="smh",
+                expected_count=25,
+            ),
+        ),
+        (
+            "gdx",
+            ETFConfig(
+                url="https://www.vaneck.com/us/en/investments/gold-miners-etf-gdx/downloads/holdings/",
+                provider="vaneck",
+                watchlist_name="gdx-us",
+                expected_count=32,
+                scope_note="US-listed subset; foreign-market-qualified holdings are excluded.",
             ),
         ),
     ],
@@ -247,6 +274,18 @@ def test_validate_count_rejects_empty_and_tiny_results() -> None:
     with pytest.raises(ValueError, match="expected at least"):
         validate_count("iwm", 1799)
     validate_count("iwm", 1800)
+
+
+@pytest.mark.parametrize(("symbol", "minimum"), [("smh", 23), ("gdx", 29)])
+def test_validate_count_vaneck_minimum_boundary(symbol: str, minimum: int) -> None:
+    """Accept the 90% count threshold and reject the count immediately below."""
+    # Arrange
+    below_minimum = minimum - 1
+
+    # Act / Assert
+    with pytest.raises(ValueError, match=f"expected at least {minimum}"):
+        validate_count(symbol, below_minimum)
+    assert validate_count(symbol, minimum) is None
 
 
 def test_main_fetches_all_before_one_shared_scanner_lookup(
