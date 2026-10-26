@@ -48,6 +48,32 @@ def test_fetch_bytes_sends_request_with_timeout_and_reads_response() -> None:
     response.__exit__.assert_called_once()
 
 
+def test_fetch_bytes_uses_supplied_opener_for_each_retry() -> None:
+    """Reuse a supplied opener while retrying and preserve the original request."""
+    # Arrange
+    request = urllib.request.Request(
+        "https://example.com/holdings",
+        data=b"request body",
+        headers={"X-Test": "request header"},
+    )
+    error, body = _make_http_error(503)
+    response = io.BytesIO(b"holdings")
+    opener = MagicMock()
+    opener.open.side_effect = [error, response]
+
+    # Act
+    with patch("index_etfs.http.time.sleep") as sleep:
+        result = fetch_bytes(request, opener=opener)
+
+    # Assert
+    assert result == b"holdings"
+    assert opener.open.call_args_list == [call(request, timeout=30)] * 2
+    assert request.data == b"request body"
+    assert request.get_header("X-test") == "request header"
+    sleep.assert_called_once_with(1)
+    assert body.closed
+
+
 @pytest.mark.parametrize(
     "error",
     [

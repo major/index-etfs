@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import Literal
 from urllib.parse import urlsplit
 
-Provider = Literal["ssga", "ishares", "nasdaq"]
+Provider = Literal["ssga", "ishares", "nasdaq", "vaneck"]
 
 MIN_EXPECTED_RATIO = 0.9
 
@@ -17,6 +17,7 @@ class ETFConfig:
     provider: Provider
     watchlist_name: str
     expected_count: int
+    scope_note: str | None = None
 
 
 ETF_CONFIGS = frozendict({
@@ -49,6 +50,19 @@ ETF_CONFIGS = frozendict({
         provider="ishares",
         watchlist_name="russell2000",
         expected_count=2000,
+    ),
+    "smh": ETFConfig(
+        url="https://www.vaneck.com/us/en/investments/semiconductor-etf-smh/downloads/holdings/",
+        provider="vaneck",
+        watchlist_name="smh",
+        expected_count=25,
+    ),
+    "gdx": ETFConfig(
+        url="https://www.vaneck.com/us/en/investments/gold-miners-etf-gdx/downloads/holdings/",
+        provider="vaneck",
+        watchlist_name="gdx-us",
+        expected_count=32,
+        scope_note="US-listed subset; foreign-market-qualified holdings are excluded.",
     ),
 })
 
@@ -87,6 +101,7 @@ def validate_catalog(configs: Mapping[str, ETFConfig] | None = None) -> None:
             "ssga",
             "ishares",
             "nasdaq",
+            "vaneck",
         }:
             raise ValueError(f"Unsupported provider {config.provider!r} for {symbol}")
 

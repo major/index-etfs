@@ -35,16 +35,21 @@ def _retry_delay(attempt: int, retry_after: str | None) -> float:
     return min(seconds, MAX_RETRY_AFTER_SECONDS)
 
 
-def fetch_bytes(request: urllib.request.Request) -> bytes:
+def fetch_bytes(
+    request: urllib.request.Request,
+    *,
+    opener: urllib.request.OpenerDirector | None = None,
+) -> bytes:
     """Fetch all response bytes, retrying transient failures up to three times.
 
     Only use this helper with safe, read-only requests because requests, including
     POST requests, may be sent more than once.
     """
+    open_request = urllib.request.urlopen if opener is None else opener.open
     for attempt in range(MAX_ATTEMPTS):
         retry_after = None
         try:
-            with urllib.request.urlopen(request, timeout=30) as response:
+            with open_request(request, timeout=30) as response:
                 return response.read()
         except urllib.error.HTTPError as error:
             if error.code not in RETRYABLE_STATUS_CODES:

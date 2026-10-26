@@ -48,6 +48,7 @@ def write_metadata(
                 "minimum_count": math.ceil(config.expected_count * MIN_EXPECTED_RATIO),
                 "source": symbol,
                 "source_url": config.url,
+                **({"scope_note": config.scope_note} if config.scope_note else {}),
                 **(details or {}).get(symbol, {}),
             }
             for symbol, count in results.items()
