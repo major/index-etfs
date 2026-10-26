@@ -37,6 +37,8 @@ uv run get-holdings
 
 That rewrites `tickers/*.txt` and `watchlists/*.txt` from the latest available holdings data.
 
+Holdings downloads and read-only TradingView requests retry selected transient failures up to three times. Each attempt uses a 30-second socket timeout, with short waits capped at five seconds. This is not a total refresh deadline. Permanent HTTP errors and parsing errors fail without retries.
+
 ## Adding an index
 
 - Start with a representative source file and check its terms of use. ETF holdings are proxies for index membership, not official constituent lists. Nasdaq-100 currently uses a direct Nasdaq endpoint rather than QQQ holdings.

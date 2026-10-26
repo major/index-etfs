@@ -7,6 +7,7 @@ import urllib.request
 import polars as pl
 
 from .catalog import ETFConfig, Provider
+from .http import fetch_bytes
 
 FIREFOX_HEADERS = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0",
@@ -18,8 +19,7 @@ FIREFOX_HEADERS = {
 def read_url(url: str) -> io.BytesIO:
     """Read a URL with browser-ish headers."""
     request = urllib.request.Request(url, headers=FIREFOX_HEADERS)
-    with urllib.request.urlopen(request, timeout=30) as response:
-        return io.BytesIO(response.read())
+    return io.BytesIO(fetch_bytes(request))
 
 
 def load_ssga_excel(url: str) -> pl.DataFrame:
