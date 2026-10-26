@@ -7,8 +7,15 @@ import urllib.request
 
 import polars as pl
 
+from .amplify import load_amplify_json
+from .ark import load_ark_csv
 from .catalog import ETFConfig, Provider
+from .firsttrust import load_firsttrust_html
+from .globalx import load_globalx_csv
 from .http import fetch_bytes
+from .invesco import load_invesco_json
+from .specialty_csv import load_flexshares_csv, load_tema_csv
+from .vanguard import load_vanguard_json
 
 FIREFOX_HEADERS = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0",
@@ -54,10 +61,27 @@ def load_ishares_csv(url: str) -> pl.DataFrame:
     df = pl.read_csv(
         read_url(url),
         skip_rows=9,
-        columns=["Ticker", "Name", "Weight (%)", "Market Currency"],
+        infer_schema=False,
         truncate_ragged_lines=True,
     )
-    return df.rename({"Weight (%)": "Weight"})
+    required_columns = {"Ticker", "Name", "Market Currency"}
+    missing_columns = sorted(required_columns - set(df.columns))
+    if missing_columns:
+        missing = ", ".join(missing_columns)
+        raise ValueError(f"iShares CSV is missing required columns: {missing}")
+
+    weight_column = "Weight (%)" if "Weight (%)" in df.columns else "Market Weight"
+    if weight_column not in df.columns:
+        raise ValueError(
+            "iShares CSV is missing required weight column: Weight (%) or Market Weight"
+        )
+
+    return df.select(
+        "Ticker",
+        "Name",
+        pl.col(weight_column).cast(pl.Float64, strict=False).alias("Weight"),
+        "Market Currency",
+    )
 
 
 def load_nasdaq_json(url: str) -> pl.DataFrame:
@@ -80,6 +104,14 @@ def load_holdings(config: ETFConfig) -> pl.DataFrame:
         "vaneck": load_vaneck_excel,
         "ishares": load_ishares_csv,
         "nasdaq": load_nasdaq_json,
+        "invesco": load_invesco_json,
+        "ark": load_ark_csv,
+        "globalx": load_globalx_csv,
+        "vanguard": load_vanguard_json,
+        "firsttrust": load_firsttrust_html,
+        "flexshares": load_flexshares_csv,
+        "tema": load_tema_csv,
+        "amplify": load_amplify_json,
     }
     try:
         loader = loaders[config.provider]
