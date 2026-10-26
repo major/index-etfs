@@ -8,7 +8,7 @@
   <a href="https://github.com/major/index-etfs/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/major/index-etfs/actions/workflows/ci.yml/badge.svg"></a>
   <a href="https://github.com/major/index-etfs/actions/workflows/data-refresh.yml"><img alt="Data refresh" src="https://github.com/major/index-etfs/actions/workflows/data-refresh.yml/badge.svg"></a>
   <a href="https://codecov.io/gh/major/index-etfs"><img alt="Coverage" src="https://codecov.io/gh/major/index-etfs/graph/badge.svg"></a>
-  <img alt="Python 3.14" src="https://img.shields.io/badge/python-3.14-3776AB?logo=python&logoColor=white">
+  <img alt="Python 3.15" src="https://img.shields.io/badge/python-3.15-3776AB?logo=python&logoColor=white">
   <img alt="Built with uv" src="https://img.shields.io/badge/built%20with-uv-654FF0">
 </p>
 
@@ -29,6 +29,10 @@ Grab the TradingView version for watchlist imports, or the plain ticker file for
 TradingView watchlists contain `EXCHANGE:TICKER` symbols. Grouped files add sector-only `###Section` headers. Plain files contain bare tickers.
 
 ## 🛠️ Run it locally
+
+Requirements: Python 3.15 and `uv`.
+
+Python 3.15's [`frozendict`](https://docs.python.org/3.15/whatsnew/3.15.html#pep-814-add-frozendict-built-in-type) keeps the ETF configuration registry immutable.
 
 ```bash
 uv sync

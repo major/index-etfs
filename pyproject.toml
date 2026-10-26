@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = [{ name = "Major Hayden", email = "major@mhtx.net" }]
 readme = "README.md"
-requires-python = ">=3.14,<3.15"
+requires-python = ">=3.15,<3.16"
 dependencies = [
     "fastexcel>=0.14.0",
     "pandas>=2.3.1",
@@ -37,7 +37,10 @@ addopts = [
     "--cov-fail-under=90",
 ]
 
+[tool.ruff]
+target-version = "py315"
+
 [dependency-groups]
 dev = [
-    "ruff>=0.15.19",
+    "ruff>=0.17.0",
 ]

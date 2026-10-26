@@ -102,9 +102,10 @@ def test_load_nasdaq_json_rejects_missing_or_empty_symbols(payload: bytes, messa
     url = "https://example.com/nasdaq.json"
 
     # Act and assert
-    with patch("index_etfs.sources.read_url", return_value=io.BytesIO(payload)):
-        with pytest.raises(ValueError, match=message):
-            load_nasdaq_json(url)
+    with patch(
+        "index_etfs.sources.read_url", return_value=io.BytesIO(payload)
+    ), pytest.raises(ValueError, match=message):
+        load_nasdaq_json(url)
 
 
 def test_load_nasdaq_json_rejects_invalid_json() -> None:
@@ -113,6 +114,7 @@ def test_load_nasdaq_json_rejects_invalid_json() -> None:
     url = "https://example.com/nasdaq.json"
 
     # Act and assert
-    with patch("index_etfs.sources.read_url", return_value=io.BytesIO(b"not JSON")):
-        with pytest.raises(json.JSONDecodeError):
-            load_nasdaq_json(url)
+    with patch(
+        "index_etfs.sources.read_url", return_value=io.BytesIO(b"not JSON")
+    ), pytest.raises(json.JSONDecodeError):
+        load_nasdaq_json(url)

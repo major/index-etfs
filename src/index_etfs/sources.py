@@ -25,7 +25,7 @@ def read_url(url: str) -> io.BytesIO:
 def load_ssga_excel(url: str) -> pl.DataFrame:
     """Load SSGA Excel format holdings data."""
     df_dict = pl.read_excel(read_url(url), sheet_id=0, read_options={"header_row": 4})
-    return list(df_dict.values())[0] if isinstance(df_dict, dict) else df_dict
+    return next(iter(df_dict.values())) if isinstance(df_dict, dict) else df_dict
 
 
 def load_ishares_csv(url: str) -> pl.DataFrame:

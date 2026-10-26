@@ -4,7 +4,7 @@ import http.client
 import io
 import urllib.error
 import urllib.request
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from email.message import Message
 from email.utils import format_datetime
 from unittest.mock import MagicMock, call, patch
@@ -201,7 +201,7 @@ def test_fetch_bytes_caps_retry_after_http_date() -> None:
     request = urllib.request.Request("https://example.com/holdings")
     headers = Message()
     headers["Retry-After"] = format_datetime(
-        datetime.now(timezone.utc) + timedelta(seconds=30), usegmt=True
+        datetime.now(UTC) + timedelta(seconds=30), usegmt=True
     )
     error, _ = _make_http_error(503, headers)
     response = io.BytesIO(b"holdings")
@@ -223,7 +223,7 @@ def test_fetch_bytes_parses_asctime_retry_after_date_as_utc() -> None:
     # Arrange
     request = urllib.request.Request("https://example.com/holdings")
     headers = Message()
-    headers["Retry-After"] = datetime(2099, 1, 1, tzinfo=timezone.utc).strftime(
+    headers["Retry-After"] = datetime(2099, 1, 1, tzinfo=UTC).strftime(
         "%a %b %d %H:%M:%S %Y"
     )
     error, _ = _make_http_error(503, headers)

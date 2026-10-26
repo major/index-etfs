@@ -8,8 +8,7 @@ from unittest.mock import MagicMock, patch
 import polars as pl
 import pytest
 
-import index_etfs.catalog as catalog
-import index_etfs.holdings as holdings
+from index_etfs import catalog, holdings
 from index_etfs.catalog import ETFConfig, validate_count
 from index_etfs.holdings import get_etf_holdings
 from index_etfs.outputs import (
@@ -28,6 +27,49 @@ from index_etfs.sources import (
     load_ssga_excel,
     read_url,
 )
+
+
+def test_etf_config_registry_keys_preserve_order() -> None:
+    """Keep configured ETF symbols and their iteration order stable."""
+    assert list(catalog.ETF_CONFIGS) == ["spy", "mdy", "spsm", "qqq", "iwm"]
+
+
+@pytest.mark.parametrize(
+    ("symbol", "expected"),
+    [
+        (
+            "spy",
+            ETFConfig(
+                url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
+                provider="ssga",
+                watchlist_name="sp500",
+                expected_count=503,
+            ),
+        ),
+        (
+            "qqq",
+            ETFConfig(
+                url="https://api.nasdaq.com/api/quote/list-type/nasdaq100",
+                provider="nasdaq",
+                watchlist_name="nasdaq100",
+                expected_count=100,
+            ),
+        ),
+    ],
+)
+def test_etf_config_registry_lookup(symbol: str, expected: ETFConfig) -> None:
+    """Keep representative ETF configuration lookups unchanged."""
+    assert catalog.ETF_CONFIGS[symbol] == expected
+
+
+@pytest.mark.parametrize("operation", ["assignment", "deletion"])
+def test_etf_config_registry_rejects_mutation(operation: str) -> None:
+    """Reject item assignment and deletion on the ETF configuration registry."""
+    with pytest.raises(TypeError):
+        if operation == "assignment":
+            catalog.ETF_CONFIGS["spy"] = catalog.ETF_CONFIGS["mdy"]
+        else:
+            del catalog.ETF_CONFIGS["spy"]
 
 
 @pytest.fixture

@@ -6,7 +6,7 @@
 
 Downloads public ETF/index holdings and writes ticker lists for humans and TradingView.
 
-- Python 3.14, `uv`, Polars
+- Python 3.15, `uv`, Polars
 - CLI: `uv run get-holdings`
 - Main code: `src/index_etfs/holdings.py`
 - Tests: `tests/test_holdings.py`, `tests/test_catalog.py`, `tests/test_provider_contracts.py`; small provider fixtures in `tests/fixtures/`.
