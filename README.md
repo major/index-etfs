@@ -41,6 +41,10 @@ uv run get-holdings
 
 That rewrites `tickers/*.txt` and `watchlists/*.txt` from the latest available holdings data.
 
+A full refresh fetches and validates every source, then resolves the combined set of unique tickers through TradingView. Repeated ticker rows are reported and collapsed before count validation. Missing or ambiguous TradingView matches use bare tickers; conflicting sectors use `Other`. Per-index metadata records these lookup issues.
+
+All files are prepared in a temporary directory before publication. Fetch, validation, lookup, or preparation failures leave existing outputs unchanged. Publication replaces individual files with metadata last; it is not crash-atomic, does not roll back replacement failures, and does not coordinate concurrent runs. The single-ETF Python API keeps its existing immediate-write behavior.
+
 Holdings downloads and read-only TradingView requests retry selected transient failures up to three times. Each attempt uses a 30-second socket timeout, with short waits capped at five seconds. This is not a total refresh deadline. Permanent HTTP errors and parsing errors fail without retries.
 
 ## Adding an index

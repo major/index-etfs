@@ -4,11 +4,12 @@ import io
 import json
 from pathlib import Path
 from unittest.mock import MagicMock, patch
+from urllib.request import Request
 
 import polars as pl
 import pytest
 
-from index_etfs import catalog, holdings
+from index_etfs import catalog, holdings, outputs
 from index_etfs.catalog import ETFConfig, validate_count
 from index_etfs.holdings import get_etf_holdings
 from index_etfs.outputs import (
@@ -248,15 +249,48 @@ def test_validate_count_rejects_empty_and_tiny_results() -> None:
     validate_count("iwm", 1800)
 
 
-@patch("index_etfs.holdings.write_metadata")
-@patch("index_etfs.holdings.get_etf_holdings")
-def test_main_downloads_all_configured_etfs(mock_get_holdings: MagicMock, mock_write_metadata: MagicMock) -> None:
-    mock_get_holdings.side_effect = [
-        pl.DataFrame({"Ticker": range(config.expected_count)})
-        for config in catalog.ETF_CONFIGS.values()
-    ]
+def test_main_fetches_all_before_one_shared_scanner_lookup(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The real orchestration cleans all providers before resolving their ticker union."""
+    configs = {
+        "alpha": ETFConfig("https://example.com/alpha", "nasdaq", "alpha", 2),
+        "beta": ETFConfig("https://example.com/beta", "nasdaq", "beta", 2),
+    }
+    monkeypatch.setattr(catalog, "ETF_CONFIGS", configs)
+    monkeypatch.setattr(holdings, "ETF_CONFIGS", configs)
+    monkeypatch.setattr(outputs, "ETF_CONFIGS", configs)
+    events: list[str] = []
+
+    def load(config: ETFConfig) -> pl.DataFrame:
+        """Return mocked source data for one configured ETF."""
+        events.append(f"fetch:{config.watchlist_name}")
+        tickers = ["AAPL", "AAA"] if config.watchlist_name == "alpha" else ["AAPL", "BBB"]
+        return pl.DataFrame({"Ticker": tickers})
+
+    def fetch_scanner(request: Request) -> bytes:
+        """Return scanner rows for the shared union."""
+        events.append("scan")
+        payload = json.loads(request.data)
+        assert payload["filter"][0]["right"] == ["AAA", "AAPL", "BBB"]
+        return json.dumps(
+            {
+                "data": [
+                    {"s": "NASDAQ:AAPL", "d": ["AAPL", "Technology"]},
+                    {"s": "NASDAQ:BBB", "d": ["BBB", "Finance"]},
+                ]
+            }
+        ).encode()
+
+    monkeypatch.setattr(holdings, "load_holdings", load)
+    monkeypatch.setattr("index_etfs.outputs.fetch_bytes", fetch_scanner)
+    monkeypatch.setattr(holdings.Path, "cwd", lambda: tmp_path)
 
     holdings.main()
 
-    assert mock_get_holdings.call_count == len(catalog.ETF_CONFIGS)
-    mock_write_metadata.assert_called_once()
+    assert events == ["fetch:alpha", "fetch:beta", "scan"]
+    assert (tmp_path / "tickers" / "alpha.txt").read_text() == "AAA\nAAPL\n"
+    assert (tmp_path / "tickers" / "beta.txt").read_text() == "AAPL\nBBB\n"
+    assert (tmp_path / "watchlists" / "alpha.txt").read_text() == "AAA\nNASDAQ:AAPL\n"
+    metadata = json.loads((tmp_path / "metadata" / "latest.json").read_text())
+    assert metadata["watchlists"]["alpha"]["count"] == 2

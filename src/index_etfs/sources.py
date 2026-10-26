@@ -67,18 +67,28 @@ def load_holdings(config: ETFConfig) -> pl.DataFrame:
 
 
 def filter_and_clean(df: pl.DataFrame, provider: Provider) -> pl.DataFrame:
-    """Filter provider holdings down to sorted ticker symbols."""
+    """Filter provider holdings down to sorted, unique ticker symbols."""
     if len(df) == 0:
         return df.select("Ticker") if "Ticker" in df.columns else pl.DataFrame({"Ticker": []})
+
+    if "Ticker" not in df.columns:
+        raise ValueError("Holdings data is missing the required 'Ticker' column")
+    if df.schema["Ticker"] != pl.String:
+        raise ValueError(f"Ticker column must have string dtype, got {df.schema['Ticker']}")
 
     if provider in ("ssga", "ishares"):
         currency_col = "Local Currency" if provider == "ssga" else "Market Currency"
         df = df.filter((pl.col(currency_col) == "USD") & (pl.col("Ticker") != "-"))
 
-    return df.filter(
+    cleaned = df.filter(
         pl.col("Ticker").is_not_null()
         & (pl.col("Ticker") != "")
         & (pl.col("Ticker") != "-")
         & ~pl.col("Ticker").str.contains("_", literal=True)
         & ~pl.col("Ticker").str.contains(" ", literal=True)
-    ).select("Ticker").sort("Ticker")
+    ).select("Ticker")
+    duplicate_count = len(cleaned) - cleaned["Ticker"].n_unique()
+    if duplicate_count > 0:
+        print(f"Warning: collapsed {duplicate_count} repeated ticker rows for provider {provider}.")
+
+    return cleaned.unique().sort("Ticker")

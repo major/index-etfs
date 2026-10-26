@@ -38,8 +38,7 @@ def test_load_ssga_excel_parses_real_header_and_cleans_holdings() -> None:
     mock_read_url.assert_called_once_with(url)
     assert holdings.columns == ["Ticker", "Name", "Weight", "Local Currency"]
     assert holdings.row(0) == ("ZETA", "Zeta Inc", 3.25, "USD")
-    # Duplicates remain for now. A future unique-output change should update this contract.
-    assert cleaned["Ticker"].to_list() == ["AAA", "AAA", "BRK/B", "ZETA"]
+    assert cleaned["Ticker"].to_list() == ["AAA", "BRK/B", "ZETA"]
 
 
 def test_load_ishares_csv_parses_after_nine_preamble_rows() -> None:
@@ -58,12 +57,11 @@ def test_load_ishares_csv_parses_after_nine_preamble_rows() -> None:
     mock_read_url.assert_called_once_with(url)
     assert holdings.columns == ["Ticker", "Name", "Weight", "Market Currency"]
     assert holdings.row(0) == ("ZETA", "Zeta Inc", 3.25, "USD")
-    # Duplicates remain for now. A future unique-output change should update this contract.
-    assert cleaned["Ticker"].to_list() == ["AAA", "AAA", "BRK/B", "ZETA"]
+    assert cleaned["Ticker"].to_list() == ["AAA", "BRK/B", "ZETA"]
 
 
 def test_load_nasdaq_json_normalizes_only_provider_symbols() -> None:
-    """Strip Nasdaq symbols and replace slashes without removing duplicates."""
+    """Strip Nasdaq symbols and replace slashes before cleaning holdings."""
     # Arrange
     url = "https://example.com/nasdaq.json"
     fixture = _fixture_stream("nasdaq_symbols.json")
@@ -84,8 +82,7 @@ def test_load_nasdaq_json_normalizes_only_provider_symbols() -> None:
         "WITH SPACE",
         "WITH_UNDERSCORE",
     ]
-    # Duplicates remain for now. A future unique-output change should update this contract.
-    assert cleaned["Ticker"].to_list() == ["AAA", "BRK.B", "BRK.B", "MSFT"]
+    assert cleaned["Ticker"].to_list() == ["AAA", "BRK.B", "MSFT"]
 
 
 @pytest.mark.parametrize(
