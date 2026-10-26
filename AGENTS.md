@@ -31,6 +31,7 @@ Do not read the whole repo first. Start here:
 src/index_etfs/catalog.py    ETF config and count validation
 src/index_etfs/sources.py    downloader, provider parsers, cleaners
 src/index_etfs/http.py       bounded retries for safe, read-only HTTP requests
+src/index_etfs/changes.py    membership diagnostics against published ticker snapshots
 src/index_etfs/outputs.py    ticker, watchlist, and metadata writers
 src/index_etfs/holdings.py   public API and CLI entry point
 tests/test_holdings.py       mocked unit tests; no network required
@@ -56,6 +57,7 @@ uv run get-holdings          # networked; rewrites ticker/watchlist files
 - Prefer `pathlib.Path`, stdlib HTTP, and Polars already used here.
 - Do not add providers or dependencies unless the requested ETF needs them.
 - Tests should mock network/provider reads; avoid live HTTP in unit tests.
+- `tests/test_membership.py` covers change diagnostics; `tests/test_scale.py` runs 15 overlapping synthetic configurations offline.
 - Output files are sorted and newline-terminated.
 - Full refresh staging protects existing files from preparation failures, not crashes or replacement failures. Tests in `tests/test_refresh.py` cover this boundary.
 - TradingView files use section headers and exchange-prefixed symbols when the scanner can resolve them.

@@ -6,6 +6,7 @@ from tempfile import TemporaryDirectory
 import polars as pl
 
 from .catalog import ETF_CONFIGS, validate_catalog, validate_count
+from .changes import compare_membership
 from .outputs import resolve_tradingview, save_holdings, write_metadata
 from .sources import filter_and_clean, load_holdings
 
@@ -66,6 +67,12 @@ def main() -> None:
         results[symbol] = _fetch_holdings(symbol)
         print(f"  ✅ {symbol.upper()} ready ({len(results[symbol])} rows)")
 
+    membership_changes = {
+        symbol: compare_membership(
+            df["Ticker"].to_list(), output_dir / "tickers" / f"{symbol}.txt"
+        )
+        for symbol, df in results.items()
+    }
     tickers = sorted(
         {ticker for df in results.values() for ticker in df["Ticker"].to_list()}
     )
@@ -93,6 +100,7 @@ def main() -> None:
             "ambiguous_tickers": ambiguous,
             "sector_conflict_count": len(sector_conflicts),
             "sector_conflict_tickers": sector_conflicts,
+            "membership_changes": membership_changes[symbol],
         }
     counts = {symbol: len(df) for symbol, df in results.items()}
 

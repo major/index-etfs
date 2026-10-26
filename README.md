@@ -58,3 +58,9 @@ Holdings downloads and read-only TradingView requests retry selected transient f
 ## 🔎 Track changes
 
 Want to see index additions and removals? Check the [main branch commits](https://github.com/major/index-etfs/commits/main/) after each refresh.
+
+Full refreshes also compare unique tickers with the previous `tickers/<symbol>.txt` snapshot. Each watchlist in `metadata/latest.json` includes `membership_changes`: baseline availability, previous count, and sorted additions and removals with their counts. Changes are reported even when the total count stays the same, but they do not block rebalances or prove official index membership.
+
+Missing or empty baselines have `baseline_available: false`, `previous_count: null`, and empty change lists. Empty baselines produce a warning. Preparation failures do not advance the published baseline; publication itself has the per-file limitations described above.
+
+The offline scale test covers 15 overlapping synthetic configurations through the real pipeline with mocked HTTP responses. It does not establish compatibility with 15 real feeds. New index additions still need representative provider fixtures and a separate data refresh.
