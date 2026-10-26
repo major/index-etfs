@@ -40,6 +40,17 @@ def test_etf_config_registry_keys_preserve_order() -> None:
         "iwm",
         "smh",
         "gdx",
+        "xlb",
+        "xlc",
+        "xle",
+        "xlf",
+        "xli",
+        "xlk",
+        "xlp",
+        "xlre",
+        "xlu",
+        "xlv",
+        "xly",
     ]
 
 
@@ -88,6 +99,42 @@ def test_etf_config_registry_keys_preserve_order() -> None:
 def test_etf_config_registry_lookup(symbol: str, expected: ETFConfig) -> None:
     """Keep representative ETF configuration lookups unchanged."""
     assert catalog.ETF_CONFIGS[symbol] == expected
+
+
+@pytest.mark.parametrize(
+    ("symbol", "expected_count"),
+    [
+        ("xlb", 24),
+        ("xlc", 22),
+        ("xle", 21),
+        ("xlf", 76),
+        ("xli", 83),
+        ("xlk", 75),
+        ("xlp", 35),
+        ("xlre", 30),
+        ("xlu", 31),
+        ("xlv", 61),
+        ("xly", 47),
+    ],
+)
+def test_spdr_sector_etf_config(symbol: str, expected_count: int) -> None:
+    """Configure each SPDR sector ETF with its official source and count."""
+    # Arrange
+    expected = ETFConfig(
+        url=(
+            "https://www.ssga.com/us/en/individual/library-content/products/"
+            f"fund-data/etfs/us/holdings-daily-us-en-{symbol}.xlsx"
+        ),
+        provider="ssga",
+        watchlist_name=symbol,
+        expected_count=expected_count,
+    )
+
+    # Act
+    actual = catalog.ETF_CONFIGS[symbol]
+
+    # Assert
+    assert actual == expected
 
 
 @pytest.mark.parametrize("operation", ["assignment", "deletion"])

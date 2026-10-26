@@ -98,9 +98,21 @@ def filter_and_clean(df: pl.DataFrame, provider: Provider) -> pl.DataFrame:
     if df.schema["Ticker"] != pl.String:
         raise ValueError(f"Ticker column must have string dtype, got {df.schema['Ticker']}")
 
-    if provider in ("ssga", "ishares"):
-        currency_col = "Local Currency" if provider == "ssga" else "Market Currency"
-        df = df.filter((pl.col(currency_col) == "USD") & (pl.col("Ticker") != "-"))
+    if provider == "ssga":
+        if "Name" in df.columns:
+            # SSGA labels futures with a trailing month code and two-digit delivery year.
+            futures_contract = (
+                pl.col("Name")
+                .cast(pl.String, strict=False)
+                .str.strip_chars()
+                .str.to_uppercase()
+                .str.contains(r"(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\d{2}$")
+                .fill_null(False)
+            )
+            df = df.filter(~futures_contract)
+        df = df.filter((pl.col("Local Currency") == "USD") & (pl.col("Ticker") != "-"))
+    elif provider == "ishares":
+        df = df.filter((pl.col("Market Currency") == "USD") & (pl.col("Ticker") != "-"))
     elif provider == "vaneck":
         ticker = pl.col("Ticker")
         cash_markers = ["--", "-USD CASH-"]
