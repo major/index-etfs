@@ -142,7 +142,6 @@ def test_load_holdings_dispatches_new_providers(provider: str, loader_name: str)
     config = ETFConfig(
         url=url,
         provider=provider,
-        watchlist_name="test",
         expected_count=1,
     )
     expected = pl.DataFrame({"Ticker": ["AAA"]})

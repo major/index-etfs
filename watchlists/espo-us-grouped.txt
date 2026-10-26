@@ -1,7 +1,0 @@
-###Retail Trade
-NYSE:GME
-###Technology Services
-NASDAQ:NTES
-NYSE:RBLX
-NASDAQ:TTWO
-NYSE:U

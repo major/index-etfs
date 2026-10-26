@@ -12,22 +12,20 @@ def test_validate_catalog_accepts_current_configuration() -> None:
     validate_catalog(
         {
             "safe_name-1": ETFConfig(
-                "https://example.com/data", "ssga", "watch_list-1", 1
+                "https://example.com/data", "ssga", 1
             )
         }
     )
 
 
 @pytest.mark.parametrize(
-    ("symbol", "watchlist_name"),
-    [("smh", "smh"), ("gdx", "gdx-us")],
+    "symbol",
+    ["smh", "gdx"],
 )
-def test_validate_catalog_accepts_vaneck_configs(
-    symbol: str, watchlist_name: str
-) -> None:
-    """Accept VanEck configs, including the scoped GDX watchlist name."""
+def test_validate_catalog_accepts_vaneck_configs(symbol: str) -> None:
+    """Accept valid VanEck provider configs."""
     # Arrange
-    config = ETFConfig("https://example.com/data", "vaneck", watchlist_name, 1)
+    config = ETFConfig("https://example.com/data", "vaneck", 1)
 
     # Act
     result = validate_catalog({symbol: config})
@@ -42,7 +40,7 @@ def test_validate_catalog_accepts_vaneck_configs(
 )
 def test_validate_catalog_rejects_unsupported_provider(provider: str) -> None:
     """Only providers with a loader should be accepted."""
-    config = ETFConfig("https://example.com/data", provider, "safe", 1)  # type: ignore[arg-type]
+    config = ETFConfig("https://example.com/data", provider, 1)  # type: ignore[arg-type]
 
     with pytest.raises(ValueError, match="provider"):
         validate_catalog({"safe": config})
@@ -52,7 +50,7 @@ def test_validate_catalog_rejects_unsupported_provider(provider: str) -> None:
 def test_validate_catalog_rejects_invalid_expected_count(expected_count: object) -> None:
     """Expected row counts must be positive integers, not booleans."""
     config = ETFConfig(
-        "https://example.com/data", "ssga", "safe", expected_count  # type: ignore[arg-type]
+        "https://example.com/data", "ssga", expected_count  # type: ignore[arg-type]
     )
 
     with pytest.raises(ValueError, match="expected_count"):
@@ -65,55 +63,28 @@ def test_validate_catalog_rejects_invalid_expected_count(expected_count: object)
 )
 def test_validate_catalog_rejects_invalid_url(url: str) -> None:
     """Source URLs must use HTTP or HTTPS and include a host."""
-    config = ETFConfig(url, "ssga", "safe", 1)
+    config = ETFConfig(url, "ssga", 1)
 
     with pytest.raises(ValueError, match="URL"):
         validate_catalog({"safe": config})
 
 
 @pytest.mark.parametrize(
-    ("symbol", "watchlist_name"),
+    "symbol",
     [
-        ("", "safe"),
-        ("../escape", "safe"),
-        ("UPPER", "safe"),
-        ("has space", "safe"),
-        ("safe", ""),
-        ("safe", "../escape"),
-        ("safe", "Mixed"),
-        ("safe", "has space"),
-        ("safe", "é"),
+        "",
+        "../escape",
+        "UPPER",
+        "has space",
+        "é",
     ],
 )
-def test_validate_catalog_rejects_unsafe_names(
-    symbol: str, watchlist_name: str
-) -> None:
-    """Catalog and watchlist names must be safe filename components."""
-    config = ETFConfig("https://example.com/data", "ssga", watchlist_name, 1)
+def test_validate_catalog_rejects_unsafe_symbols(symbol: str) -> None:
+    """Catalog symbols must be safe ticker filename components."""
+    config = ETFConfig("https://example.com/data", "ssga", 1)
 
     with pytest.raises(ValueError, match="name"):
         validate_catalog({symbol: config})
-
-
-@pytest.mark.parametrize(
-    "watchlist_names",
-    [
-        ("same", "same"),
-        ("foo", "foo-grouped"),
-        ("foo-grouped", "foo-grouped-grouped"),
-    ],
-)
-def test_validate_catalog_rejects_generated_path_collisions(
-    watchlist_names: tuple[str, str],
-) -> None:
-    """All ticker and watchlist output paths must be unique."""
-    configs = {
-        symbol: ETFConfig("https://example.com/data", "ssga", watchlist_name, 1)
-        for symbol, watchlist_name in zip(("one", "two"), watchlist_names)
-    }
-
-    with pytest.raises(ValueError, match="collision"):
-        validate_catalog(configs)
 
 
 def test_main_rejects_invalid_catalog_before_fetching_or_writing(
@@ -125,7 +96,6 @@ def test_main_rejects_invalid_catalog_before_fetching_or_writing(
     configs["spy"] = ETFConfig(
         config.url,
         "unsupported",
-        config.watchlist_name,
         config.expected_count,
     )  # type: ignore[arg-type]
     monkeypatch.setattr(catalog, "ETF_CONFIGS", frozendict(configs))

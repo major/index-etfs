@@ -1,5 +1,0 @@
-###Non-Energy Minerals
-NYSE:FCX
-AMEX:IE
-NYSE:SCCO
-AMEX:TGB

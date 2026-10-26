@@ -2,9 +2,7 @@
 
 import io
 import json
-import math
 import urllib.request
-from collections import Counter
 from pathlib import Path
 
 import pytest
@@ -16,12 +14,11 @@ from index_etfs.catalog import ETFConfig
 def test_full_refresh_handles_fifteen_overlapping_indexes(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """Refresh 15 configurations from one provider with a 230-ticker, two-batch union."""
+    """Refresh 15 overlapping configurations from one provider with 230 unique tickers."""
     configs = {
         f"index{index:02}": ETFConfig(
             url=f"https://nasdaq.example.test/index/{index:02}",
             provider="nasdaq",
-            watchlist_name=f"index{index:02}",
             expected_count=20,
         )
         for index in range(15)
@@ -47,45 +44,27 @@ def test_full_refresh_handles_fifteen_overlapping_indexes(
     monkeypatch.chdir(tmp_path)
 
     events: list[tuple[str, str]] = []
-    scanner_batches: list[list[str]] = []
 
     def mock_urlopen(
         request: str | urllib.request.Request, timeout: float = 30
     ) -> io.BytesIO:
-        """Return fresh source or scanner JSON at the HTTP boundary."""
+        """Return fresh source JSON at the HTTP boundary."""
         assert timeout == 30
         url = request.full_url if isinstance(request, urllib.request.Request) else request
         method = request.get_method() if isinstance(request, urllib.request.Request) else "GET"
         events.append((method, url))
 
-        if method == "GET":
-            assert url in tickers_by_url
-            payload = {
+        assert method == "GET"
+        assert url in tickers_by_url
+        payload = {
+            "data": {
                 "data": {
-                    "data": {
-                        "rows": [
-                            {"symbol": ticker} for ticker in tickers_by_url[url]
-                        ]
-                    }
+                    "rows": [
+                        {"symbol": ticker} for ticker in tickers_by_url[url]
+                    ]
                 }
             }
-        else:
-            assert method == "POST"
-            assert url == outputs.TRADINGVIEW_SCAN_URL
-            assert isinstance(request, urllib.request.Request)
-            assert request.data is not None
-            request_payload = json.loads(request.data)
-            requested_tickers = request_payload["filter"][0]["right"]
-            scanner_batches.append(requested_tickers)
-            payload = {
-                "data": [
-                    {
-                        "s": f"NASDAQ:{ticker}",
-                        "d": [ticker, "Technology"],
-                    }
-                    for ticker in requested_tickers
-                ]
-            }
+        }
 
         return io.BytesIO(json.dumps(payload).encode("utf-8"))
 
@@ -98,18 +77,8 @@ def test_full_refresh_handles_fifteen_overlapping_indexes(
 
     holdings.main()
 
-    expected_scanner_batches = math.ceil(len(ticker_union) / 200)
-    assert len(scanner_batches) == expected_scanner_batches
-    assert scanner_batches == [
-        ticker_union[start : start + 200]
-        for start in range(0, len(ticker_union), 200)
-    ]
-    assert Counter(ticker for batch in scanner_batches for ticker in batch) == Counter(
-        {ticker: 1 for ticker in ticker_union}
-    )
     assert events == [
-        *(('GET', config.url) for config in configs.values()),
-        *(('POST', outputs.TRADINGVIEW_SCAN_URL) for _ in range(expected_scanner_batches)),
+        ("GET", config.url) for config in configs.values()
     ]
 
     ticker_files = sorted((tmp_path / "tickers").glob("*.txt"))
@@ -121,31 +90,19 @@ def test_full_refresh_handles_fifteen_overlapping_indexes(
         assert ticker_lines == "".join(f"{ticker}\n" for ticker in sorted(tickers))
         assert ticker_lines.endswith("\n")
 
-    watchlist_files = sorted((tmp_path / "watchlists").glob("*.txt"))
-    assert len(watchlist_files) == 30
-    for symbol, tickers in tickers_by_symbol.items():
-        sorted_tickers = sorted(tickers)
-        ordinary = tmp_path / "watchlists" / f"{symbol}.txt"
-        grouped = tmp_path / "watchlists" / f"{symbol}-grouped.txt"
-        assert ordinary.read_text(encoding="utf-8") == "".join(
-            f"NASDAQ:{ticker}\n" for ticker in sorted_tickers
-        )
-        assert grouped.read_text(encoding="utf-8") == "".join(
-            ["###Technology\n", *(f"NASDAQ:{ticker}\n" for ticker in sorted_tickers)]
-        )
+    assert not (tmp_path / "watchlists").exists()
 
     metadata = json.loads(
         (tmp_path / "metadata" / "latest.json").read_text(encoding="utf-8")
     )
-    entries = metadata["watchlists"]
+    entries = metadata["etfs"]
     assert len(entries) == 15
     assert set(entries) == set(configs)
-    for symbol in configs:
+    for symbol, config in configs.items():
         entry = entries[symbol]
         assert entry["count"] == 20
-        assert entry["unresolved_count"] == 0
-        assert entry["ambiguous_count"] == 0
-        assert entry["sector_conflict_count"] == 0
+        assert entry["source"] == symbol
+        assert entry["source_url"] == config.url
         assert entry["membership_changes"] == {
             "baseline_available": False,
             "previous_count": None,
@@ -154,3 +111,11 @@ def test_full_refresh_handles_fifteen_overlapping_indexes(
             "added_tickers": [],
             "removed_tickers": [],
         }
+        assert not {
+            "unresolved_count",
+            "unresolved_tickers",
+            "ambiguous_count",
+            "ambiguous_tickers",
+            "sector_conflict_count",
+            "sector_conflict_tickers",
+        }.intersection(entry)

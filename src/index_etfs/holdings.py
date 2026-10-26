@@ -7,7 +7,7 @@ import polars as pl
 
 from .catalog import ETF_CONFIGS, validate_catalog, validate_count
 from .changes import compare_membership
-from .outputs import resolve_tradingview, save_holdings, write_metadata
+from .outputs import save_holdings, write_metadata
 from .sources import filter_and_clean, load_holdings
 
 
@@ -73,42 +73,17 @@ def main() -> None:
         )
         for symbol, df in results.items()
     }
-    tickers = sorted(
-        {ticker for df in results.values() for ticker in df["Ticker"].to_list()}
-    )
-    print(f"🔎 Resolving TradingView symbols for {len(tickers)} unique tickers...")
-    resolution = resolve_tradingview(tickers)
-
-    tickers_by_symbol = {
-        symbol: set(df["Ticker"].to_list()) for symbol, df in results.items()
+    details = {
+        symbol: {"membership_changes": changes}
+        for symbol, changes in membership_changes.items()
     }
-    details = {}
-    for symbol, etf_tickers in tickers_by_symbol.items():
-        unresolved = [
-            ticker for ticker in resolution.unresolved if ticker in etf_tickers
-        ]
-        ambiguous = [
-            ticker for ticker in resolution.ambiguous if ticker in etf_tickers
-        ]
-        sector_conflicts = [
-            ticker for ticker in resolution.sector_conflicts if ticker in etf_tickers
-        ]
-        details[symbol] = {
-            "unresolved_count": len(unresolved),
-            "unresolved_tickers": unresolved,
-            "ambiguous_count": len(ambiguous),
-            "ambiguous_tickers": ambiguous,
-            "sector_conflict_count": len(sector_conflicts),
-            "sector_conflict_tickers": sector_conflicts,
-            "membership_changes": membership_changes[symbol],
-        }
     counts = {symbol: len(df) for symbol, df in results.items()}
 
     output_dir.mkdir(parents=True, exist_ok=True)
     with TemporaryDirectory(dir=output_dir, prefix=".holdings-") as staging:
         staging_dir = Path(staging)
         for symbol, df in results.items():
-            save_holdings(df, symbol, staging_dir, symbols=resolution.symbols)
+            save_holdings(df, symbol, staging_dir)
         write_metadata(counts, staging_dir, details=details)
         _publish_staged_files(staging_dir, output_dir)
 
