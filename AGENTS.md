@@ -52,11 +52,12 @@ uv run get-holdings          # networked; rewrites ticker/watchlist files
 
 ## Conventions
 
-- Keep the pipeline small: fetch -> parse -> filter -> write.
+- Keep the full refresh small: fetch -> parse -> filter unique tickers -> validate -> resolve union -> stage -> publish metadata last.
 - Prefer `pathlib.Path`, stdlib HTTP, and Polars already used here.
 - Do not add providers or dependencies unless the requested ETF needs them.
 - Tests should mock network/provider reads; avoid live HTTP in unit tests.
 - Output files are sorted and newline-terminated.
+- Full refresh staging protects existing files from preparation failures, not crashes or replacement failures. Tests in `tests/test_refresh.py` cover this boundary.
 - TradingView files use section headers and exchange-prefixed symbols when the scanner can resolve them.
 
 ## Git hygiene

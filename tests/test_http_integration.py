@@ -83,7 +83,7 @@ def test_tradingview_scan_does_not_retry_malformed_json() -> None:
     with (
         patch("index_etfs.http.urllib.request.urlopen", return_value=response) as urlopen,
         patch("index_etfs.http.time.sleep") as sleep,
-        pytest.raises(json.JSONDecodeError),
+        pytest.raises(ValueError, match="Invalid TradingView scanner JSON"),
     ):
         tradingview_symbols(["AAPL"])
 
