@@ -2,8 +2,7 @@
 
 import pytest
 
-import index_etfs.catalog as catalog
-import index_etfs.holdings as holdings
+from index_etfs import catalog, holdings
 from index_etfs.catalog import ETFConfig, validate_catalog
 
 
@@ -103,12 +102,15 @@ def test_main_rejects_invalid_catalog_before_fetching_or_writing(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Main must validate the catalog before any fetch or output operation."""
-    config = catalog.ETF_CONFIGS["spy"]
-    monkeypatch.setitem(
-        catalog.ETF_CONFIGS,
-        "spy",
-        ETFConfig(config.url, "unsupported", config.watchlist_name, config.expected_count),  # type: ignore[arg-type]
-    )
+    configs = dict(catalog.ETF_CONFIGS)
+    config = configs["spy"]
+    configs["spy"] = ETFConfig(
+        config.url,
+        "unsupported",
+        config.watchlist_name,
+        config.expected_count,
+    )  # type: ignore[arg-type]
+    monkeypatch.setattr(catalog, "ETF_CONFIGS", frozendict(configs))
     monkeypatch.setattr(
         holdings,
         "get_etf_holdings",

@@ -1,6 +1,7 @@
 """ETF configuration and validation."""
 
 import math
+from collections.abc import Mapping
 from dataclasses import dataclass
 from typing import Literal
 from urllib.parse import urlsplit
@@ -18,7 +19,7 @@ class ETFConfig:
     expected_count: int
 
 
-ETF_CONFIGS = {
+ETF_CONFIGS = frozendict({
     "spy": ETFConfig(
         url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
         provider="ssga",
@@ -49,10 +50,10 @@ ETF_CONFIGS = {
         watchlist_name="russell2000",
         expected_count=2000,
     ),
-}
+})
 
 
-def validate_catalog(configs: dict[str, ETFConfig] | None = None) -> None:
+def validate_catalog(configs: Mapping[str, ETFConfig] | None = None) -> None:
     """Validate catalog fields and ensure generated output paths are unique."""
     if configs is None:
         configs = ETF_CONFIGS
@@ -60,7 +61,9 @@ def validate_catalog(configs: dict[str, ETFConfig] | None = None) -> None:
     generated_paths = {"metadata/latest.json": "metadata"}
     for symbol, config in configs.items():
         if not isinstance(config, ETFConfig):
-            raise ValueError(f"Invalid ETF config for {symbol!r}")
+            raise ValueError(  # noqa: TRY004  # Catalog validation consistently raises ValueError.
+                f"Invalid ETF config for {symbol!r}"
+            )
 
         for field_name, name in (
             ("symbol", symbol),

@@ -4,7 +4,7 @@ import http.client
 import time
 import urllib.error
 import urllib.request
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from email.utils import parsedate_to_datetime
 
 MAX_ATTEMPTS = 3
@@ -25,8 +25,8 @@ def _retry_delay(attempt: int, retry_after: str | None) -> float:
         try:
             retry_date = parsedate_to_datetime(value)
             if retry_date.tzinfo is None:
-                retry_date = retry_date.replace(tzinfo=timezone.utc)
-            seconds = (retry_date - datetime.now(timezone.utc)).total_seconds()
+                retry_date = retry_date.replace(tzinfo=UTC)
+            seconds = (retry_date - datetime.now(UTC)).total_seconds()
         except (IndexError, OverflowError, TypeError, ValueError):
             return fallback
 
