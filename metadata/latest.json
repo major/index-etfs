@@ -1,40 +1,175 @@
 {
-  "generated_at": "2026-10-26T14:50:45Z",
+  "generated_at": "2026-10-26T16:55:38Z",
   "watchlists": {
     "sp500": {
       "count": 504,
       "expected_count": 503,
       "minimum_count": 453,
       "source": "spy",
-      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx"
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
+      "unresolved_count": 1,
+      "unresolved_tickers": [
+        "2602335D"
+      ],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": true,
+        "previous_count": 504,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
     },
     "sp400": {
       "count": 400,
       "expected_count": 400,
       "minimum_count": 360,
       "source": "mdy",
-      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-mdy.xlsx"
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-mdy.xlsx",
+      "unresolved_count": 0,
+      "unresolved_tickers": [],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": true,
+        "previous_count": 400,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
     },
     "sp600": {
       "count": 605,
       "expected_count": 600,
       "minimum_count": 540,
       "source": "spsm",
-      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spsm.xlsx"
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spsm.xlsx",
+      "unresolved_count": 3,
+      "unresolved_tickers": [
+        "2200963D",
+        "2200964D",
+        "RTYZ6"
+      ],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": true,
+        "previous_count": 605,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
     },
     "nasdaq100": {
       "count": 101,
       "expected_count": 100,
       "minimum_count": 90,
       "source": "qqq",
-      "source_url": "https://api.nasdaq.com/api/quote/list-type/nasdaq100"
+      "source_url": "https://api.nasdaq.com/api/quote/list-type/nasdaq100",
+      "unresolved_count": 0,
+      "unresolved_tickers": [],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": true,
+        "previous_count": 101,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
     },
     "russell2000": {
-      "count": 1974,
+      "count": 1973,
       "expected_count": 2000,
       "minimum_count": 1800,
       "source": "iwm",
-      "source_url": "https://www.blackrock.com/varnish-api/blk-one01-product-data/product-data/api/v1/get-fund-document?appType=PRODUCT_PAGE&appSubType=ISHARES&targetSite=us-ishares&locale=en_US&portfolioId=239710&userType=individual&component=holdings"
+      "source_url": "https://www.blackrock.com/varnish-api/blk-one01-product-data/product-data/api/v1/get-fund-document?appType=PRODUCT_PAGE&appSubType=ISHARES&targetSite=us-ishares&locale=en_US&portfolioId=239710&userType=individual&component=holdings",
+      "unresolved_count": 15,
+      "unresolved_tickers": [
+        "ACA",
+        "ADRO",
+        "AKE",
+        "GTXI",
+        "INH",
+        "MSCO",
+        "MSFUT",
+        "P5N994",
+        "PDLI",
+        "RTYZ6",
+        "SBT",
+        "THRD",
+        "TSE",
+        "WEAV",
+        "XTSLA"
+      ],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": true,
+        "previous_count": 1973,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
+    },
+    "smh": {
+      "count": 25,
+      "expected_count": 25,
+      "minimum_count": 23,
+      "source": "smh",
+      "source_url": "https://www.vaneck.com/us/en/investments/semiconductor-etf-smh/downloads/holdings/",
+      "unresolved_count": 0,
+      "unresolved_tickers": [],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": false,
+        "previous_count": null,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
+    },
+    "gdx-us": {
+      "count": 32,
+      "expected_count": 32,
+      "minimum_count": 29,
+      "source": "gdx",
+      "source_url": "https://www.vaneck.com/us/en/investments/gold-miners-etf-gdx/downloads/holdings/",
+      "scope_note": "US-listed subset; foreign-market-qualified holdings are excluded.",
+      "unresolved_count": 0,
+      "unresolved_tickers": [],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": false,
+        "previous_count": null,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
     }
   }
 }
