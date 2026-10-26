@@ -30,6 +30,7 @@ Do not read the whole repo first. Start here:
 ```text
 src/index_etfs/catalog.py    ETF config and count validation
 src/index_etfs/sources.py    downloader, provider parsers, cleaners
+src/index_etfs/http.py       bounded retries for safe, read-only HTTP requests
 src/index_etfs/outputs.py    ticker, watchlist, and metadata writers
 src/index_etfs/holdings.py   public API and CLI entry point
 tests/test_holdings.py       mocked unit tests; no network required

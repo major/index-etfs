@@ -9,6 +9,7 @@ from pathlib import Path
 import polars as pl
 
 from .catalog import ETF_CONFIGS, MIN_EXPECTED_RATIO
+from .http import fetch_bytes
 from .sources import FIREFOX_HEADERS
 
 TRADINGVIEW_SCAN_URL = "https://scanner.tradingview.com/america/scan"
@@ -59,8 +60,7 @@ def _scan_tradingview(tickers: list[str]) -> list[dict]:
             "Referer": "https://www.tradingview.com/",
         },
     )
-    with urllib.request.urlopen(request, timeout=30) as response:
-        return json.load(response).get("data", [])
+    return json.loads(fetch_bytes(request)).get("data", [])
 
 
 def tradingview_symbols(tickers: list[str], chunk_size: int = 200) -> dict[str, tuple[str, str]]:
