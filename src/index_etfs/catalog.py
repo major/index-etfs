@@ -64,6 +64,72 @@ ETF_CONFIGS = frozendict({
         expected_count=32,
         scope_note="US-listed subset; foreign-market-qualified holdings are excluded.",
     ),
+    "xlb": ETFConfig(
+        url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlb.xlsx",
+        provider="ssga",
+        watchlist_name="xlb",
+        expected_count=24,
+    ),
+    "xlc": ETFConfig(
+        url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlc.xlsx",
+        provider="ssga",
+        watchlist_name="xlc",
+        expected_count=22,
+    ),
+    "xle": ETFConfig(
+        url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xle.xlsx",
+        provider="ssga",
+        watchlist_name="xle",
+        expected_count=21,
+    ),
+    "xlf": ETFConfig(
+        url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlf.xlsx",
+        provider="ssga",
+        watchlist_name="xlf",
+        expected_count=76,
+    ),
+    "xli": ETFConfig(
+        url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xli.xlsx",
+        provider="ssga",
+        watchlist_name="xli",
+        expected_count=83,
+    ),
+    "xlk": ETFConfig(
+        url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlk.xlsx",
+        provider="ssga",
+        watchlist_name="xlk",
+        expected_count=75,
+    ),
+    "xlp": ETFConfig(
+        url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlp.xlsx",
+        provider="ssga",
+        watchlist_name="xlp",
+        expected_count=35,
+    ),
+    "xlre": ETFConfig(
+        url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlre.xlsx",
+        provider="ssga",
+        watchlist_name="xlre",
+        expected_count=30,
+    ),
+    "xlu": ETFConfig(
+        url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlu.xlsx",
+        provider="ssga",
+        watchlist_name="xlu",
+        expected_count=31,
+    ),
+    "xlv": ETFConfig(
+        url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlv.xlsx",
+        provider="ssga",
+        watchlist_name="xlv",
+        expected_count=61,
+    ),
+    "xly": ETFConfig(
+        url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xly.xlsx",
+        provider="ssga",
+        watchlist_name="xly",
+        expected_count=47,
+    ),
 })
 
 

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T16:55:38Z",
+  "generated_at": "2026-10-26T17:47:31Z",
   "watchlists": {
     "sp500": {
       "count": 504,
@@ -46,16 +46,15 @@
       }
     },
     "sp600": {
-      "count": 605,
+      "count": 604,
       "expected_count": 600,
       "minimum_count": 540,
       "source": "spsm",
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spsm.xlsx",
-      "unresolved_count": 3,
+      "unresolved_count": 2,
       "unresolved_tickers": [
         "2200963D",
-        "2200964D",
-        "RTYZ6"
+        "2200964D"
       ],
       "ambiguous_count": 0,
       "ambiguous_tickers": [],
@@ -65,9 +64,11 @@
         "baseline_available": true,
         "previous_count": 605,
         "added_count": 0,
-        "removed_count": 0,
+        "removed_count": 1,
         "added_tickers": [],
-        "removed_tickers": []
+        "removed_tickers": [
+          "RTYZ6"
+        ]
       }
     },
     "nasdaq100": {
@@ -141,8 +142,8 @@
       "sector_conflict_count": 0,
       "sector_conflict_tickers": [],
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 25,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -156,6 +157,239 @@
       "source": "gdx",
       "source_url": "https://www.vaneck.com/us/en/investments/gold-miners-etf-gdx/downloads/holdings/",
       "scope_note": "US-listed subset; foreign-market-qualified holdings are excluded.",
+      "unresolved_count": 0,
+      "unresolved_tickers": [],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": true,
+        "previous_count": 32,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
+    },
+    "xlb": {
+      "count": 24,
+      "expected_count": 24,
+      "minimum_count": 22,
+      "source": "xlb",
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlb.xlsx",
+      "unresolved_count": 0,
+      "unresolved_tickers": [],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": false,
+        "previous_count": null,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
+    },
+    "xlc": {
+      "count": 22,
+      "expected_count": 22,
+      "minimum_count": 20,
+      "source": "xlc",
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlc.xlsx",
+      "unresolved_count": 0,
+      "unresolved_tickers": [],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": false,
+        "previous_count": null,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
+    },
+    "xle": {
+      "count": 21,
+      "expected_count": 21,
+      "minimum_count": 19,
+      "source": "xle",
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xle.xlsx",
+      "unresolved_count": 0,
+      "unresolved_tickers": [],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": false,
+        "previous_count": null,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
+    },
+    "xlf": {
+      "count": 76,
+      "expected_count": 76,
+      "minimum_count": 69,
+      "source": "xlf",
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlf.xlsx",
+      "unresolved_count": 0,
+      "unresolved_tickers": [],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": false,
+        "previous_count": null,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
+    },
+    "xli": {
+      "count": 83,
+      "expected_count": 83,
+      "minimum_count": 75,
+      "source": "xli",
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xli.xlsx",
+      "unresolved_count": 0,
+      "unresolved_tickers": [],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": false,
+        "previous_count": null,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
+    },
+    "xlk": {
+      "count": 75,
+      "expected_count": 75,
+      "minimum_count": 68,
+      "source": "xlk",
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlk.xlsx",
+      "unresolved_count": 0,
+      "unresolved_tickers": [],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": false,
+        "previous_count": null,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
+    },
+    "xlp": {
+      "count": 34,
+      "expected_count": 35,
+      "minimum_count": 32,
+      "source": "xlp",
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlp.xlsx",
+      "unresolved_count": 0,
+      "unresolved_tickers": [],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": false,
+        "previous_count": null,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
+    },
+    "xlre": {
+      "count": 30,
+      "expected_count": 30,
+      "minimum_count": 27,
+      "source": "xlre",
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlre.xlsx",
+      "unresolved_count": 0,
+      "unresolved_tickers": [],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": false,
+        "previous_count": null,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
+    },
+    "xlu": {
+      "count": 31,
+      "expected_count": 31,
+      "minimum_count": 28,
+      "source": "xlu",
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlu.xlsx",
+      "unresolved_count": 0,
+      "unresolved_tickers": [],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": false,
+        "previous_count": null,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
+    },
+    "xlv": {
+      "count": 61,
+      "expected_count": 61,
+      "minimum_count": 55,
+      "source": "xlv",
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlv.xlsx",
+      "unresolved_count": 1,
+      "unresolved_tickers": [
+        "2602335D"
+      ],
+      "ambiguous_count": 0,
+      "ambiguous_tickers": [],
+      "sector_conflict_count": 0,
+      "sector_conflict_tickers": [],
+      "membership_changes": {
+        "baseline_available": false,
+        "previous_count": null,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
+      }
+    },
+    "xly": {
+      "count": 47,
+      "expected_count": 47,
+      "minimum_count": 43,
+      "source": "xly",
+      "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xly.xlsx",
       "unresolved_count": 0,
       "unresolved_tickers": [],
       "ambiguous_count": 0,
