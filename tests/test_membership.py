@@ -129,11 +129,12 @@ def test_compare_membership_propagates_read_errors(
         compare_membership(["AAPL"], baseline_path)
 
 
-def test_main_writes_membership_diagnostics_after_scanner_resolution(
+def test_main_writes_membership_diagnostics_after_fetching(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Include prior membership in metadata during a successful full refresh."""
-    configs = {"alpha": ETFConfig("https://example.com/alpha", "nasdaq", "alpha", 2)}
+    # Arrange
+    configs = {"alpha": ETFConfig("https://example.com/alpha", "nasdaq", 2)}
     monkeypatch.setattr(catalog, "ETF_CONFIGS", configs)
     monkeypatch.setattr(holdings, "ETF_CONFIGS", configs)
     monkeypatch.setattr(outputs, "ETF_CONFIGS", configs)
@@ -147,13 +148,6 @@ def test_main_writes_membership_diagnostics_after_scanner_resolution(
         events.append("fetch")
         return pl.DataFrame({"Ticker": ["KEEP", "NEW"]})
 
-    def fetch_scanner(_request: object) -> bytes:
-        """Return mocked scanner data and record that lookup ran last."""
-        events.append("scan")
-        return json.dumps(
-            {"data": [{"s": "NASDAQ:KEEP", "d": ["KEEP", "Technology"]}]}
-        ).encode()
-
     def compare_and_record(
         tickers: list[str], baseline_path: Path
     ) -> dict[str, bool | int | None | list[str]]:
@@ -163,16 +157,16 @@ def test_main_writes_membership_diagnostics_after_scanner_resolution(
 
     monkeypatch.setattr(holdings, "load_holdings", load)
     monkeypatch.setattr(holdings, "compare_membership", compare_and_record)
-    monkeypatch.setattr("index_etfs.outputs.fetch_bytes", fetch_scanner)
     monkeypatch.setattr(holdings.Path, "cwd", lambda: tmp_path)
 
+    # Act
     holdings.main()
 
+    # Assert
     metadata = json.loads((tmp_path / "metadata" / "latest.json").read_text())
-    details = metadata["watchlists"]["alpha"]
-    assert events == ["fetch", "compare", "scan"]
+    details = metadata["etfs"]["alpha"]
+    assert events == ["fetch", "compare"]
     assert details["count"] == 2
-    assert details["unresolved_tickers"] == ["NEW"]
     assert details["membership_changes"] == {
         "baseline_available": True,
         "previous_count": 2,
@@ -184,11 +178,12 @@ def test_main_writes_membership_diagnostics_after_scanner_resolution(
     assert ticker_path.read_text(encoding="utf-8") == "KEEP\nNEW\n"
 
 
-def test_main_scanner_failure_preserves_tickers_and_metadata(
+def test_main_metadata_write_failure_preserves_tickers_and_metadata(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """Do not publish diagnostic or ticker changes when scanning fails."""
-    configs = {"alpha": ETFConfig("https://example.com/alpha", "nasdaq", "alpha", 2)}
+    """Do not publish ticker changes when staged metadata writing fails."""
+    # Arrange
+    configs = {"alpha": ETFConfig("https://example.com/alpha", "nasdaq", 2)}
     monkeypatch.setattr(catalog, "ETF_CONFIGS", configs)
     monkeypatch.setattr(holdings, "ETF_CONFIGS", configs)
     monkeypatch.setattr(outputs, "ETF_CONFIGS", configs)
@@ -200,20 +195,21 @@ def test_main_scanner_failure_preserves_tickers_and_metadata(
     metadata_path.write_text('{"previous": true}\n', encoding="utf-8")
 
     def load(_config: ETFConfig) -> pl.DataFrame:
-        """Return fresh ticker rows before the scanner fails."""
+        """Return fresh ticker rows before metadata writing fails."""
         return pl.DataFrame({"Ticker": ["KEEP", "NEW"]})
 
-    def fail_scanner(_request: object) -> bytes:
-        """Raise the scanner error that must prevent staged publication."""
-        raise RuntimeError("scanner failed")
+    def fail_metadata_write(*_args: object, **_kwargs: object) -> None:
+        """Raise the metadata error that must prevent staged publication."""
+        raise RuntimeError("metadata write failed")
 
     monkeypatch.setattr(holdings, "load_holdings", load)
-    monkeypatch.setattr("index_etfs.outputs.fetch_bytes", fail_scanner)
+    monkeypatch.setattr(holdings, "write_metadata", fail_metadata_write)
     monkeypatch.setattr(holdings.Path, "cwd", lambda: tmp_path)
     original_tickers = ticker_path.read_text(encoding="utf-8")
     original_metadata = metadata_path.read_text(encoding="utf-8")
 
-    with pytest.raises(RuntimeError, match="scanner failed"):
+    # Act and assert
+    with pytest.raises(RuntimeError, match="metadata write failed"):
         holdings.main()
 
     assert ticker_path.read_text(encoding="utf-8") == original_tickers

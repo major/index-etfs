@@ -24,11 +24,11 @@ def test_gdx_metadata_labels_the_us_listed_subset(tmp_path: Path) -> None:
     """Keep the GDX partial-coverage label in published metadata."""
     write_metadata({"gdx": 32, "smh": 25}, tmp_path)
 
-    watchlists = json.loads((tmp_path / "metadata/latest.json").read_text())["watchlists"]
-    assert watchlists["gdx-us"]["scope_note"] == (
+    etfs = json.loads((tmp_path / "metadata/latest.json").read_text())["etfs"]
+    assert etfs["gdx"]["scope_note"] == (
         "US-listed subset; foreign-market-qualified holdings are excluded."
     )
-    assert "scope_note" not in watchlists["smh"]
+    assert "scope_note" not in etfs["smh"]
 
 
 def test_load_vaneck_excel_parses_stocks_and_excludes_non_us_tickers(
@@ -108,7 +108,7 @@ def test_load_vaneck_excel_uses_a_fresh_cookie_opener_per_download(
 def test_load_holdings_dispatches_to_the_vaneck_loader() -> None:
     """Route VanEck provider configurations through the workbook loader."""
     # Arrange
-    config = ETFConfig(URL, "vaneck", "example", 2)
+    config = ETFConfig(URL, "vaneck", 2)
     with patch("index_etfs.sources.fetch_bytes", return_value=FIXTURE.read_bytes()):
         # Act
         holdings = load_holdings(config)

@@ -4,7 +4,6 @@ import io
 import json
 from pathlib import Path
 from unittest.mock import MagicMock, patch
-from urllib.request import Request
 
 import polars as pl
 import pytest
@@ -12,13 +11,7 @@ import pytest
 from index_etfs import catalog, holdings, outputs
 from index_etfs.catalog import ETFConfig, validate_count
 from index_etfs.holdings import get_etf_holdings
-from index_etfs.outputs import (
-    grouped_watchlist_lines,
-    save_holdings,
-    tradingview_symbols,
-    watchlist_lines,
-    write_metadata,
-)
+from index_etfs.outputs import save_holdings, write_metadata
 from index_etfs.sources import (
     FIREFOX_HEADERS,
     filter_and_clean,
@@ -104,7 +97,6 @@ def test_etf_config_registry_keys_preserve_order() -> None:
             ETFConfig(
                 url="https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
                 provider="ssga",
-                watchlist_name="sp500",
                 expected_count=503,
             ),
         ),
@@ -113,7 +105,6 @@ def test_etf_config_registry_keys_preserve_order() -> None:
             ETFConfig(
                 url="https://api.nasdaq.com/api/quote/list-type/nasdaq100",
                 provider="nasdaq",
-                watchlist_name="nasdaq100",
                 expected_count=100,
             ),
         ),
@@ -122,7 +113,6 @@ def test_etf_config_registry_keys_preserve_order() -> None:
             ETFConfig(
                 url="https://www.vaneck.com/us/en/investments/semiconductor-etf-smh/downloads/holdings/",
                 provider="vaneck",
-                watchlist_name="smh",
                 expected_count=25,
             ),
         ),
@@ -131,7 +121,6 @@ def test_etf_config_registry_keys_preserve_order() -> None:
             ETFConfig(
                 url="https://www.vaneck.com/us/en/investments/gold-miners-etf-gdx/downloads/holdings/",
                 provider="vaneck",
-                watchlist_name="gdx-us",
                 expected_count=32,
                 scope_note="US-listed subset; foreign-market-qualified holdings are excluded.",
             ),
@@ -168,7 +157,6 @@ def test_spdr_sector_etf_config(symbol: str, expected_count: int) -> None:
             f"fund-data/etfs/us/holdings-daily-us-en-{symbol}.xlsx"
         ),
         provider="ssga",
-        watchlist_name=symbol,
         expected_count=expected_count,
     )
 
@@ -283,73 +271,79 @@ def test_read_url_uses_headers(mock_urlopen: MagicMock) -> None:
 
 def test_load_holdings_rejects_unknown_provider() -> None:
     with pytest.raises(ValueError, match="Unknown provider"):
-        load_holdings(ETFConfig("https://example.com/data", "bad", "bad", 1))  # type: ignore[arg-type]
+        load_holdings(ETFConfig("https://example.com/data", "bad", 1))  # type: ignore[arg-type]
 
 
-@patch(
-    "index_etfs.outputs.urllib.request.urlopen",
-    return_value=io.BytesIO(
-        b'{"data":[{"s":"NASDAQ:AAPL","d":["AAPL","Technology Services"]}]}'
-    ),
-)
-def test_tradingview_symbols(mock_urlopen: MagicMock) -> None:
-    assert tradingview_symbols(["AAPL"]) == {"AAPL": ("NASDAQ:AAPL", "Technology Services")}
-    request = mock_urlopen.call_args.args[0]
-    assert request.get_header("Content-type") == "application/json"
-    assert json.loads(request.data)["columns"] == ["name", "sector"]
+def test_save_holdings_writes_ticker_output_without_watchlists(tmp_path: Path) -> None:
+    """Saving ticker output creates no TradingView watchlist files."""
+    # Arrange
+    holdings = pl.DataFrame({"Ticker": ["MSFT", "AAPL"]})
 
+    # Act
+    save_holdings(holdings, "spy", tmp_path)
 
-def test_tradingview_symbols_rejects_invalid_chunk_size() -> None:
-    with pytest.raises(ValueError, match="chunk_size"):
-        tradingview_symbols(["AAPL"], chunk_size=0)
-
-
-def test_watchlist_lines_are_ungrouped() -> None:
-    assert watchlist_lines(
-        ["AAPL", "MSFT", "BRK.B"],
-        {"AAPL": ("NASDAQ:AAPL", "Technology"), "MSFT": ("NASDAQ:MSFT", "Technology")},
-    ) == ["NASDAQ:AAPL", "NASDAQ:MSFT", "BRK.B"]
-
-
-def test_grouped_watchlist_lines_groups_by_header() -> None:
-    assert grouped_watchlist_lines(
-        ["AAPL", "MSFT", "BRK.B"],
-        {"AAPL": ("NASDAQ:AAPL", "Technology"), "MSFT": ("NASDAQ:MSFT", "Technology")},
-    ) == ["###Other", "BRK.B", "###Technology", "NASDAQ:AAPL", "NASDAQ:MSFT"]
-
-
-@patch("index_etfs.outputs.tradingview_symbols", return_value={"AAPL": ("NASDAQ:AAPL", "Technology")})
-def test_save_holdings_writes_outputs(_mock_symbols: MagicMock, tmp_path: Path) -> None:
-    save_holdings(pl.DataFrame({"Ticker": ["AAPL"]}), "spy", tmp_path)
-    save_holdings(pl.DataFrame({"Ticker": ["TEST"]}), "test", tmp_path)
-
-    assert (tmp_path / "tickers" / "spy.txt").read_text() == "AAPL\n"
-    assert (tmp_path / "watchlists" / "sp500.txt").read_text() == "NASDAQ:AAPL\n"
-    assert (tmp_path / "watchlists" / "sp500-grouped.txt").read_text() == "###Technology\nNASDAQ:AAPL\n"
-    assert (tmp_path / "tickers" / "test.txt").read_text() == "TEST\n"
+    # Assert
+    assert (tmp_path / "tickers" / "spy.txt").read_text() == "MSFT\nAAPL\n"
+    assert not (tmp_path / "watchlists").exists()
 
 
 def test_write_metadata(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Write metadata to the requested path or the current working directory."""
+    # Arrange / Act
     write_metadata({"spy": 503}, tmp_path)
     monkeypatch.chdir(tmp_path)
     write_metadata({"qqq": 100})
 
+    # Assert
     metadata = json.loads((tmp_path / "metadata" / "latest.json").read_text())
     assert metadata["generated_at"].endswith("Z")
-    assert metadata["watchlists"]["nasdaq100"]["source_url"] == catalog.ETF_CONFIGS["qqq"].url
+    assert metadata["etfs"]["qqq"]["source_url"] == catalog.ETF_CONFIGS["qqq"].url
 
 
-@patch("index_etfs.outputs.tradingview_symbols", return_value={})
-def test_get_etf_holdings_downloads_cleans_and_writes(_mock_symbols: MagicMock, tmp_path: Path) -> None:
-    rows = [{"symbol": f"TICK{i}"} for i in range(100)]
-    payload = json.dumps({"data": {"data": {"rows": rows}}}).encode()
+def test_write_metadata_includes_membership_changes_by_etf_symbol(
+    tmp_path: Path,
+) -> None:
+    """Metadata details are grouped by ETF and describe membership only."""
+    # Arrange
+    membership_changes = {
+        "baseline_available": True,
+        "previous_count": 2,
+        "added_count": 1,
+        "removed_count": 0,
+        "added_tickers": ["MSFT"],
+        "removed_tickers": [],
+    }
 
-    with patch("index_etfs.sources.read_url", return_value=io.BytesIO(payload)):
-        result = get_etf_holdings("QQQ", tmp_path)
+    # Act
+    write_metadata(
+        {"spy": 503},
+        tmp_path,
+        details={"spy": {"membership_changes": membership_changes}},
+    )
 
-    assert len(result) == 100
-    assert (tmp_path / "tickers" / "qqq.txt").read_text().startswith("TICK0\n")
-    assert (tmp_path / "watchlists" / "nasdaq100.txt").exists()
+    # Assert
+    metadata = json.loads((tmp_path / "metadata" / "latest.json").read_text())
+    assert metadata["etfs"]["spy"]["membership_changes"] == membership_changes
+    assert "unresolved_count" not in metadata["etfs"]["spy"]
+
+
+def test_get_etf_holdings_uses_only_provider_and_writes_tickers(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Fetching one ETF calls its provider and writes only a ticker file."""
+    # Arrange
+    provider_data = pl.DataFrame({"Ticker": [f"TICK{i:03}" for i in range(90)]})
+    load = MagicMock(return_value=provider_data)
+    monkeypatch.setattr(holdings, "load_holdings", load)
+
+    # Act
+    result = get_etf_holdings("QQQ", tmp_path)
+
+    # Assert
+    load.assert_called_once_with(catalog.ETF_CONFIGS["qqq"])
+    assert result.height == 90
+    assert (tmp_path / "tickers" / "qqq.txt").read_text().startswith("TICK000\n")
+    assert not (tmp_path / "watchlists").exists()
 
 
 def test_get_etf_holdings_rejects_unknown_symbol() -> None:
@@ -377,48 +371,52 @@ def test_validate_count_vaneck_minimum_boundary(symbol: str, minimum: int) -> No
     assert validate_count(symbol, minimum) is None
 
 
-def test_main_fetches_all_before_one_shared_scanner_lookup(
+def test_main_fetches_each_etf_and_publishes_membership_diagnostics(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """The real orchestration cleans all providers before resolving their ticker union."""
+    """The full refresh fetches providers and records only membership diagnostics."""
     configs = {
-        "alpha": ETFConfig("https://example.com/alpha", "nasdaq", "alpha", 2),
-        "beta": ETFConfig("https://example.com/beta", "nasdaq", "beta", 2),
+        "alpha": ETFConfig("https://example.com/alpha", "nasdaq", 2),
+        "beta": ETFConfig("https://example.com/beta", "nasdaq", 2),
     }
+    # Arrange
     monkeypatch.setattr(catalog, "ETF_CONFIGS", configs)
     monkeypatch.setattr(holdings, "ETF_CONFIGS", configs)
     monkeypatch.setattr(outputs, "ETF_CONFIGS", configs)
     events: list[str] = []
 
     def load(config: ETFConfig) -> pl.DataFrame:
-        """Return mocked source data for one configured ETF."""
-        events.append(f"fetch:{config.watchlist_name}")
-        tickers = ["AAPL", "AAA"] if config.watchlist_name == "alpha" else ["AAPL", "BBB"]
+        """Return mocked source data for one configured ETF provider."""
+        events.append(f"fetch:{config.url.rsplit('/', 1)[-1]}")
+        tickers = (
+            ["AAPL", "AAA"]
+            if config.url.endswith("alpha")
+            else ["AAPL", "BBB"]
+        )
         return pl.DataFrame({"Ticker": tickers})
 
-    def fetch_scanner(request: Request) -> bytes:
-        """Return scanner rows for the shared union."""
-        events.append("scan")
-        payload = json.loads(request.data)
-        assert payload["filter"][0]["right"] == ["AAA", "AAPL", "BBB"]
-        return json.dumps(
-            {
-                "data": [
-                    {"s": "NASDAQ:AAPL", "d": ["AAPL", "Technology"]},
-                    {"s": "NASDAQ:BBB", "d": ["BBB", "Finance"]},
-                ]
-            }
-        ).encode()
-
     monkeypatch.setattr(holdings, "load_holdings", load)
-    monkeypatch.setattr("index_etfs.outputs.fetch_bytes", fetch_scanner)
     monkeypatch.setattr(holdings.Path, "cwd", lambda: tmp_path)
 
+    # Act
     holdings.main()
 
-    assert events == ["fetch:alpha", "fetch:beta", "scan"]
+    # Assert
+    assert events == ["fetch:alpha", "fetch:beta"]
     assert (tmp_path / "tickers" / "alpha.txt").read_text() == "AAA\nAAPL\n"
     assert (tmp_path / "tickers" / "beta.txt").read_text() == "AAPL\nBBB\n"
-    assert (tmp_path / "watchlists" / "alpha.txt").read_text() == "AAA\nNASDAQ:AAPL\n"
+    assert not (tmp_path / "watchlists").exists()
     metadata = json.loads((tmp_path / "metadata" / "latest.json").read_text())
-    assert metadata["watchlists"]["alpha"]["count"] == 2
+    assert metadata["etfs"]["alpha"]["count"] == 2
+    assert (
+        metadata["etfs"]["alpha"]["membership_changes"]["baseline_available"]
+        is False
+    )
+    assert set(metadata["etfs"]["alpha"]) == {
+        "count",
+        "expected_count",
+        "minimum_count",
+        "source",
+        "source_url",
+        "membership_changes",
+    }
