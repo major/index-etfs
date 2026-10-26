@@ -1,0 +1,30 @@
+{
+  "data": {
+    "data": {
+      "rows": [
+        {
+          "symbol": " MSFT "
+        },
+        {
+          "symbol": " BRK/B "
+        },
+        {
+          "symbol": "AAA"
+        },
+        {
+          "symbol": "BRK/B"
+        },
+        {
+          "symbol": "WITH SPACE"
+        },
+        {
+          "symbol": "WITH_UNDERSCORE"
+        },
+        {
+          "symbol": ""
+        },
+        {}
+      ]
+    }
+  }
+}

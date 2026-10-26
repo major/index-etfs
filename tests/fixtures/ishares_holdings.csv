@@ -1,0 +1,19 @@
+i,S,h,a,r,e,s, ,C,o,r,e, ,S,&,P, ,5,0,0, ,E,T,F, ,h,o,l,d,i,n,g,s
+F,u,n,d,:, ,I,V,V
+A,s, ,o,f,:, ,2,0,2,6,-,1,0,-,2,3
+H,o,l,d,i,n,g,s, ,d,a,t,a
+T,h,i,s, ,f,i,l,e, ,i,n,c,l,u,d,e,s, ,c,a,s,h, ,a,n,d, ,n,o,n,-,U,S,D, ,p,o,s,i,t,i,o,n,s
+W,e,i,g,h,t,s, ,a,r,e, ,s,h,o,w,n, ,a,s, ,a, ,p,e,r,c,e,n,t,a,g,e
+T,i,c,k,e,r, ,v,a,l,u,e,s, ,m,a,y, ,b,e, ,b,l,a,n,k, ,f,o,r, ,c,a,s,h, ,p,o,s,i,t,i,o,n,s
+D,o,w,n,l,o,a,d,e,d, ,f,r,o,m, ,i,S,h,a,r,e,s
+
+Ticker,Name,Weight (%),Market Currency,Asset Class
+ZETA,Zeta Inc,3.25,USD,Equity
+AAA,A Company,1.25,USD,Equity
+AAA,A Company duplicate,0.4,USD,Equity
+-,Cash,0.05,USD,Cash
+,Blank ticker,0.03,USD,Equity
+EUR1,Foreign Company,1.5,EUR,Equity
+BRK/B,Berkshire Hathaway Inc,2.0,USD,Equity
+A B,Invalid ticker with space,0.8,USD,Equity
+A_B,Invalid ticker with underscore,0.7,USD,Equity
