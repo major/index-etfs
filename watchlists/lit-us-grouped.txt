@@ -1,0 +1,11 @@
+###Consumer Durables
+NASDAQ:LCID
+NASDAQ:TSLA
+###Non-Energy Minerals
+NYSE:RIO
+NASDAQ:SGML
+###Process Industries
+NYSE:ALB
+NYSE:SQM
+###Producer Manufacturing
+NYSE:ENS
