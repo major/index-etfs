@@ -1,0 +1,17 @@
+###Industrial Services
+NASDAQ:IMSR
+###Non-Energy Minerals
+NYSE:LEU
+AMEX:UEC
+AMEX:URG
+NASDAQ:UROY
+###Process Industries
+NASDAQ:LTBR
+###Producer Manufacturing
+NASDAQ:NKLR
+NASDAQ:NNE
+NYSE:OKLO
+NYSE:SMR
+NASDAQ:XE
+###Utilities
+NASDAQ:NUCL

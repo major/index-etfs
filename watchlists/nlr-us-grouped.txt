@@ -1,0 +1,19 @@
+###Electronic Technology
+NYSE:BWXT
+###Non-Energy Minerals
+NYSE:CCJ
+AMEX:DNN
+AMEX:ISOU
+NYSE:LEU
+NYSE:NXE
+AMEX:UEC
+AMEX:URG
+AMEX:UUUU
+###Producer Manufacturing
+NASDAQ:NNE
+NYSE:OKLO
+NYSE:SMR
+NASDAQ:XE
+###Utilities
+NASDAQ:CEG
+NYSE:PEG

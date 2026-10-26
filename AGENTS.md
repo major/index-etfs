@@ -9,7 +9,7 @@ Downloads public ETF/index holdings and writes ticker lists for humans and Tradi
 - Python 3.15, `uv`, Polars
 - CLI: `uv run get-holdings`
 - Main code: `src/index_etfs/holdings.py`
-- Tests: `tests/test_holdings.py`, `tests/test_catalog.py`, `tests/test_provider_contracts.py`, `tests/test_vaneck.py`, `tests/test_ssga_sectors.py`; small provider fixtures in `tests/fixtures/`.
+- Tests: `tests/test_holdings.py`, `tests/test_catalog.py`, `tests/test_provider_contracts.py`, `tests/test_vaneck.py`, `tests/test_ssga_sectors.py`, and provider tests including `test_{amplify,ark,firsttrust,globalx,invesco,specialty_csv,vanguard}.py`; fixtures in `tests/fixtures/`.
 
 ## Progressive discovery
 
@@ -18,7 +18,8 @@ Do not read the whole repo first. Start here:
 1. **User-facing shape**: `README.md` for outputs and install/run commands.
 2. **Config/flow**:
    - `src/index_etfs/catalog.py`: `ETF_CONFIGS`, expected counts, validation.
-   - `src/index_etfs/sources.py`: provider loaders and cleanup.
+   - `src/index_etfs/sources.py`: provider registry, loaders, and cleanup.
+   - Provider-specific parsers: `src/index_etfs/{amplify,ark,firsttrust,globalx,invesco,specialty_csv,vanguard}.py`.
    - `src/index_etfs/outputs.py`: ticker/watchlist/metadata writers.
    - `src/index_etfs/holdings.py`: public API and CLI orchestration.
 3. **Tests for behavior**: `tests/test_holdings.py`.
@@ -57,6 +58,7 @@ uv run get-holdings          # networked; rewrites ticker/watchlist files
 - Prefer `pathlib.Path`, stdlib HTTP, and Polars already used here.
 - Do not add providers or dependencies unless the requested ETF needs them.
 - Tests should mock network/provider reads; avoid live HTTP in unit tests.
+- The catalog supports 60 feeds from 12 providers; market-group exclusions are in `catalog.py`.
 - SSGA cleanup excludes names ending in a futures month code and two-digit contract year; this is not exhaustive equity classification.
 - VanEck workbooks use a cookie-enabled download, a third-row header, and an `Asset Class` stock filter. GDX outputs only the US-listed subset, documented by `scope_note` in metadata.
 - `tests/test_membership.py` covers change diagnostics; `tests/test_scale.py` runs 15 overlapping synthetic configurations offline.
