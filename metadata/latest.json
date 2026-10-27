@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T19:55:23Z",
+  "generated_at": "2026-10-27T14:35:39Z",
   "etfs": {
     "spy": {
       "count": 504,
@@ -32,7 +32,7 @@
       }
     },
     "spsm": {
-      "count": 604,
+      "count": 605,
       "expected_count": 600,
       "minimum_count": 540,
       "source": "spsm",
@@ -40,9 +40,11 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 604,
-        "added_count": 0,
+        "added_count": 1,
         "removed_count": 0,
-        "added_tickers": [],
+        "added_tickers": [
+          "MSGRw"
+        ],
         "removed_tickers": []
       }
     },
@@ -62,7 +64,7 @@
       }
     },
     "iwm": {
-      "count": 1973,
+      "count": 1972,
       "expected_count": 2000,
       "minimum_count": 1800,
       "source": "iwm",
@@ -71,9 +73,11 @@
         "baseline_available": true,
         "previous_count": 1973,
         "added_count": 0,
-        "removed_count": 0,
+        "removed_count": 1,
         "added_tickers": [],
-        "removed_tickers": []
+        "removed_tickers": [
+          "WEAV"
+        ]
       }
     },
     "smh": {
@@ -279,8 +283,8 @@
       "source": "xme",
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xme.xlsx",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 38,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -294,8 +298,8 @@
       "source": "xop",
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xop.xlsx",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 51,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -309,8 +313,8 @@
       "source": "kre",
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-kre.xlsx",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 167,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -324,8 +328,8 @@
       "source": "kbe",
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-kbe.xlsx",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 107,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -339,8 +343,8 @@
       "source": "xrt",
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xrt.xlsx",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 74,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -354,8 +358,8 @@
       "source": "xtl",
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xtl.xlsx",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 39,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -370,8 +374,8 @@
       "source_url": "https://www.vaneck.com/us/en/investments/junior-gold-miners-etf-gdxj/downloads/holdings/",
       "scope_note": "US-listed subset; foreign-market-qualified holdings are excluded.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 53,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -386,8 +390,8 @@
       "source_url": "https://www.vaneck.com/us/en/investments/agribusiness-etf-moo/downloads/holdings/",
       "scope_note": "US-listed subset; foreign-market-qualified holdings are excluded.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 20,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -402,8 +406,8 @@
       "source_url": "https://www.vaneck.com/us/en/investments/uranium-nuclear-energy-etf-nlr/downloads/holdings/",
       "scope_note": "US-listed subset; foreign-market-qualified holdings are excluded.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 15,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -417,8 +421,8 @@
       "source": "oih",
       "source_url": "https://www.vaneck.com/us/en/investments/oil-services-etf-oih/downloads/holdings/",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 25,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -433,8 +437,8 @@
       "source_url": "https://www.vaneck.com/us/en/investments/oil-refiners-etf-crak/downloads/holdings/",
       "scope_note": "US-listed subset; foreign-market-qualified holdings are excluded.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 8,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -449,8 +453,8 @@
       "source_url": "https://www.vaneck.com/us/en/investments/video-gaming-esports-etf-espo/downloads/holdings/",
       "scope_note": "US-listed subset; foreign-market-qualified holdings are excluded.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 5,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -465,8 +469,8 @@
       "source_url": "https://www.ishares.com/us/products/239705/SOXX/latest-holdings.csv",
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 34,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -481,8 +485,8 @@
       "source_url": "https://www.ishares.com/us/products/239771/IGV/latest-holdings.csv",
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 111,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -497,8 +501,8 @@
       "source_url": "https://www.ishares.com/us/products/239699/IBB/latest-holdings.csv",
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 242,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -513,8 +517,8 @@
       "source_url": "https://www.ishares.com/us/products/239516/IHI/latest-holdings.csv",
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 54,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -529,8 +533,8 @@
       "source_url": "https://www.ishares.com/us/products/239519/IHE/latest-holdings.csv",
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 57,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -545,8 +549,8 @@
       "source_url": "https://www.ishares.com/us/products/239510/IHF/latest-holdings.csv",
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 65,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -561,8 +565,8 @@
       "source_url": "https://www.ishares.com/us/products/239502/ITA/latest-holdings.csv",
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 52,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -577,8 +581,8 @@
       "source_url": "https://www.ishares.com/us/products/239501/IYT/latest-holdings.csv",
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 48,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -593,8 +597,8 @@
       "source_url": "https://www.ishares.com/us/products/239504/IAI/latest-holdings.csv",
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 39,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -609,8 +613,8 @@
       "source_url": "https://www.globalxetfs.com/funds/aiq/",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 66,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -625,8 +629,8 @@
       "source_url": "https://www.globalxetfs.com/funds/bug/",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 23,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -641,8 +645,8 @@
       "source_url": "https://www.globalxetfs.com/funds/copx/",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 4,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -657,8 +661,8 @@
       "source_url": "https://www.globalxetfs.com/funds/ura/",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 12,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -673,8 +677,8 @@
       "source_url": "https://www.globalxetfs.com/funds/sil/",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 9,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -689,8 +693,8 @@
       "source_url": "https://www.globalxetfs.com/funds/mlpx/",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 29,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -705,8 +709,8 @@
       "source_url": "https://www.globalxetfs.com/funds/lit/",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 7,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -721,8 +725,8 @@
       "source_url": "https://www.globalxetfs.com/funds/pave/",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 98,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -737,8 +741,8 @@
       "source_url": "https://dng-api.invesco.com/cache/v1/accounts/en_US/shareclasses/46137V639/holdings/fund?idType=cusip&productType=ETF",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 70,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -753,8 +757,8 @@
       "source_url": "https://dng-api.invesco.com/cache/v1/accounts/en_US/shareclasses/46138G706/holdings/fund?idType=cusip&productType=ETF",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 24,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -769,8 +773,8 @@
       "source_url": "https://dng-api.invesco.com/cache/v1/accounts/en_US/shareclasses/46138E628/holdings/fund?idType=cusip&productType=ETF",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 24,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -785,8 +789,8 @@
       "source_url": "https://dng-api.invesco.com/cache/v1/accounts/en_US/shareclasses/46137V720/holdings/fund?idType=cusip&productType=ETF",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 30,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -801,8 +805,8 @@
       "source_url": "https://dng-api.invesco.com/cache/v1/accounts/en_US/shareclasses/46137V753/holdings/fund?idType=cusip&productType=ETF",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 30,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -817,8 +821,8 @@
       "source_url": "https://assets.ark-funds.com/fund-documents/funds-etf-csv/ARK_GENOMIC_REVOLUTION_ETF_ARKG_HOLDINGS.csv",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 33,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -833,8 +837,8 @@
       "source_url": "https://assets.ark-funds.com/fund-documents/funds-etf-csv/ARK_BLOCKCHAIN_&_FINTECH_INNOVATION_ETF_ARKF_HOLDINGS.csv",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 33,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -849,8 +853,8 @@
       "source_url": "https://www.ftportfolios.com/Retail/Etf/EtfHoldings.aspx?Ticker=CIBR",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 41,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -865,8 +869,8 @@
       "source_url": "https://www.ftportfolios.com/Retail/Etf/EtfHoldings.aspx?Ticker=GRID",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 41,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -881,8 +885,8 @@
       "source_url": "https://www.flexshares.com/content/dam/ntflexshares/fund/gunr/gunr-holdings.csv",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 107,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -890,18 +894,20 @@
       }
     },
     "volt": {
-      "count": 24,
+      "count": 25,
       "expected_count": 24,
       "minimum_count": 22,
       "source": "volt",
       "source_url": "https://temaetfs.com/volt",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
-        "added_count": 0,
+        "baseline_available": true,
+        "previous_count": 24,
+        "added_count": 1,
         "removed_count": 0,
-        "added_tickers": [],
+        "added_tickers": [
+          "SRE"
+        ],
         "removed_tickers": []
       }
     },
@@ -913,8 +919,8 @@
       "source_url": "https://investor.vanguard.com/irr/funds/profile/VNQ-AdditionalFundData",
       "scope_note": "EQ rows only; underlying fund positions excluded, no lookthrough.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 138,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -929,8 +935,8 @@
       "source_url": "https://firestore.googleapis.com/v1/projects/amplify-etfs-data-feed/databases/%28default%29/documents/funds/BLOK/holdings?pageSize=1&orderBy=__name__%20desc",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification. Listed fund positions are included without lookthrough.",
       "membership_changes": {
-        "baseline_available": false,
-        "previous_count": null,
+        "baseline_available": true,
+        "previous_count": 44,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
