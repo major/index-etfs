@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-27T14:35:39Z",
+  "generated_at": "2026-10-28T14:51:17Z",
   "etfs": {
     "spy": {
       "count": 504,
@@ -39,13 +39,19 @@
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spsm.xlsx",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 604,
-        "added_count": 1,
-        "removed_count": 0,
+        "previous_count": 605,
+        "added_count": 3,
+        "removed_count": 3,
         "added_tickers": [
-          "MSGRw"
+          "HHH",
+          "MSGK",
+          "MSGR"
         ],
-        "removed_tickers": []
+        "removed_tickers": [
+          "ABR",
+          "MSGRw",
+          "MSGS"
+        ]
       }
     },
     "qqq": {
@@ -64,19 +70,20 @@
       }
     },
     "iwm": {
-      "count": 1972,
+      "count": 1970,
       "expected_count": 2000,
       "minimum_count": 1800,
       "source": "iwm",
       "source_url": "https://www.blackrock.com/varnish-api/blk-one01-product-data/product-data/api/v1/get-fund-document?appType=PRODUCT_PAGE&appSubType=ISHARES&targetSite=us-ishares&locale=en_US&portfolioId=239710&userType=individual&component=holdings",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 1973,
+        "previous_count": 1972,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 2,
         "added_tickers": [],
         "removed_tickers": [
-          "WEAV"
+          "ACA",
+          "NATH"
         ]
       }
     },
@@ -702,7 +709,7 @@
       }
     },
     "lit": {
-      "count": 7,
+      "count": 8,
       "expected_count": 7,
       "minimum_count": 7,
       "source": "lit",
@@ -711,9 +718,11 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 7,
-        "added_count": 0,
+        "added_count": 1,
         "removed_count": 0,
-        "added_tickers": [],
+        "added_tickers": [
+          "CRML"
+        ],
         "removed_tickers": []
       }
     },
@@ -782,7 +791,7 @@
       }
     },
     "pej": {
-      "count": 30,
+      "count": 31,
       "expected_count": 30,
       "minimum_count": 27,
       "source": "pej",
@@ -791,10 +800,15 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 30,
-        "added_count": 0,
-        "removed_count": 0,
-        "added_tickers": [],
-        "removed_tickers": []
+        "added_count": 2,
+        "removed_count": 1,
+        "added_tickers": [
+          "MSGK",
+          "MSGR"
+        ],
+        "removed_tickers": [
+          "MSGS"
+        ]
       }
     },
     "pbj": {
@@ -887,14 +901,18 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 107,
-        "added_count": 0,
-        "removed_count": 0,
-        "added_tickers": [],
-        "removed_tickers": []
+        "added_count": 1,
+        "removed_count": 1,
+        "added_tickers": [
+          "HIX6"
+        ],
+        "removed_tickers": [
+          "HIV6"
+        ]
       }
     },
     "volt": {
-      "count": 25,
+      "count": 24,
       "expected_count": 24,
       "minimum_count": 22,
       "source": "volt",
@@ -902,13 +920,13 @@
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 24,
-        "added_count": 1,
-        "removed_count": 0,
-        "added_tickers": [
-          "SRE"
-        ],
-        "removed_tickers": []
+        "previous_count": 25,
+        "added_count": 0,
+        "removed_count": 1,
+        "added_tickers": [],
+        "removed_tickers": [
+          "VRT"
+        ]
       }
     },
     "vnq": {
@@ -928,7 +946,7 @@
       }
     },
     "blok": {
-      "count": 44,
+      "count": 45,
       "expected_count": 44,
       "minimum_count": 40,
       "source": "blok",
@@ -937,9 +955,11 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 44,
-        "added_count": 0,
+        "added_count": 1,
         "removed_count": 0,
-        "added_tickers": [],
+        "added_tickers": [
+          "BLSH"
+        ],
         "removed_tickers": []
       }
     }
