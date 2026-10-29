@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T14:51:17Z",
+  "generated_at": "2026-10-29T14:56:38Z",
   "etfs": {
     "spy": {
       "count": 504,
@@ -32,7 +32,7 @@
       }
     },
     "spsm": {
-      "count": 605,
+      "count": 604,
       "expected_count": 600,
       "minimum_count": 540,
       "source": "spsm",
@@ -40,17 +40,11 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 605,
-        "added_count": 3,
-        "removed_count": 3,
-        "added_tickers": [
-          "HHH",
-          "MSGK",
-          "MSGR"
-        ],
+        "added_count": 0,
+        "removed_count": 1,
+        "added_tickers": [],
         "removed_tickers": [
-          "ABR",
-          "MSGRw",
-          "MSGS"
+          "NAVI"
         ]
       }
     },
@@ -77,14 +71,11 @@
       "source_url": "https://www.blackrock.com/varnish-api/blk-one01-product-data/product-data/api/v1/get-fund-document?appType=PRODUCT_PAGE&appSubType=ISHARES&targetSite=us-ishares&locale=en_US&portfolioId=239710&userType=individual&component=holdings",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 1972,
+        "previous_count": 1970,
         "added_count": 0,
-        "removed_count": 2,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "ACA",
-          "NATH"
-        ]
+        "removed_tickers": []
       }
     },
     "smh": {
@@ -717,12 +708,10 @@
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 7,
-        "added_count": 1,
+        "previous_count": 8,
+        "added_count": 0,
         "removed_count": 0,
-        "added_tickers": [
-          "CRML"
-        ],
+        "added_tickers": [],
         "removed_tickers": []
       }
     },
@@ -799,16 +788,11 @@
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 30,
-        "added_count": 2,
-        "removed_count": 1,
-        "added_tickers": [
-          "MSGK",
-          "MSGR"
-        ],
-        "removed_tickers": [
-          "MSGS"
-        ]
+        "previous_count": 31,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
       }
     },
     "pbj": {
@@ -901,14 +885,10 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 107,
-        "added_count": 1,
-        "removed_count": 1,
-        "added_tickers": [
-          "HIX6"
-        ],
-        "removed_tickers": [
-          "HIV6"
-        ]
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
       }
     },
     "volt": {
@@ -920,13 +900,11 @@
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 25,
+        "previous_count": 24,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "VRT"
-        ]
+        "removed_tickers": []
       }
     },
     "vnq": {
@@ -954,12 +932,10 @@
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification. Listed fund positions are included without lookthrough.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 44,
-        "added_count": 1,
+        "previous_count": 45,
+        "added_count": 0,
         "removed_count": 0,
-        "added_tickers": [
-          "BLSH"
-        ],
+        "added_tickers": [],
         "removed_tickers": []
       }
     }
