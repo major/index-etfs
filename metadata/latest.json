@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T14:56:38Z",
+  "generated_at": "2026-10-30T14:49:37Z",
   "etfs": {
     "spy": {
       "count": 504,
@@ -32,20 +32,20 @@
       }
     },
     "spsm": {
-      "count": 604,
+      "count": 605,
       "expected_count": 600,
       "minimum_count": 540,
       "source": "spsm",
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spsm.xlsx",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 605,
-        "added_count": 0,
-        "removed_count": 1,
-        "added_tickers": [],
-        "removed_tickers": [
+        "previous_count": 604,
+        "added_count": 1,
+        "removed_count": 0,
+        "added_tickers": [
           "NAVI"
-        ]
+        ],
+        "removed_tickers": []
       }
     },
     "qqq": {
@@ -780,7 +780,7 @@
       }
     },
     "pej": {
-      "count": 31,
+      "count": 30,
       "expected_count": 30,
       "minimum_count": 27,
       "source": "pej",
@@ -790,9 +790,11 @@
         "baseline_available": true,
         "previous_count": 31,
         "added_count": 0,
-        "removed_count": 0,
+        "removed_count": 1,
         "added_tickers": [],
-        "removed_tickers": []
+        "removed_tickers": [
+          "MSGR"
+        ]
       }
     },
     "pbj": {
