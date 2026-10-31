@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T14:49:37Z",
+  "generated_at": "2026-10-31T14:17:42Z",
   "etfs": {
     "spy": {
       "count": 504,
@@ -39,12 +39,10 @@
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spsm.xlsx",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 604,
-        "added_count": 1,
+        "previous_count": 605,
+        "added_count": 0,
         "removed_count": 0,
-        "added_tickers": [
-          "NAVI"
-        ],
+        "added_tickers": [],
         "removed_tickers": []
       }
     },
@@ -668,7 +666,7 @@
       }
     },
     "sil": {
-      "count": 9,
+      "count": 11,
       "expected_count": 9,
       "minimum_count": 9,
       "source": "sil",
@@ -677,9 +675,12 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 9,
-        "added_count": 0,
+        "added_count": 2,
         "removed_count": 0,
-        "added_tickers": [],
+        "added_tickers": [
+          "GORO",
+          "SSMR"
+        ],
         "removed_tickers": []
       }
     },
@@ -700,7 +701,7 @@
       }
     },
     "lit": {
-      "count": 8,
+      "count": 7,
       "expected_count": 7,
       "minimum_count": 7,
       "source": "lit",
@@ -710,9 +711,11 @@
         "baseline_available": true,
         "previous_count": 8,
         "added_count": 0,
-        "removed_count": 0,
+        "removed_count": 1,
         "added_tickers": [],
-        "removed_tickers": []
+        "removed_tickers": [
+          "LCID"
+        ]
       }
     },
     "pave": {
@@ -788,13 +791,11 @@
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 31,
+        "previous_count": 30,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "MSGR"
-        ]
+        "removed_tickers": []
       }
     },
     "pbj": {
@@ -887,10 +888,14 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 107,
-        "added_count": 0,
-        "removed_count": 0,
-        "added_tickers": [],
-        "removed_tickers": []
+        "added_count": 1,
+        "removed_count": 1,
+        "added_tickers": [
+          "WISA"
+        ],
+        "removed_tickers": [
+          "UPM"
+        ]
       }
     },
     "volt": {
