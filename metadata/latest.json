@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T14:17:42Z",
+  "generated_at": "2026-11-01T14:44:04Z",
   "etfs": {
     "spy": {
       "count": 504,
@@ -586,7 +586,7 @@
       }
     },
     "iai": {
-      "count": 39,
+      "count": 40,
       "expected_count": 39,
       "minimum_count": 36,
       "source": "iai",
@@ -595,9 +595,11 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 39,
-        "added_count": 0,
+        "added_count": 1,
         "removed_count": 0,
-        "added_tickers": [],
+        "added_tickers": [
+          "RTYZ6"
+        ],
         "removed_tickers": []
       }
     },
@@ -674,13 +676,10 @@
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 9,
-        "added_count": 2,
+        "previous_count": 11,
+        "added_count": 0,
         "removed_count": 0,
-        "added_tickers": [
-          "GORO",
-          "SSMR"
-        ],
+        "added_tickers": [],
         "removed_tickers": []
       }
     },
@@ -709,13 +708,11 @@
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 8,
+        "previous_count": 7,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "LCID"
-        ]
+        "removed_tickers": []
       }
     },
     "pave": {
@@ -888,14 +885,10 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 107,
-        "added_count": 1,
-        "removed_count": 1,
-        "added_tickers": [
-          "WISA"
-        ],
-        "removed_tickers": [
-          "UPM"
-        ]
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
       }
     },
     "volt": {
