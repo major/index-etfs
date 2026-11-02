@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T14:44:04Z",
+  "generated_at": "2026-11-02T17:48:13Z",
   "etfs": {
     "spy": {
       "count": 504,
@@ -32,7 +32,7 @@
       }
     },
     "spsm": {
-      "count": 605,
+      "count": 604,
       "expected_count": 600,
       "minimum_count": 540,
       "source": "spsm",
@@ -40,10 +40,15 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 605,
-        "added_count": 0,
-        "removed_count": 0,
-        "added_tickers": [],
-        "removed_tickers": []
+        "added_count": 1,
+        "removed_count": 2,
+        "added_tickers": [
+          "AVPT"
+        ],
+        "removed_tickers": [
+          "LXP",
+          "RAMP"
+        ]
       }
     },
     "qqq": {
@@ -594,12 +599,10 @@
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 39,
-        "added_count": 1,
+        "previous_count": 40,
+        "added_count": 0,
         "removed_count": 0,
-        "added_tickers": [
-          "RTYZ6"
-        ],
+        "added_tickers": [],
         "removed_tickers": []
       }
     },
