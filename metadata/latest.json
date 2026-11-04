@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-11-03T15:48:42Z",
+  "generated_at": "2026-11-04T15:57:27Z",
   "etfs": {
     "spy": {
-      "count": 503,
+      "count": 504,
       "expected_count": 503,
       "minimum_count": 453,
       "source": "spy",
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 504,
-        "added_count": 0,
-        "removed_count": 1,
-        "added_tickers": [],
-        "removed_tickers": [
-          "KVUE"
-        ]
+        "previous_count": 503,
+        "added_count": 1,
+        "removed_count": 0,
+        "added_tickers": [
+          "OKTA"
+        ],
+        "removed_tickers": []
       }
     },
     "mdy": {
@@ -34,7 +34,7 @@
       }
     },
     "spsm": {
-      "count": 604,
+      "count": 605,
       "expected_count": 600,
       "minimum_count": 540,
       "source": "spsm",
@@ -42,13 +42,16 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 604,
-        "added_count": 1,
-        "removed_count": 1,
+        "added_count": 3,
+        "removed_count": 2,
         "added_tickers": [
-          "HURN"
+          "LOAR",
+          "MGRC",
+          "SUPN"
         ],
         "removed_tickers": [
-          "SUPN"
+          "GKOS",
+          "INDV"
         ]
       }
     },
@@ -75,18 +78,14 @@
       "source_url": "https://www.blackrock.com/varnish-api/blk-one01-product-data/product-data/api/v1/get-fund-document?appType=PRODUCT_PAGE&appSubType=ISHARES&targetSite=us-ishares&locale=en_US&portfolioId=239710&userType=individual&component=holdings",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 1970,
+        "previous_count": 1966,
         "added_count": 1,
-        "removed_count": 5,
+        "removed_count": 1,
         "added_tickers": [
-          "CASK"
+          "SUPN"
         ],
         "removed_tickers": [
-          "CBZ",
-          "LXP",
-          "MGPI",
-          "RAMP",
-          "SUPN"
+          "INDV"
         ]
       }
     },
@@ -197,7 +196,7 @@
       }
     },
     "xlk": {
-      "count": 75,
+      "count": 76,
       "expected_count": 75,
       "minimum_count": 68,
       "source": "xlk",
@@ -205,9 +204,11 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 75,
-        "added_count": 0,
+        "added_count": 1,
         "removed_count": 0,
-        "added_tickers": [],
+        "added_tickers": [
+          "OKTA"
+        ],
         "removed_tickers": []
       }
     },
@@ -219,13 +220,11 @@
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlp.xlsx",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 34,
+        "previous_count": 33,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "KVUE"
-        ]
+        "removed_tickers": []
       }
     },
     "xlre": {
@@ -498,13 +497,11 @@
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 111,
+        "previous_count": 110,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "RAMP"
-        ]
+        "removed_tickers": []
       }
     },
     "ibb": {
@@ -548,12 +545,14 @@
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 57,
-        "added_count": 0,
+        "previous_count": 56,
+        "added_count": 1,
         "removed_count": 1,
-        "added_tickers": [],
-        "removed_tickers": [
+        "added_tickers": [
           "SUPN"
+        ],
+        "removed_tickers": [
+          "INDV"
         ]
       }
     },
@@ -902,17 +901,10 @@
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 107,
-        "added_count": 6,
+        "previous_count": 113,
+        "added_count": 0,
         "removed_count": 0,
-        "added_tickers": [
-          "GMKN",
-          "LKOH",
-          "NVTK",
-          "PHOR",
-          "ROSN",
-          "UPM"
-        ],
+        "added_tickers": [],
         "removed_tickers": []
       }
     },
