@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T15:57:27Z",
+  "generated_at": "2026-11-05T16:08:33Z",
   "etfs": {
     "spy": {
       "count": 504,
@@ -9,12 +9,10 @@
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 503,
-        "added_count": 1,
+        "previous_count": 504,
+        "added_count": 0,
         "removed_count": 0,
-        "added_tickers": [
-          "OKTA"
-        ],
+        "added_tickers": [],
         "removed_tickers": []
       }
     },
@@ -27,10 +25,14 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 400,
-        "added_count": 0,
-        "removed_count": 0,
-        "added_tickers": [],
-        "removed_tickers": []
+        "added_count": 1,
+        "removed_count": 1,
+        "added_tickers": [
+          "GKOS"
+        ],
+        "removed_tickers": [
+          "OKTA"
+        ]
       }
     },
     "spsm": {
@@ -41,18 +43,11 @@
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spsm.xlsx",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 604,
-        "added_count": 3,
-        "removed_count": 2,
-        "added_tickers": [
-          "LOAR",
-          "MGRC",
-          "SUPN"
-        ],
-        "removed_tickers": [
-          "GKOS",
-          "INDV"
-        ]
+        "previous_count": 605,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
       }
     },
     "qqq": {
@@ -82,10 +77,10 @@
         "added_count": 1,
         "removed_count": 1,
         "added_tickers": [
-          "SUPN"
+          "RGEN"
         ],
         "removed_tickers": [
-          "INDV"
+          "KPTI"
         ]
       }
     },
@@ -203,12 +198,10 @@
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlk.xlsx",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 75,
-        "added_count": 1,
+        "previous_count": 76,
+        "added_count": 0,
         "removed_count": 0,
-        "added_tickers": [
-          "OKTA"
-        ],
+        "added_tickers": [],
         "removed_tickers": []
       }
     },
@@ -546,14 +539,10 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 56,
-        "added_count": 1,
-        "removed_count": 1,
-        "added_tickers": [
-          "SUPN"
-        ],
-        "removed_tickers": [
-          "INDV"
-        ]
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
       }
     },
     "ihf": {
@@ -893,7 +882,7 @@
       }
     },
     "gunr": {
-      "count": 113,
+      "count": 112,
       "expected_count": 107,
       "minimum_count": 97,
       "source": "gunr",
@@ -903,9 +892,11 @@
         "baseline_available": true,
         "previous_count": 113,
         "added_count": 0,
-        "removed_count": 0,
+        "removed_count": 1,
         "added_tickers": [],
-        "removed_tickers": []
+        "removed_tickers": [
+          "WISA"
+        ]
       }
     },
     "volt": {
