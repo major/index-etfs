@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T16:08:33Z",
+  "generated_at": "2026-11-06T15:39:20Z",
   "etfs": {
     "spy": {
       "count": 504,
@@ -25,14 +25,10 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 400,
-        "added_count": 1,
-        "removed_count": 1,
-        "added_tickers": [
-          "GKOS"
-        ],
-        "removed_tickers": [
-          "OKTA"
-        ]
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
       }
     },
     "spsm": {
@@ -66,7 +62,7 @@
       }
     },
     "iwm": {
-      "count": 1966,
+      "count": 1965,
       "expected_count": 2000,
       "minimum_count": 1800,
       "source": "iwm",
@@ -74,13 +70,11 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 1966,
-        "added_count": 1,
+        "added_count": 0,
         "removed_count": 1,
-        "added_tickers": [
-          "RGEN"
-        ],
+        "added_tickers": [],
         "removed_tickers": [
-          "KPTI"
+          "RGEN"
         ]
       }
     },
@@ -890,13 +884,11 @@
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 113,
+        "previous_count": 112,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "WISA"
-        ]
+        "removed_tickers": []
       }
     },
     "volt": {
