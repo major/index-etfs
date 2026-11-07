@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-06T15:39:20Z",
+  "generated_at": "2026-11-07T14:40:20Z",
   "etfs": {
     "spy": {
       "count": 504,
@@ -69,13 +69,11 @@
       "source_url": "https://www.blackrock.com/varnish-api/blk-one01-product-data/product-data/api/v1/get-fund-document?appType=PRODUCT_PAGE&appSubType=ISHARES&targetSite=us-ishares&locale=en_US&portfolioId=239710&userType=individual&component=holdings",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 1966,
+        "previous_count": 1965,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "RGEN"
-        ]
+        "removed_tickers": []
       }
     },
     "smh": {
@@ -924,7 +922,7 @@
       }
     },
     "blok": {
-      "count": 45,
+      "count": 44,
       "expected_count": 44,
       "minimum_count": 40,
       "source": "blok",
@@ -934,9 +932,11 @@
         "baseline_available": true,
         "previous_count": 45,
         "added_count": 0,
-        "removed_count": 0,
+        "removed_count": 1,
         "added_tickers": [],
-        "removed_tickers": []
+        "removed_tickers": [
+          "IREN"
+        ]
       }
     }
   }
