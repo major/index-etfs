@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T14:46:09Z",
+  "generated_at": "2026-11-12T16:34:20Z",
   "etfs": {
     "spy": {
       "count": 504,
@@ -25,10 +25,16 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 400,
-        "added_count": 0,
-        "removed_count": 0,
-        "added_tickers": [],
-        "removed_tickers": []
+        "added_count": 2,
+        "removed_count": 2,
+        "added_tickers": [
+          "FOXA",
+          "TXCP"
+        ],
+        "removed_tickers": [
+          "ROKU",
+          "TCBI"
+        ]
       }
     },
     "spsm": {
@@ -70,10 +76,18 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 1965,
-        "added_count": 0,
-        "removed_count": 0,
-        "added_tickers": [],
-        "removed_tickers": []
+        "added_count": 3,
+        "removed_count": 3,
+        "added_tickers": [
+          "2200964D",
+          "QUIT",
+          "TXCP"
+        ],
+        "removed_tickers": [
+          "ACHV",
+          "BWMN",
+          "TCBI"
+        ]
       }
     },
     "smh": {
@@ -311,10 +325,14 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 167,
-        "added_count": 0,
-        "removed_count": 0,
-        "added_tickers": [],
-        "removed_tickers": []
+        "added_count": 1,
+        "removed_count": 1,
+        "added_tickers": [
+          "TXCP"
+        ],
+        "removed_tickers": [
+          "TCBI"
+        ]
       }
     },
     "kbe": {
@@ -326,10 +344,14 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 107,
-        "added_count": 0,
-        "removed_count": 0,
-        "added_tickers": [],
-        "removed_tickers": []
+        "added_count": 1,
+        "removed_count": 1,
+        "added_tickers": [
+          "TXCP"
+        ],
+        "removed_tickers": [
+          "TCBI"
+        ]
       }
     },
     "xrt": {
@@ -739,10 +761,14 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 70,
-        "added_count": 0,
-        "removed_count": 0,
-        "added_tickers": [],
-        "removed_tickers": []
+        "added_count": 1,
+        "removed_count": 1,
+        "added_tickers": [
+          "FOXA"
+        ],
+        "removed_tickers": [
+          "ROKU"
+        ]
       }
     },
     "tan": {
@@ -810,7 +836,7 @@
       }
     },
     "arkg": {
-      "count": 33,
+      "count": 32,
       "expected_count": 33,
       "minimum_count": 30,
       "source": "arkg",
@@ -820,9 +846,11 @@
         "baseline_available": true,
         "previous_count": 33,
         "added_count": 0,
-        "removed_count": 0,
+        "removed_count": 1,
         "added_tickers": [],
-        "removed_tickers": []
+        "removed_tickers": [
+          "PSNL"
+        ]
       }
     },
     "arkf": {
@@ -890,7 +918,7 @@
       }
     },
     "volt": {
-      "count": 24,
+      "count": 23,
       "expected_count": 24,
       "minimum_count": 22,
       "source": "volt",
@@ -900,9 +928,11 @@
         "baseline_available": true,
         "previous_count": 24,
         "added_count": 0,
-        "removed_count": 0,
+        "removed_count": 1,
         "added_tickers": [],
-        "removed_tickers": []
+        "removed_tickers": [
+          "SRE"
+        ]
       }
     },
     "vnq": {
