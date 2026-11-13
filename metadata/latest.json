@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T16:34:20Z",
+  "generated_at": "2026-11-13T15:55:09Z",
   "etfs": {
     "spy": {
       "count": 504,
@@ -17,7 +17,7 @@
       }
     },
     "mdy": {
-      "count": 400,
+      "count": 399,
       "expected_count": 400,
       "minimum_count": 360,
       "source": "mdy",
@@ -25,15 +25,11 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 400,
-        "added_count": 2,
-        "removed_count": 2,
-        "added_tickers": [
-          "FOXA",
-          "TXCP"
-        ],
+        "added_count": 0,
+        "removed_count": 1,
+        "added_tickers": [],
         "removed_tickers": [
-          "ROKU",
-          "TCBI"
+          "FOXA"
         ]
       }
     },
@@ -76,18 +72,10 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 1965,
-        "added_count": 3,
-        "removed_count": 3,
-        "added_tickers": [
-          "2200964D",
-          "QUIT",
-          "TXCP"
-        ],
-        "removed_tickers": [
-          "ACHV",
-          "BWMN",
-          "TCBI"
-        ]
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
       }
     },
     "smh": {
@@ -325,14 +313,10 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 167,
-        "added_count": 1,
-        "removed_count": 1,
-        "added_tickers": [
-          "TXCP"
-        ],
-        "removed_tickers": [
-          "TCBI"
-        ]
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
       }
     },
     "kbe": {
@@ -344,14 +328,10 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 107,
-        "added_count": 1,
-        "removed_count": 1,
-        "added_tickers": [
-          "TXCP"
-        ],
-        "removed_tickers": [
-          "TCBI"
-        ]
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
       }
     },
     "xrt": {
@@ -433,7 +413,7 @@
       }
     },
     "oih": {
-      "count": 25,
+      "count": 24,
       "expected_count": 25,
       "minimum_count": 23,
       "source": "oih",
@@ -442,9 +422,11 @@
         "baseline_available": true,
         "previous_count": 25,
         "added_count": 0,
-        "removed_count": 0,
+        "removed_count": 1,
         "added_tickers": [],
-        "removed_tickers": []
+        "removed_tickers": [
+          "WFRD"
+        ]
       }
     },
     "crak": {
@@ -512,7 +494,7 @@
       }
     },
     "ibb": {
-      "count": 242,
+      "count": 243,
       "expected_count": 242,
       "minimum_count": 218,
       "source": "ibb",
@@ -521,9 +503,11 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 242,
-        "added_count": 0,
+        "added_count": 1,
         "removed_count": 0,
-        "added_tickers": [],
+        "added_tickers": [
+          "2200964D"
+        ],
         "removed_tickers": []
       }
     },
@@ -752,7 +736,7 @@
       }
     },
     "igpt": {
-      "count": 70,
+      "count": 69,
       "expected_count": 70,
       "minimum_count": 63,
       "source": "igpt",
@@ -761,13 +745,11 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 70,
-        "added_count": 1,
+        "added_count": 0,
         "removed_count": 1,
-        "added_tickers": [
-          "FOXA"
-        ],
+        "added_tickers": [],
         "removed_tickers": [
-          "ROKU"
+          "FOXA"
         ]
       }
     },
@@ -844,13 +826,11 @@
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 33,
+        "previous_count": 32,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "PSNL"
-        ]
+        "removed_tickers": []
       }
     },
     "arkf": {
@@ -926,13 +906,11 @@
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 24,
+        "previous_count": 23,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "SRE"
-        ]
+        "removed_tickers": []
       }
     },
     "vnq": {
