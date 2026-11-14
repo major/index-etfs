@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T15:55:09Z",
+  "generated_at": "2026-11-14T14:45:18Z",
   "etfs": {
     "spy": {
       "count": 504,
@@ -24,13 +24,11 @@
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-mdy.xlsx",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 400,
+        "previous_count": 399,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "FOXA"
-        ]
+        "removed_tickers": []
       }
     },
     "spsm": {
@@ -420,13 +418,11 @@
       "source_url": "https://www.vaneck.com/us/en/investments/oil-services-etf-oih/downloads/holdings/",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 25,
+        "previous_count": 24,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "WFRD"
-        ]
+        "removed_tickers": []
       }
     },
     "crak": {
@@ -502,12 +498,10 @@
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 242,
-        "added_count": 1,
+        "previous_count": 243,
+        "added_count": 0,
         "removed_count": 0,
-        "added_tickers": [
-          "2200964D"
-        ],
+        "added_tickers": [],
         "removed_tickers": []
       }
     },
@@ -624,7 +618,7 @@
       }
     },
     "bug": {
-      "count": 23,
+      "count": 26,
       "expected_count": 23,
       "minimum_count": 21,
       "source": "bug",
@@ -633,9 +627,13 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 23,
-        "added_count": 0,
+        "added_count": 3,
         "removed_count": 0,
-        "added_tickers": [],
+        "added_tickers": [
+          "FFIV",
+          "MITK",
+          "NET"
+        ],
         "removed_tickers": []
       }
     },
@@ -744,13 +742,11 @@
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 70,
+        "previous_count": 69,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "FOXA"
-        ]
+        "removed_tickers": []
       }
     },
     "tan": {
