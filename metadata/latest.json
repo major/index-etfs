@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T15:20:40Z",
+  "generated_at": "2026-11-16T17:56:46Z",
   "etfs": {
     "spy": {
       "count": 504,
@@ -17,7 +17,7 @@
       }
     },
     "mdy": {
-      "count": 399,
+      "count": 398,
       "expected_count": 400,
       "minimum_count": 360,
       "source": "mdy",
@@ -25,10 +25,15 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 399,
-        "added_count": 0,
-        "removed_count": 0,
-        "added_tickers": [],
-        "removed_tickers": []
+        "added_count": 1,
+        "removed_count": 2,
+        "added_tickers": [
+          "HZN"
+        ],
+        "removed_tickers": [
+          "BKH",
+          "WFRD"
+        ]
       }
     },
     "spsm": {
@@ -514,13 +519,11 @@
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 54,
+        "previous_count": 53,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "IXTZ6"
-        ]
+        "removed_tickers": []
       }
     },
     "ihe": {
