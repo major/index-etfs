@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T17:56:46Z",
+  "generated_at": "2026-11-17T17:22:41Z",
   "etfs": {
     "spy": {
       "count": 504,
@@ -17,22 +17,19 @@
       }
     },
     "mdy": {
-      "count": 398,
+      "count": 397,
       "expected_count": 400,
       "minimum_count": 360,
       "source": "mdy",
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-mdy.xlsx",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 399,
-        "added_count": 1,
-        "removed_count": 2,
-        "added_tickers": [
-          "HZN"
-        ],
+        "previous_count": 398,
+        "added_count": 0,
+        "removed_count": 1,
+        "added_tickers": [],
         "removed_tickers": [
-          "BKH",
-          "WFRD"
+          "NWE"
         ]
       }
     },
@@ -45,10 +42,14 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 605,
-        "added_count": 0,
-        "removed_count": 0,
-        "added_tickers": [],
-        "removed_tickers": []
+        "added_count": 1,
+        "removed_count": 1,
+        "added_tickers": [
+          "INGM"
+        ],
+        "removed_tickers": [
+          "ITGR"
+        ]
       }
     },
     "qqq": {
@@ -67,7 +68,7 @@
       }
     },
     "iwm": {
-      "count": 1965,
+      "count": 1964,
       "expected_count": 2000,
       "minimum_count": 1800,
       "source": "iwm",
@@ -75,10 +76,15 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 1965,
-        "added_count": 0,
-        "removed_count": 0,
-        "added_tickers": [],
-        "removed_tickers": []
+        "added_count": 1,
+        "removed_count": 2,
+        "added_tickers": [
+          "HZN"
+        ],
+        "removed_tickers": [
+          "BKH",
+          "NWE"
+        ]
       }
     },
     "smh": {
@@ -416,7 +422,7 @@
       }
     },
     "oih": {
-      "count": 24,
+      "count": 25,
       "expected_count": 25,
       "minimum_count": 23,
       "source": "oih",
@@ -424,9 +430,11 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 24,
-        "added_count": 0,
+        "added_count": 1,
         "removed_count": 0,
-        "added_tickers": [],
+        "added_tickers": [
+          "WFRD"
+        ],
         "removed_tickers": []
       }
     },
@@ -463,7 +471,7 @@
       }
     },
     "soxx": {
-      "count": 34,
+      "count": 33,
       "expected_count": 34,
       "minimum_count": 31,
       "source": "soxx",
@@ -473,9 +481,11 @@
         "baseline_available": true,
         "previous_count": 34,
         "added_count": 0,
-        "removed_count": 0,
+        "removed_count": 1,
         "added_tickers": [],
-        "removed_tickers": []
+        "removed_tickers": [
+          "XTSLA"
+        ]
       }
     },
     "igv": {
