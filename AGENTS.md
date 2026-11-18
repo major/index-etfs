@@ -58,7 +58,7 @@ uv run get-holdings          # networked; rewrites ticker files
 - Do not add providers or dependencies unless the requested ETF needs them.
 - Tests should mock network/provider reads; avoid live HTTP in unit tests.
 - The catalog supports 60 feeds from 12 providers; market-group exclusions are in `catalog.py`.
-- SSGA cleanup excludes names ending in a futures month code and two-digit contract year; this is not exhaustive equity classification.
+- SSGA cleanup excludes names ending in a futures month code and two-digit contract year, and names starting with "CONTRA " (contingent value rights with made-up tickers, e.g. 2602335D for Hologic); this is not exhaustive equity classification.
 - VanEck workbooks use a cookie-enabled download, a third-row header, and an `Asset Class` stock filter. GDX outputs only the US-listed subset, documented by `scope_note` in metadata.
 - `tests/test_membership.py` covers change diagnostics; `tests/test_scale.py` runs 15 overlapping synthetic configurations offline.
 - Output files are sorted and newline-terminated.

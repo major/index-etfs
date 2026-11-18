@@ -49,19 +49,45 @@ def test_ssga_excludes_named_futures_contracts(name: str) -> None:
     assert cleaned["Ticker"].to_list() == []
 
 
-def test_ssga_preserves_stocks_with_contract_like_tickers_and_contra_symbols() -> None:
+@pytest.mark.parametrize(
+    "name",
+    [
+        "CONTRA HOLOGIC INCORPO",
+        "contra hologic incorpo",
+        "  CONTRA SOME CO",
+    ],
+)
+def test_ssga_excludes_contra_cvr_rows(name: str) -> None:
+    """Exclude SSGA contingent value rights labeled with a CONTRA name prefix."""
+    # Arrange
+    holdings = _ssga_holdings(["2602335D"], [name])
+
+    # Act
+    cleaned = filter_and_clean(holdings, "ssga")
+
+    # Assert
+    assert cleaned["Ticker"].to_list() == []
+
+
+def test_ssga_preserves_stocks_with_contract_like_tickers() -> None:
     """Keep ordinary holdings even when their ticker resembles a contract label."""
     # Arrange
     holdings = _ssga_holdings(
-        ["JAN", "MAR27", "DEC26", "2602335D"],
-        ["Janus Henderson Group", "Marathon Oil", "December Gold Inc", "Contra"],
+        ["JAN", "MAR27", "DEC26", "CTRN", "HOLX"],
+        [
+            "Janus Henderson Group",
+            "Marathon Oil",
+            "December Gold Inc",
+            "CONTRARIAN CAPITAL",
+            "Hologic Inc",
+        ],
     )
 
     # Act
     cleaned = filter_and_clean(holdings, "ssga")
 
     # Assert
-    assert cleaned["Ticker"].to_list() == ["2602335D", "DEC26", "JAN", "MAR27"]
+    assert cleaned["Ticker"].to_list() == ["CTRN", "DEC26", "HOLX", "JAN", "MAR27"]
 
 
 def test_ssga_preserves_rows_with_null_names() -> None:
@@ -130,4 +156,5 @@ def test_ssga_excel_parser_and_cleaner_exclude_contracts() -> None:
         "EMINI S+P REESTATEDEC26",
         "XAV  HEALTH CARE  DEC26",
     ]
-    assert cleaned["Ticker"].to_list() == ["2602335D", "AAA", "NULLNM"]
+    # "Contra holding" (2602335D) is a CVR and is excluded by the CONTRA name rule.
+    assert cleaned["Ticker"].to_list() == ["AAA", "NULLNM"]

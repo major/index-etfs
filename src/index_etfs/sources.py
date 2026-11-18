@@ -132,16 +132,14 @@ def filter_and_clean(df: pl.DataFrame, provider: Provider) -> pl.DataFrame:
 
     if provider == "ssga":
         if "Name" in df.columns:
+            name = pl.col("Name").cast(pl.String, strict=False).str.strip_chars().str.to_uppercase()
             # SSGA labels futures with a trailing month code and two-digit delivery year.
-            futures_contract = (
-                pl.col("Name")
-                .cast(pl.String, strict=False)
-                .str.strip_chars()
-                .str.to_uppercase()
-                .str.contains(r"(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\d{2}$")
-                .fill_null(False)
-            )
-            df = df.filter(~futures_contract)
+            futures_contract = name.str.contains(
+                r"(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\d{2}$"
+            ).fill_null(False)
+            # 🧾 SSGA labels contingent value rights with a "CONTRA " name prefix and a made-up ticker.
+            contra_cvr = name.str.starts_with("CONTRA ").fill_null(False)
+            df = df.filter(~(futures_contract | contra_cvr))
         df = df.filter((pl.col("Local Currency") == "USD") & (pl.col("Ticker") != "-"))
     elif provider == "ishares":
         df = df.filter((pl.col("Market Currency") == "USD") & (pl.col("Ticker") != "-"))
