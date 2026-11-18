@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-17T17:22:41Z",
+  "generated_at": "2026-11-18T16:56:19Z",
   "etfs": {
     "spy": {
-      "count": 504,
+      "count": 503,
       "expected_count": 503,
       "minimum_count": 453,
       "source": "spy",
@@ -11,9 +11,11 @@
         "baseline_available": true,
         "previous_count": 504,
         "added_count": 0,
-        "removed_count": 0,
+        "removed_count": 1,
         "added_tickers": [],
-        "removed_tickers": []
+        "removed_tickers": [
+          "2602335D"
+        ]
       }
     },
     "mdy": {
@@ -24,13 +26,11 @@
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-mdy.xlsx",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 398,
+        "previous_count": 397,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "NWE"
-        ]
+        "removed_tickers": []
       }
     },
     "spsm": {
@@ -42,14 +42,10 @@
       "membership_changes": {
         "baseline_available": true,
         "previous_count": 605,
-        "added_count": 1,
-        "removed_count": 1,
-        "added_tickers": [
-          "INGM"
-        ],
-        "removed_tickers": [
-          "ITGR"
-        ]
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
       }
     },
     "qqq": {
@@ -68,22 +64,22 @@
       }
     },
     "iwm": {
-      "count": 1964,
+      "count": 1963,
       "expected_count": 2000,
       "minimum_count": 1800,
       "source": "iwm",
       "source_url": "https://www.blackrock.com/varnish-api/blk-one01-product-data/product-data/api/v1/get-fund-document?appType=PRODUCT_PAGE&appSubType=ISHARES&targetSite=us-ishares&locale=en_US&portfolioId=239710&userType=individual&component=holdings",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 1965,
+        "previous_count": 1964,
         "added_count": 1,
         "removed_count": 2,
         "added_tickers": [
-          "HZN"
+          "ACCH"
         ],
         "removed_tickers": [
-          "BKH",
-          "NWE"
+          "ACH",
+          "PCRX"
         ]
       }
     },
@@ -254,7 +250,7 @@
       }
     },
     "xlv": {
-      "count": 61,
+      "count": 60,
       "expected_count": 61,
       "minimum_count": 55,
       "source": "xlv",
@@ -263,9 +259,11 @@
         "baseline_available": true,
         "previous_count": 61,
         "added_count": 0,
-        "removed_count": 0,
+        "removed_count": 1,
         "added_tickers": [],
-        "removed_tickers": []
+        "removed_tickers": [
+          "2602335D"
+        ]
       }
     },
     "xly": {
@@ -429,12 +427,10 @@
       "source_url": "https://www.vaneck.com/us/en/investments/oil-services-etf-oih/downloads/holdings/",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 24,
-        "added_count": 1,
+        "previous_count": 25,
+        "added_count": 0,
         "removed_count": 0,
-        "added_tickers": [
-          "WFRD"
-        ],
+        "added_tickers": [],
         "removed_tickers": []
       }
     },
@@ -479,13 +475,11 @@
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 34,
+        "previous_count": 33,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "XTSLA"
-        ]
+        "removed_tickers": []
       }
     },
     "igv": {
@@ -537,7 +531,7 @@
       }
     },
     "ihe": {
-      "count": 56,
+      "count": 55,
       "expected_count": 57,
       "minimum_count": 52,
       "source": "ihe",
@@ -547,9 +541,11 @@
         "baseline_available": true,
         "previous_count": 56,
         "added_count": 0,
-        "removed_count": 0,
+        "removed_count": 1,
         "added_tickers": [],
-        "removed_tickers": []
+        "removed_tickers": [
+          "PCRX"
+        ]
       }
     },
     "ihf": {
