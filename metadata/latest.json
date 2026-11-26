@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T16:56:19Z",
+  "generated_at": "2026-11-26T01:43:41Z",
   "etfs": {
     "spy": {
       "count": 503,
@@ -9,13 +9,11 @@
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 504,
+        "previous_count": 503,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "2602335D"
-        ]
+        "removed_tickers": []
       }
     },
     "mdy": {
@@ -64,23 +62,18 @@
       }
     },
     "iwm": {
-      "count": 1963,
+      "count": 1960,
       "expected_count": 2000,
       "minimum_count": 1800,
       "source": "iwm",
       "source_url": "https://www.blackrock.com/varnish-api/blk-one01-product-data/product-data/api/v1/get-fund-document?appType=PRODUCT_PAGE&appSubType=ISHARES&targetSite=us-ishares&locale=en_US&portfolioId=239710&userType=individual&component=holdings",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 1964,
-        "added_count": 1,
-        "removed_count": 2,
-        "added_tickers": [
-          "ACCH"
-        ],
-        "removed_tickers": [
-          "ACH",
-          "PCRX"
-        ]
+        "previous_count": 1960,
+        "added_count": 0,
+        "removed_count": 0,
+        "added_tickers": [],
+        "removed_tickers": []
       }
     },
     "smh": {
@@ -257,13 +250,11 @@
       "source_url": "https://www.ssga.com/us/en/individual/library-content/products/fund-data/etfs/us/holdings-daily-us-en-xlv.xlsx",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 61,
+        "previous_count": 60,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "2602335D"
-        ]
+        "removed_tickers": []
       }
     },
     "xly": {
@@ -467,7 +458,7 @@
       }
     },
     "soxx": {
-      "count": 33,
+      "count": 34,
       "expected_count": 34,
       "minimum_count": 31,
       "source": "soxx",
@@ -475,7 +466,7 @@
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 33,
+        "previous_count": 34,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -539,13 +530,11 @@
       "scope_note": "USD-denominated holdings; not exhaustive equity classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 56,
+        "previous_count": 55,
         "added_count": 0,
-        "removed_count": 1,
+        "removed_count": 0,
         "added_tickers": [],
-        "removed_tickers": [
-          "PCRX"
-        ]
+        "removed_tickers": []
       }
     },
     "ihf": {
@@ -709,15 +698,15 @@
       }
     },
     "lit": {
-      "count": 7,
+      "count": 6,
       "expected_count": 7,
-      "minimum_count": 7,
+      "minimum_count": 3,
       "source": "lit",
       "source_url": "https://www.globalxetfs.com/funds/lit/",
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 7,
+        "previous_count": 6,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],
@@ -901,7 +890,7 @@
       }
     },
     "volt": {
-      "count": 23,
+      "count": 24,
       "expected_count": 24,
       "minimum_count": 22,
       "source": "volt",
@@ -909,7 +898,7 @@
       "scope_note": "Unqualified ticker subset; foreign-market-qualified and blank holdings excluded; not verified exchange classification.",
       "membership_changes": {
         "baseline_available": true,
-        "previous_count": 23,
+        "previous_count": 24,
         "added_count": 0,
         "removed_count": 0,
         "added_tickers": [],

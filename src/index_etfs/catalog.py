@@ -34,6 +34,7 @@ class ETFConfig:
     provider: Provider
     expected_count: int
     scope_note: str | None = None
+    minimum_count: int | None = None
 
 
 ETF_CONFIGS = frozendict({
@@ -288,6 +289,9 @@ ETF_CONFIGS = frozendict({
         provider="globalx",
         expected_count=7,
         scope_note=UNQUALIFIED_TICKER_SCOPE,
+        # This is a small, volatile US-listed subset of a global portfolio.
+        # Membership may legitimately move without the source feed being broken.
+        minimum_count=3,
     ),
     "pave": ETFConfig(
         url="https://www.globalxetfs.com/funds/pave/",
@@ -434,6 +438,16 @@ def validate_catalog(configs: Mapping[str, ETFConfig] | None = None) -> None:
                 f"Invalid expected_count for {symbol}: {config.expected_count!r}"
             )
 
+        if config.minimum_count is not None and (
+            isinstance(config.minimum_count, bool)
+            or not isinstance(config.minimum_count, int)
+            or config.minimum_count <= 0
+            or config.minimum_count > config.expected_count
+        ):
+            raise ValueError(
+                f"Invalid minimum_count for {symbol}: {config.minimum_count!r}"
+            )
+
         try:
             parsed_url = urlsplit(config.url)
             url_is_valid = parsed_url.scheme in {"http", "https"} and bool(
@@ -444,13 +458,19 @@ def validate_catalog(configs: Mapping[str, ETFConfig] | None = None) -> None:
         if not url_is_valid:
             raise ValueError(f"Invalid HTTP(S) URL for {symbol}: {config.url!r}")
 
+def minimum_count(config: ETFConfig) -> int:
+    """Return the configured safety floor for a holdings result."""
+    if config.minimum_count is not None:
+        return config.minimum_count
+    return math.ceil(config.expected_count * MIN_EXPECTED_RATIO)
+
+
 def validate_count(symbol: str, count: int) -> None:
     """Fail closed on empty or suspiciously small source data."""
     if count == 0:
         raise ValueError(f"{symbol.upper()} returned zero rows")
 
-    expected = ETF_CONFIGS[symbol].expected_count
-    minimum = math.ceil(expected * MIN_EXPECTED_RATIO)
+    minimum = minimum_count(ETF_CONFIGS[symbol])
     if count < minimum:
         raise ValueError(
             f"{symbol.upper()} returned {count} rows; expected at least {minimum}"

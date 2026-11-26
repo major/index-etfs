@@ -57,6 +57,20 @@ def test_validate_catalog_rejects_invalid_expected_count(expected_count: object)
         validate_catalog({"safe": config})
 
 
+@pytest.mark.parametrize("minimum_count", [0, -1, True, 1.5, 8])
+def test_validate_catalog_rejects_invalid_minimum_count(minimum_count: object) -> None:
+    """Explicit safety floors must be positive integers within the expected count."""
+    config = ETFConfig(
+        "https://example.com/data",
+        "globalx",
+        7,
+        minimum_count=minimum_count,  # type: ignore[arg-type]
+    )
+
+    with pytest.raises(ValueError, match="minimum_count"):
+        validate_catalog({"safe": config})
+
+
 @pytest.mark.parametrize(
     "url",
     ["", "ftp://example.com/data", "https:///data", "not-a-url"],

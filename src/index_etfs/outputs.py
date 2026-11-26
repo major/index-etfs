@@ -1,13 +1,12 @@
 """Write ticker and metadata outputs."""
 
 import json
-import math
 from datetime import UTC, datetime
 from pathlib import Path
 
 import polars as pl
 
-from .catalog import ETF_CONFIGS, MIN_EXPECTED_RATIO
+from .catalog import ETF_CONFIGS, minimum_count
 
 
 def write_metadata(
@@ -29,7 +28,7 @@ def write_metadata(
             symbol: {
                 "count": count,
                 "expected_count": config.expected_count,
-                "minimum_count": math.ceil(config.expected_count * MIN_EXPECTED_RATIO),
+                "minimum_count": minimum_count(config),
                 "source": symbol,
                 "source_url": config.url,
                 **({"scope_note": config.scope_note} if config.scope_note else {}),
