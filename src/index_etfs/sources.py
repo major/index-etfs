@@ -9,6 +9,7 @@ import polars as pl
 
 from .amplify import load_amplify_json
 from .ark import load_ark_csv
+from .capforce import load_capforce_html
 from .catalog import ETFConfig, Provider
 from .firsttrust import load_firsttrust_html
 from .globalx import load_globalx_csv
@@ -112,6 +113,7 @@ def load_holdings(config: ETFConfig) -> pl.DataFrame:
         "flexshares": load_flexshares_csv,
         "tema": load_tema_csv,
         "amplify": load_amplify_json,
+        "capforce": load_capforce_html,
     }
     try:
         loader = loaders[config.provider]

@@ -19,6 +19,7 @@ Provider = Literal[
     "flexshares",
     "tema",
     "amplify",
+    "capforce",
 ]
 
 MIN_EXPECTED_RATIO = 0.9
@@ -376,6 +377,11 @@ ETF_CONFIGS = frozendict({
             + " Listed fund positions are included without lookthrough."
         ),
     ),
+    "ffty": ETFConfig(
+        url="https://www.capforceetf.com/ffty/details",
+        provider="capforce",
+        expected_count=50,
+    ),
 })
 
 MARKET_GROUP_EXCLUSIONS = frozendict(
@@ -422,6 +428,7 @@ def validate_catalog(configs: Mapping[str, ETFConfig] | None = None) -> None:
             "flexshares",
             "tema",
             "amplify",
+            "capforce",
         }:
             raise ValueError(f"Unsupported provider {config.provider!r} for {symbol}")
 

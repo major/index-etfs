@@ -133,6 +133,7 @@ def test_load_ishares_csv_rejects_missing_weight_columns() -> None:
         ("flexshares", "load_flexshares_csv"),
         ("tema", "load_tema_csv"),
         ("amplify", "load_amplify_json"),
+        ("capforce", "load_capforce_html"),
     ],
 )
 def test_load_holdings_dispatches_new_providers(provider: str, loader_name: str) -> None:
@@ -158,6 +159,7 @@ def test_load_holdings_dispatches_new_providers(provider: str, loader_name: str)
         "load_flexshares_csv",
         "load_tema_csv",
         "load_amplify_json",
+        "load_capforce_html",
     ]
 
     # Act

@@ -86,6 +86,7 @@ def test_etf_config_registry_keys_preserve_order() -> None:
         "volt",
         "vnq",
         "blok",
+        "ffty",
     ]
 
 
