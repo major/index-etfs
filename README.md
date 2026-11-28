@@ -38,12 +38,15 @@ Download plain ticker files for scripts and spreadsheets.
 | S&P 500 Utilities | XLU | [💾 xlu.txt](tickers/xlu.txt) | ~31 |
 | S&P 500 Health Care | XLV | [💾 xlv.txt](tickers/xlv.txt) | ~61 |
 | S&P 500 Consumer Discretionary | XLY | [💾 xly.txt](tickers/xly.txt) | ~47 |
+| IBD 50 Index | FFTY | [💾 ffty.txt](tickers/ffty.txt) | ~50 |
 
 SMH tracks the MVIS US Listed Semiconductor 25 Index. GDX tracks the MarketVector Global Gold Miners Index, but the files here are only its US-listed subset. In a verified October 23, 2026 snapshot, the GDX workbook had 59 stock rows: 32 unqualified US-listed symbols and 27 foreign-market-qualified symbols. The output excludes those 27 symbols without removing suffixes or creating US aliases. It is not the full global GDX constituent list. The GDX scope is also recorded in `metadata/latest.json` as `scope_note`.
 
+FFTY tracks the IBD 50 Index. The FFTY files list the equity holdings published on the official CapForce fund page. They are not a separate official IBD 50 constituent list.
+
 ## 🌐 Market-group funds
 
-The catalog has 60 holdings configurations. The market-group request contains 59 symbols: 55 supported holdings feeds and four explicit non-equity exclusions. The 55 feeds comprise 13 funds already shown in the download table and 42 newly configured funds. The other five catalog entries are the existing broad-market funds SPY, MDY, SPSM, QQQ, and IWM.
+The catalog has 61 holdings configurations. The market-group request contains 59 symbols: 55 supported holdings feeds and four explicit non-equity exclusions. The 55 feeds comprise 13 funds already shown in the download table and 42 newly configured funds. The other six catalog entries are the existing broad-market funds SPY, MDY, SPSM, QQQ, and IWM, plus FFTY, which is outside the market-group request.
 
 The table below links to local ticker files for the 42 newly configured funds. Together with the existing links above, they cover all 55 supported market-group funds.
 
@@ -121,7 +124,7 @@ Holdings downloads retry selected transient failures up to three times. Each att
 
 - Start with a representative source file and check its terms of use. ETF holdings, including SPDR sector holdings, are proxies for index membership, not official constituent lists. Nasdaq-100 currently uses a direct Nasdaq endpoint rather than QQQ holdings.
 - Add a configuration in `src/index_etfs/catalog.py` with a positive expected count and safe, unique output names.
-- Reuse a provider only when its format matches. Supported providers are SSGA, iShares, Nasdaq, VanEck, Invesco, ARK, Global X, Vanguard, First Trust, FlexShares, Tema, and Amplify. New provider parsers live in focused modules under `src/index_etfs/` and are wired through `sources.py`.
+- Reuse a provider only when its format matches. Supported providers are SSGA, iShares, Nasdaq, VanEck, Invesco, ARK, Global X, Vanguard, First Trust, FlexShares, Tema, Amplify, and CapForce. New provider parsers live in focused modules under `src/index_etfs/` and are wired through `sources.py`.
 - Check filtering carefully. SSGA removes futures-like names and CONTRA rights, and keeps USD rows; iShares keeps USD-denominated rows, which does not prove a row is an equity. VanEck uses its stock asset-class field and removes cash and foreign-qualified rows. Other providers apply source-specific cash, security-type, classification, or ticker-format filters. These are not exhaustive exchange or equity classifications.
 - Add a tiny offline fixture and parser test, update provider contract coverage where needed, run `uv run ruff check .` and `uv run pytest`, then check matching ticker and metadata outputs in a separate data refresh.
 

@@ -85,10 +85,10 @@ def test_market_group_symbol_has_one_catalog_disposition(symbol: str) -> None:
 
 
 def test_market_group_inventory_has_expected_coverage() -> None:
-    """Keep the 59-symbol input, 55 supported funds, and 60-item catalog aligned."""
+    """Keep the 59-symbol input, 55 supported funds, and 61-item catalog aligned."""
     assert len(MARKET_GROUP_SYMBOLS) == 59
     assert len(set(MARKET_GROUP_SYMBOLS)) == 59
-    assert len(ETF_CONFIGS) == 60
+    assert len(ETF_CONFIGS) == 61
     assert sum(symbol in ETF_CONFIGS for symbol in MARKET_GROUP_SYMBOLS) == 55
 
 
