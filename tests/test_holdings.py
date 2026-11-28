@@ -359,6 +359,14 @@ def test_validate_count_rejects_empty_and_tiny_results() -> None:
     validate_count("iwm", 1800)
 
 
+def test_validate_count_uses_explicit_floor_for_volatile_small_subset() -> None:
+    """Natural LIT membership changes pass while a collapsed result fails closed."""
+    validate_count("lit", 6)
+    validate_count("lit", 3)
+    with pytest.raises(ValueError, match="expected at least 3"):
+        validate_count("lit", 2)
+
+
 @pytest.mark.parametrize(("symbol", "minimum"), [("smh", 23), ("gdx", 29)])
 def test_validate_count_vaneck_minimum_boundary(symbol: str, minimum: int) -> None:
     """Accept the 90% count threshold and reject the count immediately below."""
